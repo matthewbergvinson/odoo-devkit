@@ -4,15 +4,16 @@
         <record id="example_model_tree_view" model="ir.ui.view">
             <field name="name">example.model.tree</field>
             <field name="model">example.model</field>
+            <field name="type">list</field>
             <field name="arch" type="xml">
-                <tree string="Examples" decoration-success="state=='done'" decoration-info="state=='confirmed'" decoration-muted="state=='cancelled'">
+                <list string="Examples" decoration-success="state=='done'" decoration-info="state=='confirmed'" decoration-muted="state=='cancelled'">
                     <field name="name"/>
                     <field name="description"/>
                     <field name="value"/>
                     <field name="total_value"/>
                     <field name="state"/>
                     <field name="partner_id"/>
-                </tree>
+                </list>
             </field>
         </record>
         <record id="example_model_form_view" model="ir.ui.view">
@@ -21,10 +22,10 @@
             <field name="arch" type="xml">
                 <form string="Example">
                     <header>
-                        <button name="action_confirm" string="Confirm" type="object" class="oe_highlight" states="draft"/>
-                        <button name="action_done" string="Mark as Done" type="object" class="oe_highlight" states="confirmed"/>
-                        <button name="action_cancel" string="Cancel" type="object" states="draft,confirmed"/>
-                        <button name="action_reset_to_draft" string="Reset to Draft" type="object" states="cancelled"/>
+                        <button name="action_confirm" string="Confirm" type="object" class="oe_highlight" invisible="state != 'draft'"/>
+                        <button name="action_done" string="Mark as Done" type="object" class="oe_highlight" invisible="state != 'confirmed'"/>
+                        <button name="action_cancel" string="Cancel" type="object" invisible="state not in ['draft', 'confirmed']"/>
+                        <button name="action_reset_to_draft" string="Reset to Draft" type="object" invisible="state != 'cancelled'"/>
                         <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,done"/>
                     </header>
                     <sheet>
@@ -48,12 +49,12 @@
                             </page>
                             <page string="Lines">
                                 <field name="line_ids">
-                                    <tree editable="bottom">
+                                    <list editable="bottom">
                                         <field name="sequence" widget="handle"/>
                                         <field name="name"/>
                                         <field name="value"/>
                                         <field name="notes"/>
-                                    </tree>
+                                    </list>
                                 </field>
                             </page>
                         </notebook>
@@ -89,12 +90,13 @@
         <record id="example_tag_tree_view" model="ir.ui.view">
             <field name="name">example.tag.tree</field>
             <field name="model">example.tag</field>
+            <field name="type">list</field>
             <field name="arch" type="xml">
-                <tree string="Tags">
+                <list string="Tags">
                     <field name="name"/>
                     <field name="color" widget="color"/>
                     <field name="active"/>
-                </tree>
+                </list>
             </field>
         </record>
         <record id="example_tag_form_view" model="ir.ui.view">
@@ -115,7 +117,7 @@
         <record id="example_model_action" model="ir.actions.act_window">
             <field name="name">Examples</field>
             <field name="res_model">example.model</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
             <field name="context">{}</field>
             <field name="help" type="html">
                 <p class="o_view_nocontent_smiling_face">
@@ -129,7 +131,7 @@
         <record id="example_tag_action" model="ir.actions.act_window">
             <field name="name">Tags</field>
             <field name="res_model">example.tag</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
             <field name="context">{}</field>
         </record>
         <menuitem id="example_main_menu" name="Example Module" sequence="10"/>

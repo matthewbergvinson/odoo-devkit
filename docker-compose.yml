@@ -51,7 +51,7 @@ services:
       ENVIRONMENT: ${ENVIRONMENT:-development}
 
       # Development Settings
-      ODOO_CONFIG: /etc/odoo/odoo.conf
+      ODOO_CONFIG: /opt/odoo/config/odoo.conf
     volumes:
       # Mount custom modules for development (read-write)
       - ./custom_modules:/opt/odoo/custom_modules:rw

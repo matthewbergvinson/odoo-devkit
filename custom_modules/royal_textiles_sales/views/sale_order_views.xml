@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Sales Order Form View Extension -->
+    <record id="view_order_form_royal_textiles" model="ir.ui.view">
+        <field name="name">sale.order.form.royal.textiles</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            
+            <!-- Add custom buttons to the header -->
+            <xpath expr="//form/header" position="inside">
+                <!-- Schedule Installation Button -->
+                <button name="action_schedule_installation" 
+                        type="object" 
+                        string="Schedule Installation" 
+                        class="btn-primary"
+                        icon="fa-calendar-plus-o"
+                        context="{'default_customer_id': partner_id}"
+                        invisible="state not in ['sale', 'done']"
+                        help="Schedule installation appointment for this order"/>
+                
+                <!-- Generate Work Order Button -->
+                <button name="action_generate_work_order" 
+                        type="object" 
+                        string="Generate Work Order" 
+                        class="btn-info"
+                        icon="fa-tasks"
+                        invisible="state not in ['sale', 'done']"
+                        help="Create project with installation tasks"/>
+                
+                <!-- Calculate Materials Button -->
+                <button name="action_calculate_materials" 
+                        type="object" 
+                        string="Calculate Materials" 
+                        class="btn-warning"
+                        icon="fa-calculator"
+                        invisible="state not in ['sale', 'done']"
+                        help="Calculate materials needed for installation"/>
+            </xpath>
+            
+            <!-- Add Installation Status field after state -->
+            <xpath expr="//field[@name='state']" position="after">
+                <field name="installation_status" 
+                       widget="badge" 
+                       decoration-success="installation_status == 'completed'"
+                       decoration-info="installation_status == 'scheduled'"
+                       decoration-warning="installation_status == 'in_progress'"
+                       decoration-muted="installation_status == 'not_scheduled'"
+                       invisible="state not in ['sale', 'done']"/>
+            </xpath>
+            
+            <!-- Add Installation Information Page -->
+            <xpath expr="//notebook" position="inside">
+                <page string="Installation Details" name="installation_details">
+                    <group>
+                        <group name="installation_info" string="Installation Information">
+                            <field name="installation_scheduled" readonly="1"/>
+                            <field name="installation_date" 
+                                   invisible="not installation_scheduled"/>
+                            <field name="estimated_installation_hours" readonly="1"/>
+                            <field name="materials_calculated" readonly="1"/>
+                        </group>
+                        
+                        <group name="installation_links" string="Related Records">
+                            <field name="installation_id" 
+                                   invisible="not installation_id"
+                                   context="{'form_view_ref': 'royal_textiles_sales.view_royal_installation_form'}"/>
+                            <field name="work_order_id" 
+                                   invisible="not work_order_id"
+                                   context="{'form_view_ref': 'project.edit_project'}"/>
+                        </group>
+                    </group>
+                    
+                    <!-- Installation Progress Information -->
+                    <group name="installation_progress" 
+                           string="Installation Progress"
+                           invisible="not installation_id">
+                        <field name="installation_id" invisible="1"/>
+                        <!-- These fields will be populated by the installation record -->
+                    </group>
+                </page>
+            </xpath>
+            
+            <!-- Add Installation Status in Order Lines -->
+            <xpath expr="//field[@name='order_line']//list" position="attributes">
+                <attribute name="decoration-success">parent.installation_status == 'completed'</attribute>
+                <attribute name="decoration-info">parent.installation_status == 'scheduled'</attribute>
+                <attribute name="decoration-warning">parent.installation_status == 'in_progress'</attribute>
+            </xpath>
+            
+        </field>
+    </record>
+    
+    <!-- Sales Order List View Extension -->
+    <record id="view_order_tree_royal_textiles" model="ir.ui.view">
+        <field name="name">sale.order.tree.royal.textiles</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_tree"/>
+        <field name="arch" type="xml">
+            
+            <!-- Add Installation Status column -->
+            <xpath expr="//field[@name='amount_total']" position="after">
+                <field name="installation_status" 
+                       widget="badge" 
+                       decoration-success="installation_status == 'completed'"
+                       decoration-info="installation_status == 'scheduled'"
+                       decoration-warning="installation_status == 'in_progress'"
+                       decoration-muted="installation_status == 'not_scheduled'"
+                       optional="show"/>
+                <field name="installation_date" optional="hide"/>
+                <field name="estimated_installation_hours" optional="hide"/>
+            </xpath>
+            
+            <!-- Add color coding based on installation status -->
+            <xpath expr="//list" position="attributes">
+                <attribute name="decoration-success">installation_status == 'completed'</attribute>
+                <attribute name="decoration-info">installation_status == 'scheduled'</attribute>
+                <attribute name="decoration-warning">installation_status == 'in_progress'</attribute>
+            </xpath>
+            
+        </field>
+    </record>
+    
+    <!-- Sales Order Search View Extension -->
+    <record id="view_sales_order_filter_royal_textiles" model="ir.ui.view">
+        <field name="name">sale.order.search.royal.textiles</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_sales_order_filter"/>
+        <field name="arch" type="xml">
+            
+            <!-- Add Installation Status filters -->
+            <xpath expr="//filter[@name='my_sale_orders_filter']" position="after">
+                <separator/>
+                <filter name="installation_not_scheduled" 
+                        string="Installation Not Scheduled" 
+                        domain="[('installation_status', '=', 'not_scheduled'), ('state', 'in', ['sale', 'done'])]"/>
+                <filter name="installation_scheduled" 
+                        string="Installation Scheduled" 
+                        domain="[('installation_status', '=', 'scheduled')]"/>
+                <filter name="installation_in_progress" 
+                        string="Installation In Progress" 
+                        domain="[('installation_status', '=', 'in_progress')]"/>
+                <filter name="installation_completed" 
+                        string="Installation Completed" 
+                        domain="[('installation_status', '=', 'completed')]"/>
+            </xpath>
+            
+            <!-- Add Installation Status grouping -->
+            <xpath expr="//group" position="inside">
+                <filter name="group_installation_status" 
+                        string="Installation Status" 
+                        context="{'group_by': 'installation_status'}"/>
+            </xpath>
+            
+            <!-- Add search fields -->
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="installation_status"/>
+                <field name="installation_date"/>
+            </xpath>
+            
+        </field>
+    </record>
+
+</odoo> 

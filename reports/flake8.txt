@@ -1,46 +1,5 @@
-[1mcustom_modules/example_module/__manifest__.py[m[36m:[m1[36m:[m1[36m:[m [1m[31mB018[m Found useless Dict expression. Consider either assigning it to a variable or removing it.
-{
-^
 [1mcustom_modules/example_module/controllers/example_controller.py[m[36m:[m1[36m:[m1[36m:[m [1m[31mF401[m 'json' imported but unused
 import json
-^
-[1mcustom_modules/example_module/controllers/example_controller.py[m[36m:[m127[36m:[m87[36m:[m [1m[31mB023[m Function definition does not bind loop variable 'state'.
-            stats['state_counts'][state] = len(examples.filtered(lambda x: x.state == state))
-                                                                                      ^
-[1mcustom_modules/example_module/tests/test_example_model.py[m[36m:[m155[36m:[m9[36m:[m [1m[31mB017[m `assertRaises(Exception)` and `pytest.raises(Exception)` should be considered evil. They can lead to your test passing even if the code being tested is never executed due to a typo. Assert for a more specific exception (builtin or custom), or use `assertRaisesRegex` (if using `assertRaises`), or add the `match` keyword argument (if using `pytest.raises`), or use the context manager form with a target.
-        with self.assertRaises(Exception):
-        ^
-[1mscripts/debugpy-config.py[m[36m:[m2[36m:[m1[36m:[m [1m[31mD212[m Multi-line docstring summary should start at the first line
-"""
-Debugpy Configuration Helper for Odoo Development
-
-This script helps configure debugpy in Odoo code for remote debugging.
-Usage examples:
-
-1. Add to your Odoo module __init__.py:
-   from scripts.debugpy_config import start_debugpy
-   start_debugpy()
-
-2. Add breakpoint in your code:
-   from scripts.debugpy_config import debug_here
-   debug_here()
-"""
-^
-[1mscripts/debugpy-config.py[m[36m:[m2[36m:[m1[36m:[m [1m[31mD415[m First line should end with a period, question mark, or exclamation point
-"""
-Debugpy Configuration Helper for Odoo Development
-
-This script helps configure debugpy in Odoo code for remote debugging.
-Usage examples:
-
-1. Add to your Odoo module __init__.py:
-   from scripts.debugpy_config import start_debugpy
-   start_debugpy()
-
-2. Add breakpoint in your code:
-   from scripts.debugpy_config import debug_here
-   debug_here()
-"""
 ^
 [1mscripts/debugpy-config.py[m[36m:[m17[36m:[m1[36m:[m [1m[31mF401[m 'os' imported but unused
 import os
@@ -48,142 +7,11 @@ import os
 [1mscripts/debugpy-config.py[m[36m:[m18[36m:[m1[36m:[m [1m[31mF401[m 'sys' imported but unused
 import sys
 ^
-[1mscripts/debugpy-config.py[m[36m:[m22[36m:[m1[36m:[m [1m[31mD212[m Multi-line docstring summary should start at the first line
-    """
-    Start debugpy server for remote debugging
-
-    Args:
-        port (int): Port to listen on (default: 5678)
-        wait_for_client (bool): Whether to wait for client before continuing
-    """
-^
-[1mscripts/debugpy-config.py[m[36m:[m22[36m:[m1[36m:[m [1m[31mD415[m First line should end with a period, question mark, or exclamation point
-    """
-    Start debugpy server for remote debugging
-
-    Args:
-        port (int): Port to listen on (default: 5678)
-        wait_for_client (bool): Whether to wait for client before continuing
-    """
-^
-[1mscripts/debugpy-config.py[m[36m:[m51[36m:[m1[36m:[m [1m[31mD212[m Multi-line docstring summary should start at the first line
-    """
-    Set a breakpoint at this location and start debugpy if not already running
-
-    Args:
-        port (int): Port to listen on (default: 5678)
-    """
-^
-[1mscripts/debugpy-config.py[m[36m:[m51[36m:[m1[36m:[m [1m[31mD415[m First line should end with a period, question mark, or exclamation point
-    """
-    Set a breakpoint at this location and start debugpy if not already running
-
-    Args:
-        port (int): Port to listen on (default: 5678)
-    """
-^
-[1mscripts/debugpy-config.py[m[36m:[m69[36m:[m1[36m:[m [1m[31mD415[m First line should end with a period, question mark, or exclamation point
-    """Check if we're currently in a debugging session"""
-^
-[1mscripts/format-xml.py[m[36m:[m2[36m:[m1[36m:[m [1m[31mD200[m One-line docstring should fit on one line with quotes
-"""
-Format Odoo XML files for consistent style.
-"""
-^
-[1mscripts/format-xml.py[m[36m:[m2[36m:[m1[36m:[m [1m[31mD212[m Multi-line docstring summary should start at the first line
-"""
-Format Odoo XML files for consistent style.
-"""
-^
-[1mscripts/format-xml.py[m[36m:[m7[36m:[m2[36m:[m [1m[31mN817[m camelcase 'xml.etree.ElementTree' imported as acronym 'ET'
-import xml.etree.ElementTree as ET
- ^
-[1mscripts/odoo-type-checker.py[m[36m:[m2[36m:[m1[36m:[m [1m[31mD212[m Multi-line docstring summary should start at the first line
-"""
-Custom Odoo Type Checker
-
-This script performs additional type checking specifically for Odoo field
-definitions and relationships to catch type mismatches that can cause
-deployment failures.
-
-Usage:
-    python scripts/odoo-type-checker.py [module_name]
-"""
-^
-[1mscripts/odoo-type-checker.py[m[36m:[m2[36m:[m1[36m:[m [1m[31mD415[m First line should end with a period, question mark, or exclamation point
-"""
-Custom Odoo Type Checker
-
-This script performs additional type checking specifically for Odoo field
-definitions and relationships to catch type mismatches that can cause
-deployment failures.
-
-Usage:
-    python scripts/odoo-type-checker.py [module_name]
-"""
-^
-[1mscripts/odoo-type-checker.py[m[36m:[m49[36m:[m1[36m:[m [1m[31mD107[m Missing docstring in __init__
-    def __init__(self):
-^
-[1mscripts/odoo-type-checker.py[m[36m:[m67[36m:[m1[36m:[m [1m[31mD202[m No blank lines allowed after function docstring
-        """Check a single field definition for type consistency."""
-^
-[1mscripts/odoo-type-checker.py[m[36m:[m103[36m:[m1[36m:[m [1m[31mD202[m No blank lines allowed after function docstring
-        """Check if a related field type matches its source field type."""
-^
 [1mscripts/odoo-type-checker.py[m[36m:[m132[36m:[m5[36m:[m [1m[31mC901[m 'OdooTypeChecker.parse_model_file' is too complex (13)
     def parse_model_file(self, file_path: Path) -> None:
     ^
-[1mscripts/test-coverage-setup.py[m[36m:[m2[36m:[m1[36m:[m [1m[31mD205[m 1 blank line required between summary line and description
-"""
-Test Coverage Setup Validation Script
-Task 4.5: Implement test coverage reporting with coverage.py
-
-This script validates our coverage setup without requiring full Odoo installation.
-It tests our fixture system and coverage configuration independently.
-"""
-^
-[1mscripts/test-coverage-setup.py[m[36m:[m2[36m:[m1[36m:[m [1m[31mD212[m Multi-line docstring summary should start at the first line
-"""
-Test Coverage Setup Validation Script
-Task 4.5: Implement test coverage reporting with coverage.py
-
-This script validates our coverage setup without requiring full Odoo installation.
-It tests our fixture system and coverage configuration independently.
-"""
-^
-[1mscripts/test-coverage-setup.py[m[36m:[m2[36m:[m1[36m:[m [1m[31mD415[m First line should end with a period, question mark, or exclamation point
-"""
-Test Coverage Setup Validation Script
-Task 4.5: Implement test coverage reporting with coverage.py
-
-This script validates our coverage setup without requiring full Odoo installation.
-It tests our fixture system and coverage configuration independently.
-"""
-^
 [1mscripts/test-coverage-setup.py[m[36m:[m11[36m:[m1[36m:[m [1m[31mF401[m 'os' imported but unused
 import os
-^
-[1mscripts/test-coverage-setup.py[m[36m:[m18[36m:[m1[36m:[m [1m[31mD415[m First line should end with a period, question mark, or exclamation point
-    """Test if coverage.py is properly installed"""
-^
-[1mscripts/test-coverage-setup.py[m[36m:[m30[36m:[m1[36m:[m [1m[31mD415[m First line should end with a period, question mark, or exclamation point
-    """Test if .coveragerc configuration is valid"""
-^
-[1mscripts/test-coverage-setup.py[m[36m:[m49[36m:[m1[36m:[m [1m[31mD415[m First line should end with a period, question mark, or exclamation point
-    """Test if our fixture modules can be imported"""
-^
-[1mscripts/test-coverage-setup.py[m[36m:[m75[36m:[m1[36m:[m [1m[31mD415[m First line should end with a period, question mark, or exclamation point
-    """Test if our Makefile coverage targets are available"""
-^
-[1mscripts/test-coverage-setup.py[m[36m:[m96[36m:[m1[36m:[m [1m[31mD415[m First line should end with a period, question mark, or exclamation point
-    """Test a simple coverage run on our fixture files"""
-^
-[1mscripts/test-coverage-setup.py[m[36m:[m163[36m:[m1[36m:[m [1m[31mD415[m First line should end with a period, question mark, or exclamation point
-    """Test if HTML report directory structure is correct"""
-^
-[1mscripts/test-coverage-setup.py[m[36m:[m183[36m:[m1[36m:[m [1m[31mD415[m First line should end with a period, question mark, or exclamation point
-    """Run all coverage setup validation tests"""
 ^
 [1mscripts/test-coverage-setup.py[m[36m:[m213[36m:[m35[36m:[m [1m[31mE226[m missing whitespace around arithmetic operator
     print(f"Success rate: {(passed/total)*100:.1f}%")
@@ -191,159 +19,9 @@ import os
 [1mscripts/test-coverage-setup.py[m[36m:[m213[36m:[m42[36m:[m [1m[31mE226[m missing whitespace around arithmetic operator
     print(f"Success rate: {(passed/total)*100:.1f}%")
                                          ^
-[1mscripts/validate-imports.py[m[36m:[m2[36m:[m1[36m:[m [1m[31mD205[m 1 blank line required between summary line and description
-"""
-Odoo Python Import Validation Script
-Royal Textiles Project - Local Testing Infrastructure
-
-This script provides comprehensive validation of Python imports in Odoo modules,
-detecting circular imports, invalid paths, unused imports, and Odoo-specific
-import patterns.
-
-Key Features:
-- Circular import detection
-- Invalid import path validation
-- Unused import detection
-- Odoo-specific import pattern validation
-- Deprecated import pattern detection
-- Missing dependency detection
-- Import organization validation
-
-Usage:
-    python scripts/validate-imports.py [module_name]
-    python scripts/validate-imports.py  # validates all modules
-"""
-^
-[1mscripts/validate-imports.py[m[36m:[m2[36m:[m1[36m:[m [1m[31mD212[m Multi-line docstring summary should start at the first line
-"""
-Odoo Python Import Validation Script
-Royal Textiles Project - Local Testing Infrastructure
-
-This script provides comprehensive validation of Python imports in Odoo modules,
-detecting circular imports, invalid paths, unused imports, and Odoo-specific
-import patterns.
-
-Key Features:
-- Circular import detection
-- Invalid import path validation
-- Unused import detection
-- Odoo-specific import pattern validation
-- Deprecated import pattern detection
-- Missing dependency detection
-- Import organization validation
-
-Usage:
-    python scripts/validate-imports.py [module_name]
-    python scripts/validate-imports.py  # validates all modules
-"""
-^
-[1mscripts/validate-imports.py[m[36m:[m2[36m:[m1[36m:[m [1m[31mD415[m First line should end with a period, question mark, or exclamation point
-"""
-Odoo Python Import Validation Script
-Royal Textiles Project - Local Testing Infrastructure
-
-This script provides comprehensive validation of Python imports in Odoo modules,
-detecting circular imports, invalid paths, unused imports, and Odoo-specific
-import patterns.
-
-Key Features:
-- Circular import detection
-- Invalid import path validation
-- Unused import detection
-- Odoo-specific import pattern validation
-- Deprecated import pattern detection
-- Missing dependency detection
-- Import organization validation
-
-Usage:
-    python scripts/validate-imports.py [module_name]
-    python scripts/validate-imports.py  # validates all modules
-"""
-^
-[1mscripts/validate-imports.py[m[36m:[m91[36m:[m1[36m:[m [1m[31mD107[m Missing docstring in __init__
-    def __init__(self, base_path: str = "custom_modules"):
-^
-[1mscripts/validate-imports.py[m[36m:[m204[36m:[m40[36m:[m [1m[31mB007[m Loop control variable 'import_type' not used within the loop body. If this is intended, start the name with an underscore.
-            for import_path, line_num, import_type in addons_imports:
-                                       ^
-[1mscripts/validate-imports.py[m[36m:[m268[36m:[m18[36m:[m [1m[31mN802[m function name 'visit_Name' should be lowercase
-            def visit_Name(self, node):
-                 ^
-[1mscripts/validate-imports.py[m[36m:[m272[36m:[m18[36m:[m [1m[31mN802[m function name 'visit_Attribute' should be lowercase
-            def visit_Attribute(self, node):
-                 ^
 [1mscripts/validate-imports.py[m[36m:[m297[36m:[m5[36m:[m [1m[31mC901[m 'ImportValidator.validate_import_organization' is too complex (13)
     def validate_import_organization(self, imports: List[Tuple[str, int, str]], file_path: Path) -> bool:
     ^
-[1mscripts/validate-manifest.py[m[36m:[m2[36m:[m1[36m:[m [1m[31mD205[m 1 blank line required between summary line and description
-"""
-Odoo Manifest Validation Script
-Royal Textiles Project - Local Testing Infrastructure
-
-This script provides comprehensive validation of __manifest__.py files to ensure
-they meet Odoo 18.0 requirements and best practices. It catches common manifest
-errors that can prevent module installation or cause deployment failures.
-
-Key Features:
-- Robust parsing that handles various manifest formats
-- Comprehensive field validation for Odoo 18.0
-- Version format validation
-- Dependency analysis and recommendations
-- Data file validation
-- License and author validation
-- Category validation with Odoo standard categories
-
-Usage:
-    python scripts/validate-manifest.py [module_name]
-    python scripts/validate-manifest.py  # validates all modules
-"""
-^
-[1mscripts/validate-manifest.py[m[36m:[m2[36m:[m1[36m:[m [1m[31mD212[m Multi-line docstring summary should start at the first line
-"""
-Odoo Manifest Validation Script
-Royal Textiles Project - Local Testing Infrastructure
-
-This script provides comprehensive validation of __manifest__.py files to ensure
-they meet Odoo 18.0 requirements and best practices. It catches common manifest
-errors that can prevent module installation or cause deployment failures.
-
-Key Features:
-- Robust parsing that handles various manifest formats
-- Comprehensive field validation for Odoo 18.0
-- Version format validation
-- Dependency analysis and recommendations
-- Data file validation
-- License and author validation
-- Category validation with Odoo standard categories
-
-Usage:
-    python scripts/validate-manifest.py [module_name]
-    python scripts/validate-manifest.py  # validates all modules
-"""
-^
-[1mscripts/validate-manifest.py[m[36m:[m2[36m:[m1[36m:[m [1m[31mD415[m First line should end with a period, question mark, or exclamation point
-"""
-Odoo Manifest Validation Script
-Royal Textiles Project - Local Testing Infrastructure
-
-This script provides comprehensive validation of __manifest__.py files to ensure
-they meet Odoo 18.0 requirements and best practices. It catches common manifest
-errors that can prevent module installation or cause deployment failures.
-
-Key Features:
-- Robust parsing that handles various manifest formats
-- Comprehensive field validation for Odoo 18.0
-- Version format validation
-- Dependency analysis and recommendations
-- Data file validation
-- License and author validation
-- Category validation with Odoo standard categories
-
-Usage:
-    python scripts/validate-manifest.py [module_name]
-    python scripts/validate-manifest.py  # validates all modules
-"""
-^
 [1mscripts/validate-manifest.py[m[36m:[m25[36m:[m1[36m:[m [1m[31mF401[m 'os' imported but unused
 import os
 ^
@@ -356,35 +34,9 @@ from typing import Any, Dict, List, Optional, Set, Tuple, Union
 [1mscripts/validate-manifest.py[m[36m:[m29[36m:[m1[36m:[m [1m[31mF401[m 'typing.Union' imported but unused
 from typing import Any, Dict, List, Optional, Set, Tuple, Union
 ^
-[1mscripts/validate-manifest.py[m[36m:[m120[36m:[m1[36m:[m [1m[31mD107[m Missing docstring in __init__
-    def __init__(self, base_path: str = "custom_modules"):
-^
 [1mscripts/validate-manifest.py[m[36m:[m144[36m:[m5[36m:[m [1m[31mC901[m 'ManifestValidator.parse_manifest_file' is too complex (21)
     def parse_manifest_file(self, manifest_path: Path) -> Optional[Dict[str, Any]]:
     ^
-[1mscripts/validate-manifest.py[m[36m:[m145[36m:[m1[36m:[m [1m[31mD212[m Multi-line docstring summary should start at the first line
-        """
-        Robustly parse a __manifest__.py file.
-
-        Handles multiple formats:
-        1. Dictionary-only format: # -*- coding: utf-8 -*- \n { ... }
-        2. Explicit variable: __manifest__ = {...}
-        3. Module-style with imports and complex expressions
-        """
-^
-[1mscripts/validate-manifest.py[m[36m:[m145[36m:[m1[36m:[m [1m[31mD301[m Use r""" if any backslashes in a docstring
-        """
-        Robustly parse a __manifest__.py file.
-
-        Handles multiple formats:
-        1. Dictionary-only format: # -*- coding: utf-8 -*- \n { ... }
-        2. Explicit variable: __manifest__ = {...}
-        3. Module-style with imports and complex expressions
-        """
-^
-[1mscripts/validate-manifest.py[m[36m:[m224[36m:[m17[36m:[m [1m[31mB001[m Do not use bare `except:`, it also catches unexpected events like memory errors, interrupts, system exit, and so on.  Prefer excepting specific exceptions  If you're sure what you're doing, be explicit and write `except BaseException:`.
-                except:
-                ^
 [1mscripts/validate-manifest.py[m[36m:[m224[36m:[m17[36m:[m [1m[31mE722[m do not use bare 'except'
                 except:
                 ^
@@ -394,71 +46,12 @@ from typing import Any, Dict, List, Optional, Set, Tuple, Union
 [1mscripts/validate-manifest.py[m[36m:[m616[36m:[m24[36m:[m [1m[31mF541[m f-string is missing placeholders
             self.error(f"Manifest file not found: __manifest__.py", module_name, "file existence")
                        ^
-[1mscripts/validate-module.py[m[36m:[m2[36m:[m1[36m:[m [1m[31mD212[m Multi-line docstring summary should start at the first line
-"""
-Odoo Module Validation Script for RTP Denver
-
-This script validates Odoo module structure, syntax, and common patterns
-to catch errors before deployment. It would have caught the field type
-mismatch error we encountered earlier.
-
-Usage:
-    python scripts/validate-module.py [module_name]
-    python scripts/validate-module.py  # validates all modules
-"""
-^
-[1mscripts/validate-module.py[m[36m:[m2[36m:[m1[36m:[m [1m[31mD415[m First line should end with a period, question mark, or exclamation point
-"""
-Odoo Module Validation Script for RTP Denver
-
-This script validates Odoo module structure, syntax, and common patterns
-to catch errors before deployment. It would have caught the field type
-mismatch error we encountered earlier.
-
-Usage:
-    python scripts/validate-module.py [module_name]
-    python scripts/validate-module.py  # validates all modules
-"""
-^
-[1mscripts/validate-module.py[m[36m:[m18[36m:[m2[36m:[m [1m[31mN817[m camelcase 'xml.etree.ElementTree' imported as acronym 'ET'
-import xml.etree.ElementTree as ET
- ^
-[1mscripts/validate-module.py[m[36m:[m108[36m:[m1[36m:[m [1m[31mD107[m Missing docstring in __init__
-    def __init__(self, base_path: str = "custom_modules"):
-^
 [1mscripts/validate-module.py[m[36m:[m164[36m:[m5[36m:[m [1m[31mC901[m 'ModuleValidator.validate_manifest' is too complex (17)
     def validate_manifest(self, module_name: str) -> bool:
     ^
-[1mscripts/validate-module.py[m[36m:[m332[36m:[m1[36m:[m [1m[31mD205[m 1 blank line required between summary line and description
-        """Validate model inheritance patterns - Critical for preventing
-        deployment errors."""
-^
-[1mscripts/validate-module.py[m[36m:[m332[36m:[m1[36m:[m [1m[31mD209[m Multi-line docstring closing quotes should be on a separate line
-        """Validate model inheritance patterns - Critical for preventing
-        deployment errors."""
-^
-[1mscripts/validate-module.py[m[36m:[m332[36m:[m1[36m:[m [1m[31mD415[m First line should end with a period, question mark, or exclamation point
-        """Validate model inheritance patterns - Critical for preventing
-        deployment errors."""
-^
 [1mscripts/validate-module.py[m[36m:[m420[36m:[m5[36m:[m [1m[31mC901[m 'ModuleValidator._extract_model_fields' is too complex (15)
     def _extract_model_fields(self, content: str) -> Dict[str, Dict[str, Any]]:
     ^
-[1mscripts/validate-module.py[m[36m:[m554[36m:[m1[36m:[m [1m[31mD205[m 1 blank line required between summary line and description
-        """Validate related field type compatibility - This would have
-        caught our error!"""
-^
-[1mscripts/validate-module.py[m[36m:[m554[36m:[m1[36m:[m [1m[31mD209[m Multi-line docstring closing quotes should be on a separate line
-        """Validate related field type compatibility - This would have
-        caught our error!"""
-^
-[1mscripts/validate-module.py[m[36m:[m554[36m:[m1[36m:[m [1m[31mD415[m First line should end with a period, question mark, or exclamation point
-        """Validate related field type compatibility - This would have
-        caught our error!"""
-^
-[1mscripts/validate-module.py[m[36m:[m578[36m:[m13[36m:[m [1m[31mB007[m Loop control variable 'model_name' not used within the loop body. If this is intended, start the name with an underscore.
-        for model_name, model_fields in COMMON_MODEL_FIELDS.items():
-            ^
 [1mscripts/validate-module.py[m[36m:[m725[36m:[m73[36m:[m [1m[31mE226[m missing whitespace around arithmetic operator
                             f"(which is typically a Char field). Line {i+1}: {line.strip()}",
                                                                         ^
@@ -480,180 +73,12 @@ import xml.etree.ElementTree as ET
 [1mscripts/validate-module.py[m[36m:[m1083[36m:[m5[36m:[m [1m[31mC901[m 'ModuleValidator._check_circular_imports' is too complex (14)
     def _check_circular_imports(self, module_name: str) -> bool:
     ^
-[1mscripts/validate-security.py[m[36m:[m2[36m:[m1[36m:[m [1m[31mD205[m 1 blank line required between summary line and description
-"""
-Odoo Security File Validation Script
-Royal Textiles Project - Local Testing Infrastructure
-
-This script provides comprehensive validation of security files in Odoo modules,
-including CSV access rights files, XML security rules, group definitions,
-and security structure validation.
-
-Key Features:
-- CSV format and structure validation
-- Access rights column validation
-- Security rule XML validation
-- Group definition validation
-- Permission value validation
-- Reference integrity checking
-- Security file organization validation
-
-Usage:
-    python scripts/validate-security.py [module_name]
-    python scripts/validate-security.py  # validates all modules
-"""
-^
-[1mscripts/validate-security.py[m[36m:[m2[36m:[m1[36m:[m [1m[31mD212[m Multi-line docstring summary should start at the first line
-"""
-Odoo Security File Validation Script
-Royal Textiles Project - Local Testing Infrastructure
-
-This script provides comprehensive validation of security files in Odoo modules,
-including CSV access rights files, XML security rules, group definitions,
-and security structure validation.
-
-Key Features:
-- CSV format and structure validation
-- Access rights column validation
-- Security rule XML validation
-- Group definition validation
-- Permission value validation
-- Reference integrity checking
-- Security file organization validation
-
-Usage:
-    python scripts/validate-security.py [module_name]
-    python scripts/validate-security.py  # validates all modules
-"""
-^
-[1mscripts/validate-security.py[m[36m:[m2[36m:[m1[36m:[m [1m[31mD415[m First line should end with a period, question mark, or exclamation point
-"""
-Odoo Security File Validation Script
-Royal Textiles Project - Local Testing Infrastructure
-
-This script provides comprehensive validation of security files in Odoo modules,
-including CSV access rights files, XML security rules, group definitions,
-and security structure validation.
-
-Key Features:
-- CSV format and structure validation
-- Access rights column validation
-- Security rule XML validation
-- Group definition validation
-- Permission value validation
-- Reference integrity checking
-- Security file organization validation
-
-Usage:
-    python scripts/validate-security.py [module_name]
-    python scripts/validate-security.py  # validates all modules
-"""
-^
-[1mscripts/validate-security.py[m[36m:[m26[36m:[m2[36m:[m [1m[31mN817[m camelcase 'xml.etree.ElementTree' imported as acronym 'ET'
-import xml.etree.ElementTree as ET
- ^
-[1mscripts/validate-security.py[m[36m:[m70[36m:[m1[36m:[m [1m[31mD107[m Missing docstring in __init__
-    def __init__(self, base_path: str = "custom_modules"):
-^
 [1mscripts/validate-security.py[m[36m:[m182[36m:[m121[36m:[m [1m[31mE501[m line too long (122 > 120 characters)
                         f"Invalid permission value '{value}' for {field}. Use: {', '.join(self.VALID_PERMISSION_VALUES)}",
                                                                                                                         ^
-[1mscripts/validate-xml.py[m[36m:[m2[36m:[m1[36m:[m [1m[31mD205[m 1 blank line required between summary line and description
-"""
-Odoo XML Validation Script
-Royal Textiles Project - Local Testing Infrastructure
-
-This script provides comprehensive validation of XML files in Odoo modules,
-including views, security files, and data files. It checks for XML syntax
-errors and validates Odoo-specific structure requirements.
-
-Key Features:
-- XML syntax validation
-- Odoo root element validation (<odoo>)
-- Record structure validation
-- Field and attribute validation
-- Security file structure validation
-- View structure validation for forms, trees, kanban, etc.
-- Menu and action validation
-- Data file structure validation
-
-Usage:
-    python scripts/validate-xml.py [module_name]
-    python scripts/validate-xml.py  # validates all modules
-"""
-^
-[1mscripts/validate-xml.py[m[36m:[m2[36m:[m1[36m:[m [1m[31mD212[m Multi-line docstring summary should start at the first line
-"""
-Odoo XML Validation Script
-Royal Textiles Project - Local Testing Infrastructure
-
-This script provides comprehensive validation of XML files in Odoo modules,
-including views, security files, and data files. It checks for XML syntax
-errors and validates Odoo-specific structure requirements.
-
-Key Features:
-- XML syntax validation
-- Odoo root element validation (<odoo>)
-- Record structure validation
-- Field and attribute validation
-- Security file structure validation
-- View structure validation for forms, trees, kanban, etc.
-- Menu and action validation
-- Data file structure validation
-
-Usage:
-    python scripts/validate-xml.py [module_name]
-    python scripts/validate-xml.py  # validates all modules
-"""
-^
-[1mscripts/validate-xml.py[m[36m:[m2[36m:[m1[36m:[m [1m[31mD415[m First line should end with a period, question mark, or exclamation point
-"""
-Odoo XML Validation Script
-Royal Textiles Project - Local Testing Infrastructure
-
-This script provides comprehensive validation of XML files in Odoo modules,
-including views, security files, and data files. It checks for XML syntax
-errors and validates Odoo-specific structure requirements.
-
-Key Features:
-- XML syntax validation
-- Odoo root element validation (<odoo>)
-- Record structure validation
-- Field and attribute validation
-- Security file structure validation
-- View structure validation for forms, trees, kanban, etc.
-- Menu and action validation
-- Data file structure validation
-
-Usage:
-    python scripts/validate-xml.py [module_name]
-    python scripts/validate-xml.py  # validates all modules
-"""
-^
-[1mscripts/validate-xml.py[m[36m:[m27[36m:[m2[36m:[m [1m[31mN817[m camelcase 'xml.etree.ElementTree' imported as acronym 'ET'
-import xml.etree.ElementTree as ET
- ^
-[1mscripts/validate-xml.py[m[36m:[m98[36m:[m1[36m:[m [1m[31mD107[m Missing docstring in __init__
-    def __init__(self, base_path: str = "custom_modules"):
-^
-1     B001 Do not use bare `except:`, it also catches unexpected events like memory errors, interrupts, system exit, and so on.  Prefer excepting specific exceptions  If you're sure what you're doing, be explicit and write `except BaseException:`.
-2     B007 Loop control variable 'import_type' not used within the loop body. If this is intended, start the name with an underscore.
-1     B017 `assertRaises(Exception)` and `pytest.raises(Exception)` should be considered evil. They can lead to your test passing even if the code being tested is never executed due to a typo. Assert for a more specific exception (builtin or custom), or use `assertRaisesRegex` (if using `assertRaises`), or add the `match` keyword argument (if using `pytest.raises`), or use the context manager form with a target.
-1     B018 Found useless Dict expression. Consider either assigning it to a variable or removing it.
-1     B023 Function definition does not bind loop variable 'state'.
 6     C901 'OdooTypeChecker.parse_model_file' is too complex (13)
-6     D107 Missing docstring in __init__
-1     D200 One-line docstring should fit on one line with quotes
-2     D202 No blank lines allowed after function docstring
-7     D205 1 blank line required between summary line and description
-2     D209 Multi-line docstring closing quotes should be on a separate line
-12    D212 Multi-line docstring summary should start at the first line
-1     D301 Use r""" if any backslashes in a docstring
-20    D415 First line should end with a period, question mark, or exclamation point
 7     E226 missing whitespace around arithmetic operator
 3     E501 line too long (135 > 120 characters)
 1     E722 do not use bare 'except'
 8     F401 'json' imported but unused
 1     F541 f-string is missing placeholders
-2     N802 function name 'visit_Name' should be lowercase
-4     N817 camelcase 'xml.etree.ElementTree' imported as acronym 'ET'
