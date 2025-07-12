@@ -1,0 +1,970 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "🧪 Test: Run All Tests",
+            "type": "shell",
+            "command": "make",
+            "args": ["test"],
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false,
+                "group": "testing"
+            },
+            "problemMatcher": ["$python"]
+        },
+        {
+            "label": "🧪 Test: Current Module",
+            "type": "shell",
+            "command": "make",
+            "args": ["test-module", "MODULE=${input:moduleName}"],
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "group": "testing"
+            },
+            "problemMatcher": ["$python"]
+        },
+        {
+            "label": "🔄 Test: Integration Tests",
+            "type": "shell",
+            "command": "make",
+            "args": ["test-integration"],
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "group": "testing"
+            },
+            "problemMatcher": ["$python"]
+        },
+        {
+            "label": "⚡ Test: Performance Tests",
+            "type": "shell",
+            "command": "make",
+            "args": ["test-performance"],
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "group": "testing"
+            },
+            "problemMatcher": ["$python"]
+        },
+        {
+            "label": "👥 Test: Customer Workflows",
+            "type": "shell",
+            "command": "make",
+            "args": ["test-customer-flows"],
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "group": "testing"
+            },
+            "problemMatcher": ["$python"]
+        },
+        {
+            "label": "💰 Test: Sales Workflows",
+            "type": "shell",
+            "command": "make",
+            "args": ["test-sales-flows"],
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "group": "testing"
+            },
+            "problemMatcher": ["$python"]
+        },
+        {
+            "label": "🗃️ Test: Database Performance",
+            "type": "shell",
+            "command": "make",
+            "args": ["test-database-performance"],
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "group": "testing"
+            },
+            "problemMatcher": ["$python"]
+        },
+        {
+            "label": "🖥️ Test: View Performance",
+            "type": "shell",
+            "command": "make",
+            "args": ["test-view-performance"],
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "group": "testing"
+            },
+            "problemMatcher": ["$python"]
+        },
+        {
+            "label": "🚀 Test: CI/CD Pipeline",
+            "type": "shell",
+            "command": "make",
+            "args": ["test-integration-ci"],
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "dedicated",
+                "group": "testing"
+            },
+            "problemMatcher": ["$python"]
+        },
+
+        {
+            "label": "📊 Coverage: Generate Report",
+            "type": "shell",
+            "command": "make",
+            "args": ["coverage-report"],
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "group": "coverage"
+            },
+            "problemMatcher": ["$python"]
+        },
+        {
+            "label": "📊 Coverage: HTML Report",
+            "type": "shell",
+            "command": "make",
+            "args": ["coverage-html"],
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared",
+                "group": "coverage"
+            },
+            "problemMatcher": ["$python"]
+        },
+        {
+            "label": "📊 Coverage: Validate Thresholds",
+            "type": "shell",
+            "command": "make",
+            "args": ["coverage-validate"],
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "group": "coverage"
+            },
+            "problemMatcher": ["$python"]
+        },
+        {
+            "label": "📊 Coverage: Full Analysis",
+            "type": "shell",
+            "command": "make",
+            "args": ["coverage-full"],
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "group": "coverage"
+            },
+            "problemMatcher": ["$python"]
+        },
+        {
+            "label": "📊 Coverage: Insights & Recommendations",
+            "type": "shell",
+            "command": "make",
+            "args": ["coverage-insights"],
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "group": "coverage"
+            },
+            "problemMatcher": ["$python"]
+        },
+
+        {
+            "label": "🔍 Lint: All Code",
+            "type": "shell",
+            "command": "make",
+            "args": ["lint"],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "group": "quality"
+            },
+            "problemMatcher": [
+                {
+                    "owner": "flake8",
+                    "fileLocation": ["relative", "${workspaceFolder}"],
+                    "pattern": {
+                        "regexp": "^(.+):(\\d+):(\\d+): (\\w+)(\\d+) (.+)$",
+                        "file": 1,
+                        "line": 2,
+                        "column": 3,
+                        "severity": 4,
+                        "code": 5,
+                        "message": 6
+                    }
+                },
+                {
+                    "owner": "pylint",
+                    "fileLocation": ["relative", "${workspaceFolder}"],
+                    "pattern": {
+                        "regexp": "^(.+):(\\d+):(\\d+): (\\w+): (.+) \\((.+)\\)$",
+                        "file": 1,
+                        "line": 2,
+                        "column": 3,
+                        "severity": 4,
+                        "message": 5,
+                        "code": 6
+                    }
+                }
+            ]
+        },
+        {
+            "label": "🔍 Lint: Current File",
+            "type": "shell",
+            "command": "flake8",
+            "args": ["${file}"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared",
+                "group": "quality"
+            },
+            "problemMatcher": {
+                "owner": "flake8",
+                "fileLocation": ["relative", "${workspaceFolder}"],
+                "pattern": {
+                    "regexp": "^(.+):(\\d+):(\\d+): (\\w+)(\\d+) (.+)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "severity": 4,
+                    "code": 5,
+                    "message": 6
+                }
+            }
+        },
+        {
+            "label": "🎨 Format: All Code",
+            "type": "shell",
+            "command": "make",
+            "args": ["format"],
+            "group": "build",
+            "presentation": {
+                "echo": false,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared",
+                "group": "quality"
+            }
+        },
+        {
+            "label": "🎨 Format: Current File",
+            "type": "shell",
+            "command": "black",
+            "args": ["${file}"],
+            "group": "build",
+            "presentation": {
+                "echo": false,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared",
+                "group": "quality"
+            }
+        },
+        {
+            "label": "🔍 Lint: Pylint Odoo",
+            "type": "shell",
+            "command": "make",
+            "args": ["pylint-odoo"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "group": "quality"
+            },
+            "problemMatcher": {
+                "owner": "pylint-odoo",
+                "fileLocation": ["relative", "${workspaceFolder}"],
+                "pattern": {
+                    "regexp": "^(.+):(\\d+):(\\d+): (\\w+): (.+) \\((.+)\\)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "severity": 4,
+                    "message": 5,
+                    "code": 6
+                }
+            }
+        },
+        {
+            "label": "🔍 Type Check: MyPy",
+            "type": "shell",
+            "command": "make",
+            "args": ["mypy"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "group": "quality"
+            },
+            "problemMatcher": {
+                "owner": "mypy",
+                "fileLocation": ["relative", "${workspaceFolder}"],
+                "pattern": {
+                    "regexp": "^(.+):(\\d+): (error|warning|note): (.+)$",
+                    "file": 1,
+                    "line": 2,
+                    "severity": 3,
+                    "message": 4
+                }
+            }
+        },
+
+        {
+            "label": "✅ Validate: All Modules",
+            "type": "shell",
+            "command": "make",
+            "args": ["validate"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "group": "validation"
+            },
+            "problemMatcher": {
+                "owner": "odoo-validator",
+                "fileLocation": ["relative", "${workspaceFolder}"],
+                "pattern": {
+                    "regexp": "^ERROR: ([^:]+): (.*)$",
+                    "file": 1,
+                    "message": 2,
+                    "severity": "error"
+                }
+            }
+        },
+        {
+            "label": "✅ Validate: Current Module",
+            "type": "shell",
+            "command": "make",
+            "args": ["validate-module", "MODULE=${input:moduleName}"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "group": "validation"
+            },
+            "problemMatcher": {
+                "owner": "odoo-validator",
+                "fileLocation": ["relative", "${workspaceFolder}"],
+                "pattern": {
+                    "regexp": "^ERROR: ([^:]+): (.*)$",
+                    "file": 1,
+                    "message": 2,
+                    "severity": "error"
+                }
+            }
+        },
+        {
+            "label": "✅ Validate: Pre-commit Hooks",
+            "type": "shell",
+            "command": "make",
+            "args": ["pre-commit"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "group": "validation"
+            },
+            "problemMatcher": ["$python"]
+        },
+
+        {
+            "label": "📦 Module: Test Installation",
+            "type": "shell",
+            "command": "make",
+            "args": ["module-test-install", "MODULE=${input:moduleName}", "DEMO=true"],
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "group": "modules"
+            },
+            "problemMatcher": ["$python"]
+        },
+        {
+            "label": "📦 Module: Test Upgrade",
+            "type": "shell",
+            "command": "make",
+            "args": ["module-test-upgrade", "MODULE=${input:moduleName}"],
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "group": "modules"
+            },
+            "problemMatcher": ["$python"]
+        },
+        {
+            "label": "📦 Module: Test Dependencies",
+            "type": "shell",
+            "command": "make",
+            "args": ["module-test-dependencies", "MODULE=${input:moduleName}"],
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "group": "modules"
+            },
+            "problemMatcher": ["$python"]
+        },
+        {
+            "label": "📦 Module: Royal Textiles Complete Test",
+            "type": "shell",
+            "command": "make",
+            "args": ["module-test-royal-textiles"],
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "group": "modules"
+            },
+            "problemMatcher": ["$python"]
+        },
+        {
+            "label": "📦 Module: RTP Customers Complete Test",
+            "type": "shell",
+            "command": "make",
+            "args": ["module-test-rtp-customers"],
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "group": "modules"
+            },
+            "problemMatcher": ["$python"]
+        },
+
+        {
+            "label": "🗃️ DB: Create Database",
+            "type": "shell",
+            "command": "make",
+            "args": ["db-create", "NAME=${input:databaseName}", "TYPE=dev"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "group": "database"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "🗃️ DB: List Databases",
+            "type": "shell",
+            "command": "make",
+            "args": ["db-list"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "group": "database"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "🗃️ DB: Drop Database",
+            "type": "shell",
+            "command": "make",
+            "args": ["db-drop", "NAME=${input:databaseName}"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "group": "database"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "🗃️ DB: Backup Database",
+            "type": "shell",
+            "command": "make",
+            "args": ["backup-create", "NAME=${input:databaseName}"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "group": "database"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "🗃️ DB: Create Test Database",
+            "type": "shell",
+            "command": "make",
+            "args": ["test-db-create", "NAME=${input:testDatabaseName}"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "group": "database"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "🗃️ DB: Generate Sample Data",
+            "type": "shell",
+            "command": "make",
+            "args": ["data-development", "DB=${input:databaseName}"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "group": "database"
+            },
+            "problemMatcher": []
+        },
+
+        {
+            "label": "🚀 Server: Start Odoo",
+            "type": "shell",
+            "command": "make",
+            "args": ["start-odoo"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "dedicated",
+                "group": "server"
+            },
+            "isBackground": true,
+            "problemMatcher": []
+        },
+        {
+            "label": "🚀 Server: Stop Odoo",
+            "type": "shell",
+            "command": "make",
+            "args": ["stop-odoo"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "group": "server"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "🚀 Server: Restart Odoo",
+            "type": "shell",
+            "command": "make",
+            "args": ["restart-odoo"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "group": "server"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "🚀 Server: Start with Debugpy",
+            "type": "shell",
+            "command": "make",
+            "args": ["start-odoo-debug"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "dedicated",
+                "group": "server"
+            },
+            "isBackground": true,
+            "problemMatcher": []
+        },
+
+        {
+            "label": "🐳 Docker: Start Development Environment",
+            "type": "shell",
+            "command": "make",
+            "args": ["docker-up", "PROFILE=development"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "dedicated",
+                "group": "docker"
+            },
+            "isBackground": true,
+            "problemMatcher": []
+        },
+        {
+            "label": "🐳 Docker: Stop Services",
+            "type": "shell",
+            "command": "make",
+            "args": ["docker-down"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "group": "docker"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "🐳 Docker: View Logs",
+            "type": "shell",
+            "command": "make",
+            "args": ["docker-logs", "SERVICE=${input:dockerService}"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "group": "docker"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "🐳 Docker: Open Shell",
+            "type": "shell",
+            "command": "make",
+            "args": ["docker-shell", "SERVICE=${input:dockerService}"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new",
+                "group": "docker"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "🐳 Docker: Status",
+            "type": "shell",
+            "command": "make",
+            "args": ["docker-status"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "group": "docker"
+            },
+            "problemMatcher": []
+        },
+
+        {
+            "label": "🐛 Debug: Setup Debugpy",
+            "type": "shell",
+            "command": "make",
+            "args": ["setup-debugpy"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "group": "debug"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "🐛 Debug: Test Connection",
+            "type": "shell",
+            "command": "make",
+            "args": ["debug-test-connection"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new",
+                "group": "debug"
+            },
+            "isBackground": true,
+            "problemMatcher": []
+        },
+        {
+            "label": "🐛 Debug: Show Help",
+            "type": "shell",
+            "command": "make",
+            "args": ["debug-help"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "group": "debug"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "🐛 Debug: Validate VS Code Config",
+            "type": "shell",
+            "command": "make",
+            "args": ["validate-vscode-config"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "group": "debug"
+            },
+            "problemMatcher": []
+        },
+
+        {
+            "label": "🚢 Deploy: Check Readiness",
+            "type": "shell",
+            "command": "make",
+            "args": ["deploy-check"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "dedicated",
+                "group": "deploy"
+            },
+            "problemMatcher": [
+                "$python",
+                {
+                    "owner": "deploy-check",
+                    "fileLocation": ["relative", "${workspaceFolder}"],
+                    "pattern": {
+                        "regexp": "^❌ (.*)$",
+                        "message": 1,
+                        "severity": "error"
+                    }
+                }
+            ]
+        },
+        {
+            "label": "🚢 Deploy: Full Validation Pipeline",
+            "type": "shell",
+            "command": "bash",
+            "args": ["-c", "make lint && make validate && make test && make coverage-validate && echo '✅ All checks passed!'"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "dedicated",
+                "group": "deploy"
+            },
+            "problemMatcher": ["$python"]
+        },
+        {
+            "label": "🚢 Deploy: CI Simulation",
+            "type": "shell",
+            "command": "bash",
+            "args": ["-c", "make test-integration-ci && make test-performance-ci && make module-test-ci"],
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "dedicated",
+                "group": "deploy"
+            },
+            "problemMatcher": ["$python"]
+        },
+
+        {
+            "label": "🧹 Utility: Clean Temporary Files",
+            "type": "shell",
+            "command": "make",
+            "args": ["clean"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared",
+                "group": "utility"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "🧹 Utility: Clean Coverage Files",
+            "type": "shell",
+            "command": "make",
+            "args": ["coverage-clean"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared",
+                "group": "utility"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "🧹 Utility: Clean Debug Processes",
+            "type": "shell",
+            "command": "make",
+            "args": ["debug-cleanup"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "group": "utility"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "📖 Help: Show All Make Commands",
+            "type": "shell",
+            "command": "make",
+            "args": ["help"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "group": "utility"
+            },
+            "problemMatcher": []
+        }
+    ],
+    "inputs": [
+        {
+            "id": "moduleName",
+            "description": "Enter the module name",
+            "default": "royal_textiles_sales",
+            "type": "promptString"
+        },
+        {
+            "id": "databaseName",
+            "description": "Enter database name",
+            "default": "rtp_dev",
+            "type": "promptString"
+        },
+        {
+            "id": "testDatabaseName",
+            "description": "Enter test database name",
+            "default": "test_rtp",
+            "type": "promptString"
+        },
+        {
+            "id": "dockerService",
+            "description": "Enter Docker service name",
+            "default": "odoo",
+            "type": "promptString"
+        },
+        {
+            "id": "testType",
+            "description": "Select test type",
+            "default": "unit",
+            "type": "pickString",
+            "options": [
+                "unit",
+                "integration",
+                "performance",
+                "functional",
+                "all"
+            ]
+        },
+        {
+            "id": "coverageThreshold",
+            "description": "Enter coverage threshold percentage",
+            "default": "75",
+            "type": "promptString"
+        }
+    ]
+}

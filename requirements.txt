@@ -1,0 +1,51 @@
+# RTP Denver Odoo Project - Python Dependencies
+# These dependencies are for development and testing, not for production deployment
+
+# Odoo Development Tools
+pylint-odoo>=8.0.0        # Odoo-specific linting rules
+odoo-test-helper>=2.0.0   # Testing utilities for Odoo
+black>=23.0.0             # Code formatting
+flake8>=5.0.0             # Code linting
+flake8-docstrings>=1.7    # Docstring style checks
+flake8-builtins>=2.0      # Check for builtins shadowing
+flake8-comprehensions>=3.0 # List/dict comprehension checks
+flake8-import-order>=0.18 # Import order checks
+flake8-bugbear>=23.0      # Additional bug detection
+pep8-naming>=0.13         # PEP8 naming convention checks
+mypy>=1.0.0               # Type checking
+isort>=5.0.0              # Import sorting
+pre-commit>=3.0.0         # Pre-commit hooks
+
+# Testing Dependencies
+pytest>=7.0.0             # Testing framework
+pytest-odoo>=0.5.0        # Pytest plugin for Odoo
+coverage>=7.0.0           # Code coverage
+factory-boy>=3.2.0        # Test data generation
+
+# Documentation
+sphinx>=5.0.0             # Documentation generation
+sphinx-rtd-theme>=1.0.0   # Documentation theme
+
+# Development Utilities
+ipython>=8.0.0            # Enhanced Python shell
+jupyter>=1.0.0            # Jupyter notebooks for prototyping
+requests>=2.28.0          # HTTP library for API testing
+python-dotenv>=0.19.0     # Environment variable management
+
+# XML/HTML Processing
+lxml>=4.9.0               # XML processing (often needed for Odoo)
+beautifulsoup4>=4.11.0    # HTML/XML parsing
+
+# Date/Time Utilities
+python-dateutil>=2.8.0    # Date utilities
+pytz>=2022.1              # Timezone handling
+
+# Data Processing
+openpyxl>=3.0.0           # Excel file handling
+pandas>=1.5.0             # Data analysis (for reports)
+
+# Security
+cryptography>=37.0.0      # Cryptographic functions
+
+# Note: Odoo itself and its dependencies are provided by the odoo.sh platform
+# These are additional development tools and libraries for custom module development debugpy>=1.6.0  # Remote debugging support

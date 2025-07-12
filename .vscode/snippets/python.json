@@ -1,0 +1,436 @@
+{
+    "Odoo Model Basic": {
+        "prefix": "odoo-model",
+        "body": [
+            "from odoo import api, fields, models",
+            "",
+            "",
+            "class ${1:ModelName}(models.Model):",
+            "    _name = '${2:module.model.name}'",
+            "    _description = '${3:Model Description}'",
+            "    _order = '${4:name}'",
+            "",
+            "    name = fields.Char(string='Name', required=True)",
+            "    description = fields.Text(string='Description')",
+            "    active = fields.Boolean(string='Active', default=True)",
+            "    ",
+            "    ${0}"
+        ],
+        "description": "Basic Odoo model structure with common fields"
+    },
+
+    "Odoo Model with Inheritance": {
+        "prefix": "odoo-model-inherit",
+        "body": [
+            "from odoo import api, fields, models",
+            "",
+            "",
+            "class ${1:ModelName}(models.Model):",
+            "    _inherit = '${2:existing.model}'",
+            "    _description = '${3:Extended Model Description}'",
+            "",
+            "    ${4:new_field} = fields.${5:Char}(string='${6:Field Label}')",
+            "    ",
+            "    ${0}"
+        ],
+        "description": "Model inheritance pattern for extending existing models"
+    },
+
+    "Odoo Model Royal Textiles": {
+        "prefix": "odoo-model-rtp",
+        "body": [
+            "from odoo import api, fields, models, _",
+            "from odoo.exceptions import UserError, ValidationError",
+            "",
+            "",
+            "class ${1:ModelName}(models.Model):",
+            "    _name = 'rtp.${2:model.name}'",
+            "    _description = '${3:Royal Textiles Model Description}'",
+            "    _order = '${4:create_date desc}'",
+            "    _rec_name = '${5:name}'",
+            "",
+            "    # Basic Information",
+            "    name = fields.Char(string='Name', required=True, tracking=True)",
+            "    description = fields.Text(string='Description')",
+            "    active = fields.Boolean(string='Active', default=True, tracking=True)",
+            "    ",
+            "    # Audit Fields",
+            "    create_date = fields.Datetime(string='Created On', readonly=True)",
+            "    create_uid = fields.Many2one('res.users', string='Created By', readonly=True)",
+            "    write_date = fields.Datetime(string='Last Updated', readonly=True)",
+            "    write_uid = fields.Many2one('res.users', string='Last Updated By', readonly=True)",
+            "    ",
+            "    # State Management",
+            "    state = fields.Selection([",
+            "        ('draft', 'Draft'),",
+            "        ('confirmed', 'Confirmed'),",
+            "        ('done', 'Done'),",
+            "        ('cancelled', 'Cancelled')",
+            "    ], string='Status', default='draft', tracking=True)",
+            "    ",
+            "    ${0}"
+        ],
+        "description": "Royal Textiles model template with standard fields and patterns"
+    },
+
+    "Odoo Selection Field": {
+        "prefix": "odoo-selection",
+        "body": [
+            "${1:field_name} = fields.Selection([",
+            "    ('${2:value1}', '${3:Label 1}'),",
+            "    ('${4:value2}', '${5:Label 2}'),",
+            "    ('${6:value3}', '${7:Label 3}'),",
+            "], string='${8:Field Label}', default='${9:value1}', required=${10:True})"
+        ],
+        "description": "Selection field with multiple options"
+    },
+
+    "Odoo Computed Field": {
+        "prefix": "odoo-computed",
+        "body": [
+            "${1:field_name} = fields.${2:Char}(string='${3:Field Label}', compute='_compute_${1}', store=${4:True})",
+            "",
+            "@api.depends('${5:dependency_field}')",
+            "def _compute_${1}(self):",
+            "    for record in self:",
+            "        ${6:# Computation logic}",
+            "        record.${1} = ${7:computed_value}"
+        ],
+        "description": "Computed field with dependency and method"
+    },
+
+    "Odoo Many2one Field": {
+        "prefix": "odoo-many2one",
+        "body": [
+            "${1:field_name}_id = fields.Many2one(",
+            "    comodel_name='${2:target.model}',",
+            "    string='${3:Field Label}',",
+            "    required=${4:True},",
+            "    ondelete='${5:cascade}',",
+            "    help='${6:Help text for this field}'",
+            ")"
+        ],
+        "description": "Many2one relationship field"
+    },
+
+    "Odoo One2many Field": {
+        "prefix": "odoo-one2many",
+        "body": [
+            "${1:field_name}_ids = fields.One2many(",
+            "    comodel_name='${2:target.model}',",
+            "    inverse_name='${3:inverse_field}_id',",
+            "    string='${4:Field Label}',",
+            "    help='${5:Help text for this field}'",
+            ")"
+        ],
+        "description": "One2many relationship field"
+    },
+
+    "Odoo Many2many Field": {
+        "prefix": "odoo-many2many",
+        "body": [
+            "${1:field_name}_ids = fields.Many2many(",
+            "    comodel_name='${2:target.model}',",
+            "    relation='${3:relation_table}',",
+            "    column1='${4:source_id}',",
+            "    column2='${5:target_id}',",
+            "    string='${6:Field Label}',",
+            "    help='${7:Help text for this field}'",
+            ")"
+        ],
+        "description": "Many2many relationship field with custom relation table"
+    },
+
+    "Odoo API Constraint": {
+        "prefix": "odoo-constraint",
+        "body": [
+            "@api.constrains('${1:field_name}')",
+            "def _check_${1}(self):",
+            "    for record in self:",
+            "        if ${2:condition}:",
+            "            raise ValidationError(_('${3:Error message}'))"
+        ],
+        "description": "API constraint validation method"
+    },
+
+    "Odoo Onchange Method": {
+        "prefix": "odoo-onchange",
+        "body": [
+            "@api.onchange('${1:field_name}')",
+            "def _onchange_${1}(self):",
+            "    if self.${1}:",
+            "        ${2:# Logic when field changes}",
+            "        ${0}"
+        ],
+        "description": "Onchange method for field updates"
+    },
+
+    "Odoo CRUD Methods": {
+        "prefix": "odoo-crud",
+        "body": [
+            "@api.model",
+            "def create(self, vals):",
+            "    ${1:# Pre-creation logic}",
+            "    record = super(${2:ModelName}, self).create(vals)",
+            "    ${3:# Post-creation logic}",
+            "    return record",
+            "",
+            "def write(self, vals):",
+            "    ${4:# Pre-update logic}",
+            "    result = super(${2:ModelName}, self).write(vals)",
+            "    ${5:# Post-update logic}",
+            "    return result",
+            "",
+            "def unlink(self):",
+            "    ${6:# Pre-deletion logic}",
+            "    return super(${2:ModelName}, self).unlink()"
+        ],
+        "description": "Override CRUD methods with pre/post logic"
+    },
+
+    "Odoo HTTP Controller": {
+        "prefix": "odoo-controller",
+        "body": [
+            "from odoo import http",
+            "from odoo.http import request",
+            "",
+            "",
+            "class ${1:ControllerName}(http.Controller):",
+            "",
+            "    @http.route('/${2:route/path}', type='${3:http}', auth='${4:user}', methods=['${5:GET}'])",
+            "    def ${6:method_name}(self, **kwargs):",
+            "        \"\"\"${7:Method description}\"\"\"",
+            "        ${8:# Controller logic}",
+            "        return ${9:response}",
+            "        ",
+            "    ${0}"
+        ],
+        "description": "HTTP controller with route configuration"
+    },
+
+    "Odoo JSON Controller": {
+        "prefix": "odoo-json-controller",
+        "body": [
+            "@http.route('/${1:api/endpoint}', type='json', auth='${2:user}', methods=['POST'])",
+            "def ${3:method_name}(self, **kwargs):",
+            "    \"\"\"${4:JSON API endpoint description}\"\"\"",
+            "    try:",
+            "        ${5:# Process request}",
+            "        data = kwargs.get('data', {})",
+            "        result = ${6:# Business logic}",
+            "        return {",
+            "            'success': True,",
+            "            'data': result,",
+            "            'message': '${7:Success message}'",
+            "        }",
+            "    except Exception as e:",
+            "        return {",
+            "            'success': False,",
+            "            'error': str(e),",
+            "            'message': '${8:Error message}'",
+            "        }"
+        ],
+        "description": "JSON controller endpoint with error handling"
+    },
+
+    "Odoo Website Controller": {
+        "prefix": "odoo-website-controller",
+        "body": [
+            "@http.route('/${1:web/page}', type='http', auth='public', website=True)",
+            "def ${2:method_name}(self, **kwargs):",
+            "    \"\"\"${3:Website page description}\"\"\"",
+            "    values = {",
+            "        '${4:key}': ${5:value},",
+            "    }",
+            "    return request.render('${6:module.template_name}', values)"
+        ],
+        "description": "Website controller for public pages"
+    },
+
+    "Odoo Wizard Model": {
+        "prefix": "odoo-wizard",
+        "body": [
+            "from odoo import api, fields, models, _",
+            "",
+            "",
+            "class ${1:WizardName}(models.TransientModel):",
+            "    _name = '${2:module.wizard.name}'",
+            "    _description = '${3:Wizard Description}'",
+            "",
+            "    ${4:field_name} = fields.${5:Char}(string='${6:Field Label}', required=True)",
+            "    ",
+            "    def action_${7:confirm}(self):",
+            "        \"\"\"${8:Action description}\"\"\"",
+            "        ${9:# Wizard logic}",
+            "        return {",
+            "            'type': 'ir.actions.act_window_close'",
+            "        }",
+            "        ",
+            "    ${0}"
+        ],
+        "description": "Transient model (wizard) for user interactions"
+    },
+
+    "Odoo Report Model": {
+        "prefix": "odoo-report",
+        "body": [
+            "from odoo import api, fields, models, tools",
+            "",
+            "",
+            "class ${1:ReportName}(models.Model):",
+            "    _name = '${2:module.report.name}'",
+            "    _description = '${3:Report Description}'",
+            "    _auto = False",
+            "    _rec_name = '${4:name}'",
+            "",
+            "    ${5:field_name} = fields.${6:Char}(string='${7:Field Label}', readonly=True)",
+            "    ",
+            "    def init(self):",
+            "        tools.drop_view_if_exists(self.env.cr, self._table)",
+            "        self.env.cr.execute(\"\"\"",
+            "            CREATE OR REPLACE VIEW %s AS (",
+            "                ${8:SELECT query}",
+            "            )",
+            "        \"\"\" % self._table)",
+            "        ",
+            "    ${0}"
+        ],
+        "description": "Report model with database view"
+    },
+
+    "Odoo Business Logic Method": {
+        "prefix": "odoo-business-method",
+        "body": [
+            "def ${1:method_name}(self):",
+            "    \"\"\"${2:Method description}",
+            "    ",
+            "    Returns:",
+            "        ${3:Return type}: ${4:Return description}",
+            "    \"\"\"",
+            "    self.ensure_one()",
+            "    ${5:# Business logic}",
+            "    return ${6:result}"
+        ],
+        "description": "Business logic method with documentation"
+    },
+
+    "Odoo State Transition": {
+        "prefix": "odoo-state-transition",
+        "body": [
+            "def action_${1:state_name}(self):",
+            "    \"\"\"Transition to ${1} state\"\"\"",
+            "    for record in self:",
+            "        if record.state != '${2:expected_state}':",
+            "            raise UserError(_('Cannot transition from %s to ${1}') % record.state)",
+            "        ${3:# Pre-transition logic}",
+            "        record.state = '${1}'",
+            "        ${4:# Post-transition logic}"
+        ],
+        "description": "State transition method with validation"
+    },
+
+    "Odoo Search Domain": {
+        "prefix": "odoo-domain",
+        "body": [
+            "domain = [",
+            "    ('${1:field_name}', '${2:operator}', ${3:value}),",
+            "    ('${4:field_name}', '${5:operator}', ${6:value}),",
+            "]",
+            "records = self.env['${7:model.name}'].search(domain, limit=${8:10})"
+        ],
+        "description": "Search domain with multiple conditions"
+    },
+
+    "Odoo Environment Usage": {
+        "prefix": "odoo-env",
+        "body": [
+            "# Access models",
+            "${1:model} = self.env['${2:model.name}']",
+            "",
+            "# Create records",
+            "record = ${1}.create({",
+            "    '${3:field}': ${4:value},",
+            "})",
+            "",
+            "# Search records",
+            "records = ${1}.search([('${5:field}', '=', ${6:value})])",
+            "",
+            "# Browse by ID",
+            "record = ${1}.browse(${7:record_id})",
+            "",
+            "# Access user and company",
+            "user = self.env.user",
+            "company = self.env.company"
+        ],
+        "description": "Common environment usage patterns"
+    },
+
+    "Odoo Exception Handling": {
+        "prefix": "odoo-exception",
+        "body": [
+            "from odoo.exceptions import UserError, ValidationError, AccessError",
+            "",
+            "try:",
+            "    ${1:# Code that might raise exceptions}",
+            "except ValidationError as e:",
+            "    ${2:# Handle validation errors}",
+            "    raise ValidationError(_('${3:Custom validation message}: %s') % str(e))",
+            "except UserError as e:",
+            "    ${4:# Handle user errors}",
+            "    raise UserError(_('${5:Custom user message}: %s') % str(e))",
+            "except Exception as e:",
+            "    ${6:# Handle general exceptions}",
+            "    raise UserError(_('${7:Unexpected error}: %s') % str(e))"
+        ],
+        "description": "Exception handling with Odoo exceptions"
+    },
+
+    "Odoo Cron Job": {
+        "prefix": "odoo-cron",
+        "body": [
+            "@api.model",
+            "def cron_${1:job_name}(self):",
+            "    \"\"\"${2:Cron job description}",
+            "    ",
+            "    This method is called by the scheduler.",
+            "    \"\"\"",
+            "    _logger.info('Starting cron job: ${1}')",
+            "    ",
+            "    try:",
+            "        ${3:# Cron job logic}",
+            "        _logger.info('Cron job ${1} completed successfully')",
+            "    except Exception as e:",
+            "        _logger.error('Cron job ${1} failed: %s', str(e))",
+            "        raise"
+        ],
+        "description": "Scheduled cron job method"
+    },
+
+    "Odoo Royal Textiles Install/Sale": {
+        "prefix": "odoo-rtp-install",
+        "body": [
+            "# Royal Textiles Installation",
+            "installation_id = fields.Many2one(",
+            "    comodel_name='rtp.installation',",
+            "    string='Installation',",
+            "    help='Related textile installation project'",
+            ")",
+            "",
+            "# Sales Order Integration",
+            "sale_order_id = fields.Many2one(",
+            "    comodel_name='sale.order',",
+            "    string='Sales Order',",
+            "    help='Original sales order for this installation'",
+            ")",
+            "",
+            "# Installation Status",
+            "installation_state = fields.Selection([",
+            "    ('scheduled', 'Scheduled'),",
+            "    ('in_progress', 'In Progress'),",
+            "    ('completed', 'Completed'),",
+            "    ('on_hold', 'On Hold'),",
+            "], string='Installation Status', default='scheduled')"
+        ],
+        "description": "Royal Textiles installation and sales integration fields"
+    }
+}

@@ -1,0 +1,531 @@
+{
+  "module_name": "royal_textiles_sales",
+  "module_path": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales",
+  "analysis_timestamp": "2025-07-11T23:12:22.014249",
+  "manifest": {
+    "name": "Royal Textiles Sales Enhancement",
+    "version": "18.0.1.0.1",
+    "category": "Sales",
+    "summary": "Custom sales order enhancements for Royal Textiles installation company",
+    "description": "\nRoyal Textiles Sales Enhancement\n===============================\n\nThis module adds custom business logic to sales orders specifically designed\nfor Royal Textiles, a commercial blinds and shades installation company.\n\nKey Features:\n* Schedule Installation button on sales orders\n* Generate Work Order with installation tasks\n* Calculate Materials needed for each order\n* Automatic creation of installation appointments\n* Integration with project management workflows\n* Custom business logic for blind/shade installations\n\nBusiness Logic:\n* When sales order is confirmed \u2192 Enable installation scheduling\n* Schedule Installation \u2192 Creates calendar event and installation record\n* Generate Work Order \u2192 Creates project with installation tasks\n* Calculate Materials \u2192 Estimates materials based on order lines\n\nTarget Users:\n* Sales team members\n* Installation coordinators\n* Project managers\n* Operations team\n    ",
+    "author": "RTP Denver Development Team",
+    "website": "https://github.com/matthewbergvinson/rtp-denver",
+    "license": "LGPL-3",
+    "depends": [
+      "base",
+      "web",
+      "sale",
+      "project",
+      "calendar"
+    ],
+    "data": [
+      "security/ir.model.access.csv",
+      "views/sale_order_views.xml",
+      "views/installation_views.xml",
+      "views/installation_menu.xml",
+      "data/installation_demo.xml"
+    ],
+    "demo": [
+      "data/installation_demo.xml"
+    ],
+    "installable": true,
+    "application": true,
+    "auto_install": false,
+    "odoo_version": "18.0",
+    "development_status": "Beta",
+    "maintainers": [
+      "m@vigilanteconsulting.com"
+    ]
+  },
+  "models": [],
+  "fields": [
+    {
+      "name": "installation_status",
+      "type": "fields.Selection",
+      "class": "SaleOrder",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/models/sale_order.py",
+      "line_number": 34
+    },
+    {
+      "name": "installation_id",
+      "type": "fields.Many2one",
+      "class": "SaleOrder",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/models/sale_order.py",
+      "line_number": 48
+    },
+    {
+      "name": "estimated_installation_hours",
+      "type": "fields.Float",
+      "class": "SaleOrder",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/models/sale_order.py",
+      "line_number": 54
+    },
+    {
+      "name": "installation_notes",
+      "type": "fields.Text",
+      "class": "SaleOrder",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/models/sale_order.py",
+      "line_number": 61
+    },
+    {
+      "name": "qty",
+      "type": "product_uom_qty",
+      "class": "SaleOrder",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/models/sale_order.py",
+      "line_number": 280
+    },
+    {
+      "name": "name",
+      "type": "fields.Char",
+      "class": "RoyalInstallation",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/models/installation.py",
+      "line_number": 37
+    },
+    {
+      "name": "description",
+      "type": "fields.Text",
+      "class": "RoyalInstallation",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/models/installation.py",
+      "line_number": 43
+    },
+    {
+      "name": "sale_order_id",
+      "type": "fields.Many2one",
+      "class": "RoyalInstallation",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/models/installation.py",
+      "line_number": 50
+    },
+    {
+      "name": "customer_id",
+      "type": "fields.Many2one",
+      "class": "RoyalInstallation",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/models/installation.py",
+      "line_number": 57
+    },
+    {
+      "name": "installer_id",
+      "type": "fields.Many2one",
+      "class": "RoyalInstallation",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/models/installation.py",
+      "line_number": 64
+    },
+    {
+      "name": "status",
+      "type": "fields.Selection",
+      "class": "RoyalInstallation",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/models/installation.py",
+      "line_number": 73
+    },
+    {
+      "name": "scheduled_date",
+      "type": "fields.Datetime",
+      "class": "RoyalInstallation",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/models/installation.py",
+      "line_number": 90
+    },
+    {
+      "name": "actual_start_date",
+      "type": "fields.Datetime",
+      "class": "RoyalInstallation",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/models/installation.py",
+      "line_number": 96
+    },
+    {
+      "name": "completion_date",
+      "type": "fields.Datetime",
+      "class": "RoyalInstallation",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/models/installation.py",
+      "line_number": 101
+    },
+    {
+      "name": "estimated_hours",
+      "type": "fields.Float",
+      "class": "RoyalInstallation",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/models/installation.py",
+      "line_number": 105
+    },
+    {
+      "name": "actual_hours",
+      "type": "fields.Float",
+      "class": "RoyalInstallation",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/models/installation.py",
+      "line_number": 111
+    },
+    {
+      "name": "estimated_weight",
+      "type": "fields.Float",
+      "class": "RoyalInstallation",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/models/installation.py",
+      "line_number": 113
+    },
+    {
+      "name": "materials_notes",
+      "type": "fields.Text",
+      "class": "RoyalInstallation",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/models/installation.py",
+      "line_number": 120
+    },
+    {
+      "name": "installation_address",
+      "type": "fields.Text",
+      "class": "RoyalInstallation",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/models/installation.py",
+      "line_number": 122
+    },
+    {
+      "name": "special_instructions",
+      "type": "fields.Text",
+      "class": "RoyalInstallation",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/models/installation.py",
+      "line_number": 124
+    },
+    {
+      "name": "duration_actual",
+      "type": "fields.Float",
+      "class": "RoyalInstallation",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/models/installation.py",
+      "line_number": 131
+    },
+    {
+      "name": "is_overdue",
+      "type": "fields.Boolean",
+      "class": "RoyalInstallation",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/models/installation.py",
+      "line_number": 138
+    },
+    {
+      "name": "efficiency_rating",
+      "type": "fields.Selection",
+      "class": "RoyalInstallation",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/models/installation.py",
+      "line_number": 145
+    },
+    {
+      "name": "old_status",
+      "type": "status",
+      "class": "RoyalInstallation",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/models/installation.py",
+      "line_number": 366
+    }
+  ],
+  "methods": [
+    {
+      "name": "_compute_estimated_hours",
+      "class": "SaleOrder",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/models/sale_order.py",
+      "docstring": "Compute estimated installation hours based on products ordered\nBusiness logic specific to blinds and shades installation",
+      "args": [
+        "self"
+      ],
+      "decorators": [
+        "<ast.Call object at 0x102f6d950>"
+      ],
+      "line_number": 69,
+      "is_api_method": false,
+      "is_route": false
+    },
+    {
+      "name": "action_schedule_installation",
+      "class": "SaleOrder",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/models/sale_order.py",
+      "docstring": "Schedule Installation Button Action\n\nCreates an installation record and opens a form to schedule the appointment.\nOnly available for confirmed sales orders.",
+      "args": [
+        "self"
+      ],
+      "decorators": [],
+      "line_number": 105,
+      "is_api_method": false,
+      "is_route": false
+    },
+    {
+      "name": "action_generate_work_order",
+      "class": "SaleOrder",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/models/sale_order.py",
+      "docstring": "Generate Work Order Button Action\n\nCreates a project with tasks for the installation work.\nIntegrates with Odoo's project management module.",
+      "args": [
+        "self"
+      ],
+      "decorators": [],
+      "line_number": 185,
+      "is_api_method": false,
+      "is_route": false
+    },
+    {
+      "name": "action_calculate_materials",
+      "class": "SaleOrder",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/models/sale_order.py",
+      "docstring": "Calculate Materials Button Action\n\nAnalyzes the order lines and calculates additional materials needed\nfor the installation (screws, brackets, etc.)",
+      "args": [
+        "self"
+      ],
+      "decorators": [],
+      "line_number": 263,
+      "is_api_method": false,
+      "is_route": false
+    },
+    {
+      "name": "_compute_duration",
+      "class": "RoyalInstallation",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/models/installation.py",
+      "docstring": "Compute actual duration of installation\nSame pattern as Hello World Todo computed fields",
+      "args": [
+        "self"
+      ],
+      "decorators": [
+        "<ast.Call object at 0x102f63cd0>"
+      ],
+      "line_number": 161,
+      "is_api_method": false,
+      "is_route": false
+    },
+    {
+      "name": "_compute_is_overdue",
+      "class": "RoyalInstallation",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/models/installation.py",
+      "docstring": "Compute if installation is overdue\nSame pattern as Hello World Todo overdue logic",
+      "args": [
+        "self"
+      ],
+      "decorators": [
+        "<ast.Call object at 0x102f6c150>"
+      ],
+      "line_number": 174,
+      "is_api_method": false,
+      "is_route": false
+    },
+    {
+      "name": "_compute_efficiency_rating",
+      "class": "RoyalInstallation",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/models/installation.py",
+      "docstring": "Compute efficiency rating based on actual vs estimated time\nSame pattern as Hello World Todo computed fields",
+      "args": [
+        "self"
+      ],
+      "decorators": [
+        "<ast.Call object at 0x102fadcd0>"
+      ],
+      "line_number": 188,
+      "is_api_method": false,
+      "is_route": false
+    },
+    {
+      "name": "action_start_installation",
+      "class": "RoyalInstallation",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/models/installation.py",
+      "docstring": "Start the installation process\nSame pattern as Hello World Todo action_start_task",
+      "args": [
+        "self"
+      ],
+      "decorators": [],
+      "line_number": 213,
+      "is_api_method": false,
+      "is_route": false
+    },
+    {
+      "name": "action_complete_installation",
+      "class": "RoyalInstallation",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/models/installation.py",
+      "docstring": "Complete the installation\nSame pattern as Hello World Todo action_complete_task",
+      "args": [
+        "self"
+      ],
+      "decorators": [],
+      "line_number": 238,
+      "is_api_method": false,
+      "is_route": false
+    },
+    {
+      "name": "action_cancel_installation",
+      "class": "RoyalInstallation",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/models/installation.py",
+      "docstring": "Cancel the installation\nSame pattern as Hello World Todo action_cancel_task",
+      "args": [
+        "self"
+      ],
+      "decorators": [],
+      "line_number": 263,
+      "is_api_method": false,
+      "is_route": false
+    },
+    {
+      "name": "action_reschedule_installation",
+      "class": "RoyalInstallation",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/models/installation.py",
+      "docstring": "Reschedule the installation\nCustom business action",
+      "args": [
+        "self"
+      ],
+      "decorators": [],
+      "line_number": 287,
+      "is_api_method": false,
+      "is_route": false
+    },
+    {
+      "name": "_check_scheduled_date",
+      "class": "RoyalInstallation",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/models/installation.py",
+      "docstring": "Validate scheduled date is not in the past\nSame pattern as Hello World Todo validation",
+      "args": [
+        "self"
+      ],
+      "decorators": [
+        "<ast.Call object at 0x102f98550>"
+      ],
+      "line_number": 310,
+      "is_api_method": false,
+      "is_route": false
+    },
+    {
+      "name": "_check_date_sequence",
+      "class": "RoyalInstallation",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/models/installation.py",
+      "docstring": "Validate date sequence is logical\nSame pattern as Hello World Todo validation",
+      "args": [
+        "self"
+      ],
+      "decorators": [
+        "<ast.Call object at 0x102fa31d0>"
+      ],
+      "line_number": 327,
+      "is_api_method": false,
+      "is_route": false
+    },
+    {
+      "name": "create",
+      "class": "RoyalInstallation",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/models/installation.py",
+      "docstring": "Override create method for custom logic\nSame pattern as Hello World Todo create override",
+      "args": [
+        "self",
+        "vals"
+      ],
+      "decorators": [
+        "<ast.Attribute object at 0x102fa1190>"
+      ],
+      "line_number": 340,
+      "is_api_method": false,
+      "is_route": false
+    },
+    {
+      "name": "write",
+      "class": "RoyalInstallation",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/models/installation.py",
+      "docstring": "Override write method for status change logic\nSame pattern as Hello World Todo write override",
+      "args": [
+        "self",
+        "vals"
+      ],
+      "decorators": [],
+      "line_number": 353,
+      "is_api_method": false,
+      "is_route": false
+    },
+    {
+      "name": "name_get",
+      "class": "RoyalInstallation",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/models/installation.py",
+      "docstring": "Override name display for better UX\nSame pattern as Hello World Todo name_get",
+      "args": [
+        "self"
+      ],
+      "decorators": [],
+      "line_number": 382,
+      "is_api_method": false,
+      "is_route": false
+    }
+  ],
+  "controllers": [],
+  "views": [
+    {
+      "id": "view_royal_installation_form",
+      "model": "ir.ui.view",
+      "type": "form",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/views/installation_views.xml"
+    },
+    {
+      "id": "view_royal_installation_tree",
+      "model": "ir.ui.view",
+      "type": "tree",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/views/installation_views.xml"
+    },
+    {
+      "id": "view_royal_installation_search",
+      "model": "ir.ui.view",
+      "type": "search",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/views/installation_views.xml"
+    },
+    {
+      "id": "view_royal_installation_calendar",
+      "model": "ir.ui.view",
+      "type": "calendar",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/views/installation_views.xml"
+    },
+    {
+      "id": "view_royal_installation_kanban",
+      "model": "ir.ui.view",
+      "type": "kanban",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/views/installation_views.xml"
+    },
+    {
+      "id": "view_order_form_royal_textiles",
+      "model": "ir.ui.view",
+      "type": "xpath",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/views/sale_order_views.xml"
+    },
+    {
+      "id": "view_order_tree_royal_textiles",
+      "model": "ir.ui.view",
+      "type": "xpath",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/views/sale_order_views.xml"
+    },
+    {
+      "id": "view_sales_order_filter_royal_textiles",
+      "model": "ir.ui.view",
+      "type": "xpath",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/views/sale_order_views.xml"
+    }
+  ],
+  "actions": [
+    {
+      "id": "action_royal_installation",
+      "model": "ir.actions.act_window",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/views/installation_menu.xml"
+    },
+    {
+      "id": "action_royal_installation_today",
+      "model": "ir.actions.act_window",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/views/installation_menu.xml"
+    },
+    {
+      "id": "action_royal_installation_my",
+      "model": "ir.actions.act_window",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/views/installation_menu.xml"
+    },
+    {
+      "id": "action_sale_order_installation_pending",
+      "model": "ir.actions.act_window",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/views/installation_menu.xml"
+    }
+  ],
+  "menus": [],
+  "tests": [],
+  "files": {
+    "python": [
+      "__init__.py",
+      "__manifest__.py",
+      "models/sale_order.py",
+      "models/installation.py",
+      "models/__init__.py"
+    ],
+    "xml": [
+      "data/installation_demo.xml",
+      "views/installation_views.xml",
+      "views/sale_order_views.xml",
+      "views/installation_menu.xml"
+    ],
+    "csv": [
+      "security/ir.model.access.csv"
+    ],
+    "yaml": []
+  }
+}

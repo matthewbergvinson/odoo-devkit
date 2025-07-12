@@ -1,0 +1,372 @@
+{
+  "module_name": "rtp_customers",
+  "module_path": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/rtp_customers",
+  "analysis_timestamp": "2025-07-11T23:13:23.436850",
+  "manifest": {
+    "name": "RTP Customer Management",
+    "version": "18.0.1.0.0",
+    "category": "Sales/CRM",
+    "summary": "Customer management system for RTP Denver project",
+    "description": "\nRTP Customer Management\n======================\n\nThis module demonstrates transferring Hello World Todo concepts to real business applications.\nIt manages customer data, relationships, and workflows using the same Odoo patterns\nyou learned in the tutorial module.\n\nKey Features:\n* Customer data management\n* Contact information tracking\n* Customer status workflow\n* User access control\n* Search and filtering capabilities\n* Business validation rules\n\nLearning Transfer from Hello World:\n* Model fields \u2192 Customer attributes\n* Status workflow \u2192 Customer lifecycle\n* Security groups \u2192 Sales team permissions\n* Views \u2192 Customer forms and lists\n* Business logic \u2192 Customer operations\n* Testing \u2192 Customer validation\n    ",
+    "author": "RTP Denver Development Team",
+    "website": "https://github.com/matthewbergvinson/rtp-denver",
+    "license": "LGPL-3",
+    "depends": [
+      "base",
+      "web",
+      "contacts"
+    ],
+    "data": [
+      "security/rtp_security.xml",
+      "security/ir.model.access.csv",
+      "views/customer_views.xml",
+      "views/customer_menu.xml",
+      "data/customer_demo.xml"
+    ],
+    "demo": [
+      "data/customer_demo.xml"
+    ],
+    "installable": true,
+    "application": true,
+    "auto_install": false,
+    "odoo_version": "18.0",
+    "development_status": "Beta",
+    "maintainers": [
+      "m@vigilanteconsulting.com"
+    ]
+  },
+  "models": [],
+  "fields": [
+    {
+      "name": "name",
+      "type": "fields.Char",
+      "class": "RTPCustomer",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/rtp_customers/models/customer.py",
+      "line_number": 50
+    },
+    {
+      "name": "description",
+      "type": "fields.Text",
+      "class": "RTPCustomer",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/rtp_customers/models/customer.py",
+      "line_number": 57
+    },
+    {
+      "name": "priority",
+      "type": "fields.Selection",
+      "class": "RTPCustomer",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/rtp_customers/models/customer.py",
+      "line_number": 64
+    },
+    {
+      "name": "status",
+      "type": "fields.Selection",
+      "class": "RTPCustomer",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/rtp_customers/models/customer.py",
+      "line_number": 77
+    },
+    {
+      "name": "user_id",
+      "type": "fields.Many2one",
+      "class": "RTPCustomer",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/rtp_customers/models/customer.py",
+      "line_number": 93
+    },
+    {
+      "name": "email",
+      "type": "fields.Char",
+      "class": "RTPCustomer",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/rtp_customers/models/customer.py",
+      "line_number": 104
+    },
+    {
+      "name": "phone",
+      "type": "fields.Char",
+      "class": "RTPCustomer",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/rtp_customers/models/customer.py",
+      "line_number": 106
+    },
+    {
+      "name": "website",
+      "type": "fields.Char",
+      "class": "RTPCustomer",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/rtp_customers/models/customer.py",
+      "line_number": 108
+    },
+    {
+      "name": "signup_date",
+      "type": "fields.Date",
+      "class": "RTPCustomer",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/rtp_customers/models/customer.py",
+      "line_number": 112
+    },
+    {
+      "name": "last_contact_date",
+      "type": "fields.Date",
+      "class": "RTPCustomer",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/rtp_customers/models/customer.py",
+      "line_number": 116
+    },
+    {
+      "name": "days_since_signup",
+      "type": "fields.Integer",
+      "class": "RTPCustomer",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/rtp_customers/models/customer.py",
+      "line_number": 120
+    },
+    {
+      "name": "is_recent_customer",
+      "type": "fields.Boolean",
+      "class": "RTPCustomer",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/rtp_customers/models/customer.py",
+      "line_number": 124
+    },
+    {
+      "name": "contact_overdue",
+      "type": "fields.Boolean",
+      "class": "RTPCustomer",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/rtp_customers/models/customer.py",
+      "line_number": 131
+    },
+    {
+      "name": "old_status",
+      "type": "status",
+      "class": "RTPCustomer",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/rtp_customers/models/customer.py",
+      "line_number": 317
+    }
+  ],
+  "methods": [
+    {
+      "name": "_compute_days_since_signup",
+      "class": "RTPCustomer",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/rtp_customers/models/customer.py",
+      "docstring": "Compute days since customer signup\nSame pattern as todo _compute_days_until_due",
+      "args": [
+        "self"
+      ],
+      "decorators": [
+        "<ast.Call object at 0x1011b6650>"
+      ],
+      "line_number": 141,
+      "is_api_method": false,
+      "is_route": false
+    },
+    {
+      "name": "_compute_is_recent_customer",
+      "class": "RTPCustomer",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/rtp_customers/models/customer.py",
+      "docstring": "Compute if customer is recent (within 30 days)\nSame pattern as todo _compute_is_overdue",
+      "args": [
+        "self"
+      ],
+      "decorators": [
+        "<ast.Call object at 0x1011b4e50>"
+      ],
+      "line_number": 155,
+      "is_api_method": false,
+      "is_route": false
+    },
+    {
+      "name": "_compute_contact_overdue",
+      "class": "RTPCustomer",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/rtp_customers/models/customer.py",
+      "docstring": "Compute if contact is overdue\nSame pattern as todo overdue logic",
+      "args": [
+        "self"
+      ],
+      "decorators": [
+        "<ast.Call object at 0x1011ab3d0>"
+      ],
+      "line_number": 165,
+      "is_api_method": false,
+      "is_route": false
+    },
+    {
+      "name": "_onchange_priority",
+      "class": "RTPCustomer",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/rtp_customers/models/customer.py",
+      "docstring": "Update contact scheduling based on priority\nSame pattern as todo _onchange_priority",
+      "args": [
+        "self"
+      ],
+      "decorators": [
+        "<ast.Call object at 0x1012b3110>"
+      ],
+      "line_number": 179,
+      "is_api_method": false,
+      "is_route": false
+    },
+    {
+      "name": "_onchange_status",
+      "class": "RTPCustomer",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/rtp_customers/models/customer.py",
+      "docstring": "Handle status changes\nSame pattern as todo _onchange_status",
+      "args": [
+        "self"
+      ],
+      "decorators": [
+        "<ast.Call object at 0x1012b1e90>"
+      ],
+      "line_number": 197,
+      "is_api_method": false,
+      "is_route": false
+    },
+    {
+      "name": "action_activate_customer",
+      "class": "RTPCustomer",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/rtp_customers/models/customer.py",
+      "docstring": "Activate customer account\nSame pattern as todo action_start_task",
+      "args": [
+        "self"
+      ],
+      "decorators": [],
+      "line_number": 212,
+      "is_api_method": false,
+      "is_route": false
+    },
+    {
+      "name": "action_block_customer",
+      "class": "RTPCustomer",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/rtp_customers/models/customer.py",
+      "docstring": "Block customer account\nSame pattern as todo action_cancel_task",
+      "args": [
+        "self"
+      ],
+      "decorators": [],
+      "line_number": 225,
+      "is_api_method": false,
+      "is_route": false
+    },
+    {
+      "name": "action_update_contact",
+      "class": "RTPCustomer",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/rtp_customers/models/customer.py",
+      "docstring": "Update last contact date\nSame pattern as todo business actions",
+      "args": [
+        "self"
+      ],
+      "decorators": [],
+      "line_number": 237,
+      "is_api_method": false,
+      "is_route": false
+    },
+    {
+      "name": "_check_email_format",
+      "class": "RTPCustomer",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/rtp_customers/models/customer.py",
+      "docstring": "Validate email format\nSame pattern as todo _check_due_date",
+      "args": [
+        "self"
+      ],
+      "decorators": [
+        "<ast.Call object at 0x1012c79d0>"
+      ],
+      "line_number": 249,
+      "is_api_method": false,
+      "is_route": false
+    },
+    {
+      "name": "_check_customer_name",
+      "class": "RTPCustomer",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/rtp_customers/models/customer.py",
+      "docstring": "Validate customer name\nSame pattern as todo _check_task_name",
+      "args": [
+        "self"
+      ],
+      "decorators": [
+        "<ast.Call object at 0x1012d0f50>"
+      ],
+      "line_number": 262,
+      "is_api_method": false,
+      "is_route": false
+    },
+    {
+      "name": "_check_phone_format",
+      "class": "RTPCustomer",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/rtp_customers/models/customer.py",
+      "docstring": "Validate phone number format\nNew business validation example",
+      "args": [
+        "self"
+      ],
+      "decorators": [
+        "<ast.Call object at 0x1012d2650>"
+      ],
+      "line_number": 274,
+      "is_api_method": false,
+      "is_route": false
+    },
+    {
+      "name": "create",
+      "class": "RTPCustomer",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/rtp_customers/models/customer.py",
+      "docstring": "Override create method for custom logic\nSame pattern as todo create override",
+      "args": [
+        "self",
+        "vals"
+      ],
+      "decorators": [
+        "<ast.Attribute object at 0x1012d8ad0>"
+      ],
+      "line_number": 289,
+      "is_api_method": false,
+      "is_route": false
+    },
+    {
+      "name": "write",
+      "class": "RTPCustomer",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/rtp_customers/models/customer.py",
+      "docstring": "Override write method for status change logic\nSame pattern as todo write override",
+      "args": [
+        "self",
+        "vals"
+      ],
+      "decorators": [],
+      "line_number": 306,
+      "is_api_method": false,
+      "is_route": false
+    },
+    {
+      "name": "unlink",
+      "class": "RTPCustomer",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/rtp_customers/models/customer.py",
+      "docstring": "Override unlink method for deletion validation\nSame pattern as todo unlink override",
+      "args": [
+        "self"
+      ],
+      "decorators": [],
+      "line_number": 329,
+      "is_api_method": false,
+      "is_route": false
+    },
+    {
+      "name": "name_get",
+      "class": "RTPCustomer",
+      "file": "/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/rtp_customers/models/customer.py",
+      "docstring": "Override name display for better UX\nSame pattern as todo name_get",
+      "args": [
+        "self"
+      ],
+      "decorators": [],
+      "line_number": 343,
+      "is_api_method": false,
+      "is_route": false
+    }
+  ],
+  "controllers": [],
+  "views": [],
+  "actions": [],
+  "menus": [],
+  "tests": [],
+  "files": {
+    "python": [
+      "__init__.py",
+      "__manifest__.py",
+      "models/__init__.py",
+      "models/customer.py"
+    ],
+    "xml": [],
+    "csv": [],
+    "yaml": []
+  }
+}

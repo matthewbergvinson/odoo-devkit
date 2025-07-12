@@ -1,0 +1,336 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "🚀 Start Odoo Development Server",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/local-odoo/odoo/odoo-bin",
+            "args": [
+                "--config=${workspaceFolder}/local-odoo/config/odoo-development.conf",
+                "--dev=xml,reload,qweb",
+                "--log-level=debug",
+                "--limit-time-cpu=600",
+                "--limit-time-real=1200"
+            ],
+            "cwd": "${workspaceFolder}/local-odoo",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/custom_modules:${workspaceFolder}/local-odoo/odoo",
+                "ODOO_RC": "${workspaceFolder}/local-odoo/config/odoo-development.conf"
+            },
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "debugOptions": [
+                "RedirectOutput"
+            ],
+            "purpose": ["debug-in-terminal"],
+            "presentation": {
+                "group": "1-server",
+                "order": 1
+            }
+        },
+        {
+            "name": "🔧 Debug Odoo with Custom Modules",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/local-odoo/odoo/odoo-bin",
+            "args": [
+                "--config=${workspaceFolder}/local-odoo/config/odoo-development.conf",
+                "--dev=xml,reload,qweb",
+                "--log-level=debug",
+                "--addons-path=${workspaceFolder}/custom_modules,${workspaceFolder}/local-odoo/odoo/addons",
+                "--database=rtp_dev",
+                "--init=royal_textiles_sales,rtp_customers",
+                "--stop-after-init"
+            ],
+            "cwd": "${workspaceFolder}/local-odoo",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/custom_modules:${workspaceFolder}/local-odoo/odoo",
+                "ODOO_RC": "${workspaceFolder}/local-odoo/config/odoo-development.conf"
+            },
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "presentation": {
+                "group": "1-server",
+                "order": 2
+            }
+        },
+        {
+            "name": "🧪 Debug Odoo Tests (Royal Textiles)",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/local-odoo/odoo/odoo-bin",
+            "args": [
+                "--config=${workspaceFolder}/local-odoo/config/odoo-test.conf",
+                "--test-enable",
+                "--test-tags=royal_textiles_sales",
+                "--database=test_rtp",
+                "--addons-path=${workspaceFolder}/custom_modules,${workspaceFolder}/local-odoo/odoo/addons",
+                "--log-level=test",
+                "--stop-after-init"
+            ],
+            "cwd": "${workspaceFolder}/local-odoo",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/custom_modules:${workspaceFolder}/local-odoo/odoo",
+                "ODOO_RC": "${workspaceFolder}/local-odoo/config/odoo-test.conf"
+            },
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "presentation": {
+                "group": "2-testing",
+                "order": 1
+            }
+        },
+        {
+            "name": "🔬 Debug Specific Test File",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/local-odoo/odoo/odoo-bin",
+            "args": [
+                "--config=${workspaceFolder}/local-odoo/config/odoo-test.conf",
+                "--test-enable",
+                "--test-file=${file}",
+                "--database=test_rtp",
+                "--addons-path=${workspaceFolder}/custom_modules,${workspaceFolder}/local-odoo/odoo/addons",
+                "--log-level=test",
+                "--stop-after-init"
+            ],
+            "cwd": "${workspaceFolder}/local-odoo",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/custom_modules:${workspaceFolder}/local-odoo/odoo"
+            },
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "presentation": {
+                "group": "2-testing",
+                "order": 2
+            }
+        },
+        {
+            "name": "📦 Debug Module Installation",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/local-odoo/odoo/odoo-bin",
+            "args": [
+                "--config=${workspaceFolder}/local-odoo/config/odoo-development.conf",
+                "--database=rtp_dev",
+                "--addons-path=${workspaceFolder}/custom_modules,${workspaceFolder}/local-odoo/odoo/addons",
+                "--init=${input:moduleName}",
+                "--log-level=debug",
+                "--stop-after-init"
+            ],
+            "cwd": "${workspaceFolder}/local-odoo",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/custom_modules:${workspaceFolder}/local-odoo/odoo"
+            },
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "presentation": {
+                "group": "3-modules",
+                "order": 1
+            }
+        },
+        {
+            "name": "🔄 Debug Module Upgrade",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/local-odoo/odoo/odoo-bin",
+            "args": [
+                "--config=${workspaceFolder}/local-odoo/config/odoo-development.conf",
+                "--database=rtp_dev",
+                "--addons-path=${workspaceFolder}/custom_modules,${workspaceFolder}/local-odoo/odoo/addons",
+                "--update=${input:moduleName}",
+                "--log-level=debug",
+                "--stop-after-init"
+            ],
+            "cwd": "${workspaceFolder}/local-odoo",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/custom_modules:${workspaceFolder}/local-odoo/odoo"
+            },
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "presentation": {
+                "group": "3-modules",
+                "order": 2
+            }
+        },
+        {
+            "name": "🌐 Debug Web Controller",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/local-odoo/odoo/odoo-bin",
+            "args": [
+                "--config=${workspaceFolder}/local-odoo/config/odoo-development.conf",
+                "--dev=xml,reload,qweb",
+                "--log-level=debug",
+                "--database=rtp_dev",
+                "--addons-path=${workspaceFolder}/custom_modules,${workspaceFolder}/local-odoo/odoo/addons"
+            ],
+            "cwd": "${workspaceFolder}/local-odoo",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/custom_modules:${workspaceFolder}/local-odoo/odoo"
+            },
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "gevent": true,
+            "presentation": {
+                "group": "4-web",
+                "order": 1
+            }
+        },
+        {
+            "name": "🐍 Debug PyTest Tests",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/.venv/bin/python",
+            "args": [
+                "-m",
+                "pytest",
+                "${workspaceFolder}/tests/",
+                "-v",
+                "--tb=short"
+            ],
+            "cwd": "${workspaceFolder}",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/custom_modules:${workspaceFolder}/local-odoo/odoo"
+            },
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "presentation": {
+                "group": "2-testing",
+                "order": 3
+            }
+        },
+        {
+            "name": "⚡ Debug Performance Tests",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/.venv/bin/python",
+            "args": [
+                "-m",
+                "pytest",
+                "${workspaceFolder}/tests/performance/",
+                "-v",
+                "--tb=short",
+                "-s"
+            ],
+            "cwd": "${workspaceFolder}",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/custom_modules:${workspaceFolder}/local-odoo/odoo"
+            },
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "presentation": {
+                "group": "2-testing",
+                "order": 4
+            }
+        },
+        {
+            "name": "🔌 Attach to Running Odoo (debugpy)",
+            "type": "python",
+            "request": "attach",
+            "connect": {
+                "host": "localhost",
+                "port": 5678
+            },
+            "pathMappings": [
+                {
+                    "localRoot": "${workspaceFolder}",
+                    "remoteRoot": "${workspaceFolder}"
+                },
+                {
+                    "localRoot": "${workspaceFolder}/custom_modules",
+                    "remoteRoot": "${workspaceFolder}/custom_modules"
+                }
+            ],
+            "justMyCode": false,
+            "presentation": {
+                "group": "5-attach",
+                "order": 1
+            }
+        },
+        {
+            "name": "🐳 Debug Odoo in Docker",
+            "type": "python",
+            "request": "attach",
+            "connect": {
+                "host": "localhost",
+                "port": 5679
+            },
+            "pathMappings": [
+                {
+                    "localRoot": "${workspaceFolder}/custom_modules",
+                    "remoteRoot": "/mnt/extra-addons"
+                },
+                {
+                    "localRoot": "${workspaceFolder}",
+                    "remoteRoot": "/opt/odoo"
+                }
+            ],
+            "justMyCode": false,
+            "presentation": {
+                "group": "5-attach",
+                "order": 2
+            }
+        },
+        {
+            "name": "📊 Debug Data Import/Export",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/local-odoo/odoo/odoo-bin",
+            "args": [
+                "--config=${workspaceFolder}/local-odoo/config/odoo-development.conf",
+                "--database=rtp_dev",
+                "--addons-path=${workspaceFolder}/custom_modules,${workspaceFolder}/local-odoo/odoo/addons",
+                "--log-level=debug",
+                "--data-dir=${workspaceFolder}/local-odoo/data"
+            ],
+            "cwd": "${workspaceFolder}/local-odoo",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/custom_modules:${workspaceFolder}/local-odoo/odoo"
+            },
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "presentation": {
+                "group": "4-web",
+                "order": 2
+            }
+        },
+        {
+            "name": "🛠️ Debug Current Python File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "cwd": "${workspaceFolder}",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/custom_modules:${workspaceFolder}/local-odoo/odoo"
+            },
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "presentation": {
+                "group": "6-general",
+                "order": 1
+            }
+        }
+    ],
+    "inputs": [
+        {
+            "id": "moduleName",
+            "description": "Enter module name to install/upgrade",
+            "default": "royal_textiles_sales",
+            "type": "promptString"
+        },
+        {
+            "id": "databaseName",
+            "description": "Enter database name",
+            "default": "rtp_dev",
+            "type": "promptString"
+        },
+        {
+            "id": "testTag",
+            "description": "Enter test tag to run",
+            "default": "royal_textiles_sales",
+            "type": "promptString"
+        }
+    ]
+}

@@ -1,0 +1,117 @@
+{
+    "folders": [
+        {
+            "name": "🏗️ Royal Textiles Project Root",
+            "path": "."
+        },
+        {
+            "name": "🔧 Custom Modules",
+            "path": "./custom_modules"
+        },
+        {
+            "name": "🧪 Tests",
+            "path": "./tests"
+        },
+        {
+            "name": "⚙️ Scripts",
+            "path": "./scripts"
+        },
+        {
+            "name": "📚 Documentation",
+            "path": "./docs"
+        },
+        {
+            "name": "🐳 Local Odoo Environment",
+            "path": "./local-odoo"
+        }
+    ],
+    "settings": {
+        // =====================================
+        // Workspace-Specific Overrides
+        // =====================================
+        "workbench.name": "Royal Textiles Odoo Development",
+        "window.title": "${rootName} - Royal Textiles Odoo ${activeEditorShort}",
+
+        // =====================================
+        // Odoo Development Paths
+        // =====================================
+        "python.defaultInterpreter": "./venv/bin/python",
+        "python.terminal.activateEnvironment": true,
+        "python.analysis.extraPaths": [
+            "./custom_modules",
+            "./local-odoo/odoo",
+            "./local-odoo/odoo/addons"
+        ],
+        "odoo.addonsPath": [
+            "./custom_modules",
+            "./local-odoo/odoo/addons",
+            "./local-odoo/odoo/odoo/addons"
+        ],
+        "odoo.configPath": "./local-odoo/config/odoo-development.conf",
+
+        // =====================================
+        // Royal Textiles Specific Settings
+        // =====================================
+        "python.linting.pylintArgs": [
+            "--load-plugins=pylint_odoo",
+            "--disable=C0103,C0111,R0903,R0913,W0212,W0613,W0622,W0703,W1203",
+            "--rcfile=.pylintrc-odoo",
+            "--valid-odoo-versions=18.0"
+        ],
+
+        // =====================================
+        // File Associations for Royal Textiles
+        // =====================================
+        "files.associations": {
+            "**/custom_modules/**/*.py": "python",
+            "**/custom_modules/**/*.xml": "xml",
+            "**/custom_modules/**/*.csv": "csv",
+            "**/custom_modules/**/*.po": "gettext",
+            "**/custom_modules/**/*.pot": "gettext",
+            "**/__manifest__.py": "python",
+            "**/local-odoo/**/*.conf": "ini"
+        },
+
+        // =====================================
+        // Search and Navigation
+        // =====================================
+        "search.exclude": {
+            "**/local-odoo/odoo/**": true,
+            "**/venv/**": true,
+            "**/__pycache__/**": true,
+            "**/htmlcov/**": true,
+            "**/.pytest_cache/**": true
+        },
+
+        // =====================================
+        // Task Integration
+        // =====================================
+        "tasks.version": "2.0.0",
+        "problemMatcher": "$pylint",
+
+        // =====================================
+        // Debug Configuration
+        // =====================================
+        "launch": {
+            "version": "0.2.0",
+            "configurations": []
+        }
+    },
+
+    // =====================================
+    // Recommended Extensions for this Workspace
+    // =====================================
+    "extensions": {
+        "recommendations": [
+            "odoo.odoo",
+            "trinhanhngoc.vscode-odoo",
+            "ms-python.python",
+            "ms-python.black-formatter",
+            "redhat.vscode-xml",
+            "jigar-patel.OdooSnippets"
+        ],
+        "unwantedRecommendations": [
+            "ms-python.python-legacy-intellisense"
+        ]
+    }
+}

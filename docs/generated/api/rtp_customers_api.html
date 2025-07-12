@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>rtp_customers API Documentation - Royal Textiles Odoo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #e83e8c;
+            border-bottom: 3px solid #e83e8c;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            color: #6f42c1;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            border-left: 4px solid #6f42c1;
+            padding-left: 15px;
+        }
+
+        h3 {
+            color: #495057;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        h4 {
+            color: #666;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        code {
+            background: #f8f9fa;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            color: #e83e8c;
+        }
+
+        pre {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        pre code {
+            background: none;
+            color: inherit;
+            padding: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            border: 1px solid #dee2e6;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #495057;
+        }
+
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .toc {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .toc ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .toc li {
+            margin: 5px 0;
+        }
+
+        .toc a {
+            color: #6f42c1;
+            text-decoration: none;
+        }
+
+        .toc a:hover {
+            text-decoration: underline;
+        }
+
+        blockquote {
+            border-left: 4px solid #6f42c1;
+            padding-left: 20px;
+            margin: 20px 0;
+            color: #666;
+            font-style: italic;
+        }
+
+        .header-info {
+            background: linear-gradient(135deg, #e83e8c 0%, #6f42c1 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .footer {
+            text-align: center;
+            color: #666;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #dee2e6;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            background: #6f42c1;
+            color: white;
+            border-radius: 12px;
+            font-size: 0.8em;
+            margin: 2px;
+        }
+
+        .api-method {
+            background: #28a745;
+        }
+
+        .http-route {
+            background: #17a2b8;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                padding: 20px;
+            }
+
+            table {
+                font-size: 0.9em;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</head>
+<body>
+    <div class="container">
+        <div class="header-info">
+            <h1>🏢 Royal Textiles Odoo Platform</h1>
+            <p>📚 rtp_customers API Documentation</p>
+            <p>Generated: 2025-07-11 23:18:35</p>
+        </div>
+
+        <h1 id="rtp_customers-api-documentation">rtp_customers API Documentation</h1>
+<p><strong>Generated:</strong> 2025-07-11 23:18:35
+<strong>Version:</strong> 18.0.1.0.0
+<strong>Author:</strong> RTP Denver Development Team</p>
+<h2 id="overview">Overview</h2>
+<p>Customer management system for RTP Denver project</p>
+<h3 id="module-information">Module Information</h3>
+<ul>
+<li><strong>Name:</strong> rtp_customers</li>
+<li><strong>Version:</strong> 18.0.1.0.0</li>
+<li><strong>Category:</strong> Sales/CRM</li>
+<li><strong>Depends:</strong> base, web, contacts</li>
+<li><strong>License:</strong> LGPL-3</li>
+<li><strong>Website:</strong> https://github.com/matthewbergvinson/rtp-denver</li>
+</ul>
+<h3 id="statistics">Statistics</h3>
+<ul>
+<li><strong>Models:</strong> 0</li>
+<li><strong>Methods:</strong> 15</li>
+<li><strong>Controllers:</strong> 0</li>
+<li><strong>Views:</strong> 0</li>
+<li><strong>Tests:</strong> 0</li>
+</ul>
+<hr />
+<h2 id="methods-15">Methods (15)</h2>
+<p>The following methods are defined in the rtp_customers module:</p>
+<h3 id="rtpcustomer-methods">RTPCustomer Methods</h3>
+<h4 id="_compute_days_since_signupself"><code>_compute_days_since_signup(self)</code></h4>
+<p><strong>File:</strong> <code>/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/rtp_customers/models/customer.py</code>
+<strong>Line:</strong> 141</p>
+<p><strong>Decorators:</strong> <ast.Call object at 0x1011b6650></p>
+<p><strong>Description:</strong>
+Compute days since customer signup
+Same pattern as todo _compute_days_until_due</p>
+<h4 id="_compute_is_recent_customerself"><code>_compute_is_recent_customer(self)</code></h4>
+<p><strong>File:</strong> <code>/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/rtp_customers/models/customer.py</code>
+<strong>Line:</strong> 155</p>
+<p><strong>Decorators:</strong> <ast.Call object at 0x1011b4e50></p>
+<p><strong>Description:</strong>
+Compute if customer is recent (within 30 days)
+Same pattern as todo _compute_is_overdue</p>
+<h4 id="_compute_contact_overdueself"><code>_compute_contact_overdue(self)</code></h4>
+<p><strong>File:</strong> <code>/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/rtp_customers/models/customer.py</code>
+<strong>Line:</strong> 165</p>
+<p><strong>Decorators:</strong> <ast.Call object at 0x1011ab3d0></p>
+<p><strong>Description:</strong>
+Compute if contact is overdue
+Same pattern as todo overdue logic</p>
+<h4 id="_onchange_priorityself"><code>_onchange_priority(self)</code></h4>
+<p><strong>File:</strong> <code>/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/rtp_customers/models/customer.py</code>
+<strong>Line:</strong> 179</p>
+<p><strong>Decorators:</strong> <ast.Call object at 0x1012b3110></p>
+<p><strong>Description:</strong>
+Update contact scheduling based on priority
+Same pattern as todo _onchange_priority</p>
+<h4 id="_onchange_statusself"><code>_onchange_status(self)</code></h4>
+<p><strong>File:</strong> <code>/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/rtp_customers/models/customer.py</code>
+<strong>Line:</strong> 197</p>
+<p><strong>Decorators:</strong> <ast.Call object at 0x1012b1e90></p>
+<p><strong>Description:</strong>
+Handle status changes
+Same pattern as todo _onchange_status</p>
+<h4 id="action_activate_customerself"><code>action_activate_customer(self)</code></h4>
+<p><strong>File:</strong> <code>/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/rtp_customers/models/customer.py</code>
+<strong>Line:</strong> 212</p>
+<p><strong>Description:</strong>
+Activate customer account
+Same pattern as todo action_start_task</p>
+<h4 id="action_block_customerself"><code>action_block_customer(self)</code></h4>
+<p><strong>File:</strong> <code>/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/rtp_customers/models/customer.py</code>
+<strong>Line:</strong> 225</p>
+<p><strong>Description:</strong>
+Block customer account
+Same pattern as todo action_cancel_task</p>
+<h4 id="action_update_contactself"><code>action_update_contact(self)</code></h4>
+<p><strong>File:</strong> <code>/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/rtp_customers/models/customer.py</code>
+<strong>Line:</strong> 237</p>
+<p><strong>Description:</strong>
+Update last contact date
+Same pattern as todo business actions</p>
+<h4 id="_check_email_formatself"><code>_check_email_format(self)</code></h4>
+<p><strong>File:</strong> <code>/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/rtp_customers/models/customer.py</code>
+<strong>Line:</strong> 249</p>
+<p><strong>Decorators:</strong> <ast.Call object at 0x1012c79d0></p>
+<p><strong>Description:</strong>
+Validate email format
+Same pattern as todo _check_due_date</p>
+<h4 id="_check_customer_nameself"><code>_check_customer_name(self)</code></h4>
+<p><strong>File:</strong> <code>/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/rtp_customers/models/customer.py</code>
+<strong>Line:</strong> 262</p>
+<p><strong>Decorators:</strong> <ast.Call object at 0x1012d0f50></p>
+<p><strong>Description:</strong>
+Validate customer name
+Same pattern as todo _check_task_name</p>
+<h4 id="_check_phone_formatself"><code>_check_phone_format(self)</code></h4>
+<p><strong>File:</strong> <code>/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/rtp_customers/models/customer.py</code>
+<strong>Line:</strong> 274</p>
+<p><strong>Decorators:</strong> <ast.Call object at 0x1012d2650></p>
+<p><strong>Description:</strong>
+Validate phone number format
+New business validation example</p>
+<h4 id="createself-vals"><code>create(self, vals)</code></h4>
+<p><strong>File:</strong> <code>/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/rtp_customers/models/customer.py</code>
+<strong>Line:</strong> 289</p>
+<p><strong>Decorators:</strong> <ast.Attribute object at 0x1012d8ad0></p>
+<p><strong>Description:</strong>
+Override create method for custom logic
+Same pattern as todo create override</p>
+<h4 id="writeself-vals"><code>write(self, vals)</code></h4>
+<p><strong>File:</strong> <code>/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/rtp_customers/models/customer.py</code>
+<strong>Line:</strong> 306</p>
+<p><strong>Description:</strong>
+Override write method for status change logic
+Same pattern as todo write override</p>
+<h4 id="unlinkself"><code>unlink(self)</code></h4>
+<p><strong>File:</strong> <code>/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/rtp_customers/models/customer.py</code>
+<strong>Line:</strong> 329</p>
+<p><strong>Description:</strong>
+Override unlink method for deletion validation
+Same pattern as todo unlink override</p>
+<h4 id="name_getself"><code>name_get(self)</code></h4>
+<p><strong>File:</strong> <code>/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/rtp_customers/models/customer.py</code>
+<strong>Line:</strong> 343</p>
+<p><strong>Description:</strong>
+Override name display for better UX
+Same pattern as todo name_get</p>
+<hr />
+<h2 id="file-structure">File Structure</h2>
+<h3 id="python-files-4">Python Files (4)</h3>
+<ul>
+<li><code>__init__.py</code></li>
+<li><code>__manifest__.py</code></li>
+<li><code>models/__init__.py</code></li>
+<li><code>models/customer.py</code></li>
+</ul>
+<h3 id="xml-files-0">XML Files (0)</h3>
+
+        <div class="footer">
+            <p><strong>Royal Textiles Odoo Platform Documentation</strong></p>
+            <p>Generated by Task 6.7 - Documentation Generation System</p>
+        </div>
+    </div>
+</body>
+</html>

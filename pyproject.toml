@@ -1,0 +1,142 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rtp-denver-odoo"
+version = "1.0.0"
+description = "Royal Textiles Denver - Odoo Custom Modules"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+
+[tool.black]
+line-length = 120
+target-version = ['py311']
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.venv
+  | venv
+  | env
+  | \.mypy_cache
+  | \.pytest_cache
+  | __pycache__
+  | build
+  | dist
+  | migrations
+  | local-odoo
+  | \.eggs
+  | \.coverage
+  | htmlcov
+)/
+'''
+# Skip string normalization to preserve Odoo's string formatting preferences
+skip-string-normalization = true
+
+[tool.isort]
+profile = "black"
+line_length = 120
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+ensure_newline_before_comments = true
+# Odoo-specific import organization
+known_odoo = ["odoo", "openerp"]
+known_first_party = ["royal_textiles_sales", "rtp_customers"]
+sections = ["FUTURE", "STDLIB", "THIRDPARTY", "ODOO", "FIRSTPARTY", "LOCALFOLDER"]
+
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false  # Odoo doesn't use type hints extensively
+disallow_incomplete_defs = false
+check_untyped_defs = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+show_error_codes = true
+strict_optional = true
+warn_no_return = true
+warn_unreachable = true
+# Enable additional checks that can catch field type mismatches
+strict_equality = true
+extra_checks = true
+# Show column numbers for better error location
+show_column_numbers = true
+# Pretty print errors
+pretty = true
+# Increase error limit for comprehensive checking
+error_summary = true
+
+# Files and modules to check
+files = ["custom_modules", "scripts"]
+exclude = [
+    'custom_modules/.*/migrations/.*\.py$',
+    'custom_modules/.*/tests/.*\.py$',
+]
+
+# Ignore missing imports for Odoo modules and common libraries
+[[tool.mypy.overrides]]
+module = [
+    "odoo.*",
+    "openerp.*",
+    "psycopg2.*",
+    "werkzeug.*",
+    "lxml.*",
+    "babel.*",
+    "passlib.*",
+    "PIL.*",
+    "reportlab.*",
+]
+ignore_missing_imports = true
+
+# Specific overrides for our custom modules to catch field type issues
+[[tool.mypy.overrides]]
+module = ["custom_modules.*"]
+# Enable warnings for potentially problematic patterns
+warn_return_any = true
+warn_unused_ignores = true
+# Check for attribute access patterns that might indicate field type issues
+check_untyped_defs = true
+
+# Relaxed checking for __manifest__.py files (they're data, not code)
+[[tool.mypy.overrides]]
+module = ["custom_modules.*.__manifest__"]
+ignore_errors = true
+
+# Relaxed checking for __init__.py files
+[[tool.mypy.overrides]]
+module = ["custom_modules.*.__init__"]
+warn_unused_ignores = false
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = "-ra -q --strict-markers --strict-config"
+testpaths = [
+    "tests",
+    "custom_modules/*/tests",
+]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "integration: marks tests as integration tests",
+    "unit: marks tests as unit tests",
+]
+
+[tool.coverage.run]
+source = ["custom_modules"]
+omit = [
+    "*/tests/*",
+    "*/__init__.py",
+    "*/migrations/*",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+]

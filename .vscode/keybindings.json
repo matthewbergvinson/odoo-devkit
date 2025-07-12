@@ -1,0 +1,407 @@
+[
+    // =====================================
+    // Testing Workflow Shortcuts
+    // =====================================
+    {
+        "key": "ctrl+shift+t",
+        "command": "workbench.action.tasks.runTask",
+        "args": "🧪 Test: Run All Tests",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+alt+t",
+        "command": "workbench.action.tasks.runTask",
+        "args": "🧪 Test: Current Module",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+shift+i",
+        "command": "workbench.action.tasks.runTask",
+        "args": "🔄 Test: Integration Tests",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+alt+p",
+        "command": "workbench.action.tasks.runTask",
+        "args": "⚡ Test: Performance Tests",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+shift+c",
+        "command": "workbench.action.tasks.runTask",
+        "args": "📊 Coverage: Generate Report",
+        "when": "editorTextFocus"
+    },
+
+    // =====================================
+    // Linting and Code Quality Shortcuts
+    // =====================================
+    {
+        "key": "ctrl+shift+l",
+        "command": "workbench.action.tasks.runTask",
+        "args": "🔍 Lint: All Code",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+alt+l",
+        "command": "workbench.action.tasks.runTask",
+        "args": "🔍 Lint: Current File",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+shift+f",
+        "command": "workbench.action.tasks.runTask",
+        "args": "🎨 Format: Current File",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+alt+o",
+        "command": "workbench.action.tasks.runTask",
+        "args": "🔍 Lint: Pylint Odoo",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+shift+m",
+        "command": "workbench.action.tasks.runTask",
+        "args": "🔍 Type Check: MyPy",
+        "when": "editorTextFocus"
+    },
+
+    // =====================================
+    // Validation and Module Testing Shortcuts
+    // =====================================
+    {
+        "key": "ctrl+shift+v",
+        "command": "workbench.action.tasks.runTask",
+        "args": "✅ Validate: All Modules",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+alt+v",
+        "command": "workbench.action.tasks.runTask",
+        "args": "✅ Validate: Current Module",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+shift+u",
+        "command": "workbench.action.tasks.runTask",
+        "args": "📦 Module: Test Installation",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+alt+u",
+        "command": "workbench.action.tasks.runTask",
+        "args": "📦 Module: Test Upgrade",
+        "when": "editorTextFocus"
+    },
+
+    // =====================================
+    // Business Process Testing Shortcuts
+    // =====================================
+    {
+        "key": "ctrl+shift+w",
+        "command": "workbench.action.tasks.runTask",
+        "args": "👥 Test: Customer Workflows",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+alt+w",
+        "command": "workbench.action.tasks.runTask",
+        "args": "💰 Test: Sales Workflows",
+        "when": "editorTextFocus"
+    },
+
+    // =====================================
+    // Advanced Testing Shortcuts
+    // =====================================
+    {
+        "key": "ctrl+shift+d",
+        "command": "workbench.action.tasks.runTask",
+        "args": "🗃️ Test: Database Performance",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+alt+d",
+        "command": "workbench.action.tasks.runTask",
+        "args": "🖥️ Test: View Performance",
+        "when": "editorTextFocus"
+    },
+
+    // =====================================
+    // Quick Access to Terminal and Tasks
+    // =====================================
+    {
+        "key": "ctrl+shift+`",
+        "command": "workbench.action.terminal.toggleTerminal"
+    },
+    {
+        "key": "ctrl+shift+p",
+        "command": "workbench.action.tasks.runTask"
+    },
+
+    // =====================================
+    // File-specific Actions
+    // =====================================
+    {
+        "key": "f5",
+        "command": "workbench.action.tasks.runTask",
+        "args": "🧪 Test: Run All Tests",
+        "when": "resourceExtname == .py"
+    },
+    {
+        "key": "f6",
+        "command": "workbench.action.tasks.runTask",
+        "args": "🔍 Lint: Current File",
+        "when": "resourceExtname == .py"
+    },
+    {
+        "key": "f7",
+        "command": "workbench.action.tasks.runTask",
+        "args": "🎨 Format: Current File",
+        "when": "resourceExtname == .py"
+    },
+    {
+        "key": "f8",
+        "command": "workbench.action.tasks.runTask",
+        "args": "✅ Validate: All Modules",
+        "when": "resourceExtname == .py || resourceExtname == .xml"
+    },
+
+    // =====================================
+    // Odoo-specific Context Shortcuts
+    // =====================================
+    {
+        "key": "ctrl+alt+shift+t",
+        "command": "workbench.action.tasks.runTask",
+        "args": "📦 Module: Royal Textiles Complete Test",
+        "when": "resourcePath =~ /royal_textiles_sales/"
+    },
+    {
+        "key": "ctrl+alt+shift+r",
+        "command": "workbench.action.tasks.runTask",
+        "args": "📦 Module: RTP Customers Complete Test",
+        "when": "resourcePath =~ /rtp_customers/"
+    },
+
+    // =====================================
+    // Coverage and CI/CD Shortcuts
+    // =====================================
+    {
+        "key": "ctrl+shift+alt+c",
+        "command": "workbench.action.tasks.runTask",
+        "args": "📊 Coverage: Full Analysis",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+shift+alt+i",
+        "command": "workbench.action.tasks.runTask",
+        "args": "📊 Coverage: Insights & Recommendations",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+shift+alt+p",
+        "command": "workbench.action.tasks.runTask",
+        "args": "🚀 Test: CI/CD Pipeline",
+        "when": "editorTextFocus"
+    },
+
+    // =====================================
+    // Royal Textiles Specific Shortcuts
+    // =====================================
+    {
+        "key": "ctrl+alt+r",
+        "command": "workbench.action.tasks.runTask",
+        "args": "🏢 RTP: Install All Modules",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+shift+r",
+        "command": "workbench.action.tasks.runTask",
+        "args": "🏢 RTP: Update All Modules",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+alt+s",
+        "command": "workbench.action.tasks.runTask",
+        "args": "🚀 Server: Start Odoo Development",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+alt+d",
+        "command": "workbench.action.tasks.runTask",
+        "args": "🚀 Server: Start Odoo Debug",
+        "when": "editorTextFocus"
+    },
+
+    // =====================================
+    // Terminal Profile Shortcuts - Task 5.7
+    // =====================================
+    {
+        "key": "ctrl+alt+1",
+        "command": "workbench.action.terminal.new",
+        "args": {
+            "profileName": "Odoo Development"
+        }
+    },
+    {
+        "key": "ctrl+alt+2",
+        "command": "workbench.action.terminal.new",
+        "args": {
+            "profileName": "Odoo Testing"
+        }
+    },
+    {
+        "key": "ctrl+alt+3",
+        "command": "workbench.action.terminal.new",
+        "args": {
+            "profileName": "Odoo Production"
+        }
+    },
+    {
+        "key": "ctrl+alt+4",
+        "command": "workbench.action.terminal.new",
+        "args": {
+            "profileName": "Database Management"
+        }
+    },
+    {
+        "key": "ctrl+alt+5",
+        "command": "workbench.action.terminal.new",
+        "args": {
+            "profileName": "Docker Environment"
+        }
+    },
+
+    // =====================================
+    // Terminal Task Shortcuts - Task 5.7
+    // =====================================
+    {
+        "key": "ctrl+shift+alt+1",
+        "command": "workbench.action.tasks.runTask",
+        "args": "🖥️ Terminal: Open Development Environment"
+    },
+    {
+        "key": "ctrl+shift+alt+2",
+        "command": "workbench.action.tasks.runTask",
+        "args": "🧪 Terminal: Open Testing Environment"
+    },
+    {
+        "key": "ctrl+shift+alt+3",
+        "command": "workbench.action.tasks.runTask",
+        "args": "🚀 Terminal: Open Production Environment"
+    },
+    {
+        "key": "ctrl+shift+alt+4",
+        "command": "workbench.action.tasks.runTask",
+        "args": "🗃️ Terminal: Open Database Management"
+    },
+    {
+        "key": "ctrl+shift+alt+5",
+        "command": "workbench.action.tasks.runTask",
+        "args": "🐳 Terminal: Open Docker Environment"
+    },
+    {
+        "key": "ctrl+shift+alt+q",
+        "command": "workbench.action.tasks.runTask",
+        "args": "⚡ Terminal: Quick Commands Menu"
+    },
+    {
+        "key": "ctrl+shift+alt+m",
+        "command": "workbench.action.tasks.runTask",
+        "args": "🎯 Terminal: Module Development Session"
+    },
+    {
+        "key": "ctrl+shift+alt+s",
+        "command": "workbench.action.tasks.runTask",
+        "args": "🔧 Terminal: Interactive Odoo Shell"
+    },
+    {
+        "key": "ctrl+shift+alt+t",
+        "command": "workbench.action.tasks.runTask",
+        "args": "🎨 Terminal: Development Tools"
+    },
+    {
+        "key": "ctrl+shift+alt+o",
+        "command": "workbench.action.tasks.runTask",
+        "args": "⚡ Terminal: Performance Monitoring"
+    },
+
+    // =====================================
+    // Enhanced Terminal Operations
+    // =====================================
+    {
+        "key": "ctrl+shift+enter",
+        "command": "workbench.action.terminal.runSelectedText",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+shift+k",
+        "command": "workbench.action.terminal.clear",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "ctrl+shift+d",
+        "command": "workbench.action.terminal.split",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "ctrl+shift+w",
+        "command": "workbench.action.terminal.kill",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "ctrl+shift+n",
+        "command": "workbench.action.terminal.new",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "ctrl+shift+tab",
+        "command": "workbench.action.terminal.focusNext",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "ctrl+tab",
+        "command": "workbench.action.terminal.focusPrevious",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "ctrl+shift+m",
+        "command": "workbench.action.terminal.toggleTerminal"
+    },
+
+    // =====================================
+    // Quick Terminal Commands
+    // =====================================
+    {
+        "key": "f1",
+        "command": "workbench.action.terminal.sendSequence",
+        "args": {
+            "text": "odoo-help\n"
+        },
+        "when": "terminalFocus && resourceExtname == '.py'"
+    },
+    {
+        "key": "f2",
+        "command": "workbench.action.terminal.sendSequence",
+        "args": {
+            "text": "odoo-status\n"
+        },
+        "when": "terminalFocus && resourceExtname == '.py'"
+    },
+    {
+        "key": "f3",
+        "command": "workbench.action.terminal.sendSequence",
+        "args": {
+            "text": "odoo-logs\n"
+        },
+        "when": "terminalFocus && resourceExtname == '.py'"
+    },
+    {
+        "key": "f4",
+        "command": "workbench.action.terminal.sendSequence",
+        "args": {
+            "text": "odoo-test-all\n"
+        },
+        "when": "terminalFocus && resourceExtname == '.py'"
+    }
+]

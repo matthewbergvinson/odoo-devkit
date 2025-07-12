@@ -1,0 +1,86 @@
+[flake8]
+# Odoo-friendly flake8 configuration for Royal Textiles Project
+
+# General Settings
+max-line-length = 120
+max-complexity = 12
+exclude =
+    .git,
+    __pycache__,
+    .venv,
+    venv,
+    env,
+    .eggs,
+    *.egg,
+    build,
+    dist,
+    migrations,
+    local-odoo,
+    .pytest_cache,
+    htmlcov,
+    .coverage
+
+# Ignore certain errors that are common/acceptable in Odoo development
+ignore =
+    # W503: line break before binary operator (conflicts with Black)
+    W503,
+    # E203: whitespace before ':' (conflicts with Black)
+    E203,
+    # D100: Missing docstring in public module (Odoo often has minimal module docstrings)
+    D100,
+    # D101: Missing docstring in public class (Odoo models don't always need docstrings)
+    D101,
+    # D102: Missing docstring in public method (Odoo has many simple methods)
+    D102,
+    # D103: Missing docstring in public function
+    D103,
+    # D104: Missing docstring in public package
+    D104,
+    # D105: Missing docstring in magic method
+    D105,
+    # I100: Import statements are in the wrong order (handled by isort)
+    I100,
+    # I201: Missing newline between import groups (handled by isort)
+    I201,
+    # I202: Additional newline in import group (handled by isort)
+    I202
+
+# Per-file ignores for specific patterns
+per-file-ignores =
+    # __init__.py files often just have imports
+    */__init__.py:F401,E402,D104
+    # __manifest__.py files are data files, not code
+    */__manifest__.py:E501,D100
+    # Test files have different requirements
+    */tests/*:D100,D101,D102,D103,S101,S106
+    # Migration scripts may have different style
+    */migrations/*:E501,D100,D101,D102
+
+# Plugin configurations
+
+# flake8-docstrings
+docstring-convention = google
+
+# flake8-import-order
+import-order-style = google
+application-import-names = odoo,royal_textiles_sales
+
+# pep8-naming
+# Allow Odoo's common naming patterns
+classmethod-decorators = api.model,api.model_create_multi
+
+# flake8-bugbear
+# B950: line too long (more flexible than E501)
+extend-ignore = B950
+
+# Format for error output
+format = %(path)s:%(row)d:%(col)d: %(code)s %(text)s
+
+# Enable statistics
+statistics = True
+count = True
+
+# Show source code for errors
+show-source = True
+
+# McCabe complexity checker is already set above in general settings

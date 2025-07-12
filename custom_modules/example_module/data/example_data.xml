@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        
+        <!-- Example Tags -->
+        <record id="tag_important" model="example.tag">
+            <field name="name">Important</field>
+            <field name="color">1</field>
+        </record>
+        
+        <record id="tag_urgent" model="example.tag">
+            <field name="name">Urgent</field>
+            <field name="color">2</field>
+        </record>
+        
+        <record id="tag_demo" model="example.tag">
+            <field name="name">Demo</field>
+            <field name="color">3</field>
+        </record>
+        
+        <!-- Example Records -->
+        <record id="example_demo_1" model="example.model">
+            <field name="name">Demo Example 1</field>
+            <field name="description">This is a demo example record to show the testing framework capabilities.</field>
+            <field name="value">100.0</field>
+            <field name="state">draft</field>
+            <field name="tag_ids" eval="[(6, 0, [ref('tag_demo')])]"/>
+        </record>
+        
+        <record id="example_demo_2" model="example.model">
+            <field name="name">Demo Example 2</field>
+            <field name="description">Another demo example record with different values.</field>
+            <field name="value">250.0</field>
+            <field name="state">confirmed</field>
+            <field name="tag_ids" eval="[(6, 0, [ref('tag_demo'), ref('tag_important')])]"/>
+        </record>
+        
+        <!-- Example Lines -->
+        <record id="line_demo_1_1" model="example.line">
+            <field name="example_id" ref="example_demo_1"/>
+            <field name="name">First Line</field>
+            <field name="value">50.0</field>
+            <field name="sequence">10</field>
+        </record>
+        
+        <record id="line_demo_1_2" model="example.line">
+            <field name="example_id" ref="example_demo_1"/>
+            <field name="name">Second Line</field>
+            <field name="value">30.0</field>
+            <field name="sequence">20</field>
+        </record>
+        
+        <record id="line_demo_2_1" model="example.line">
+            <field name="example_id" ref="example_demo_2"/>
+            <field name="name">Line A</field>
+            <field name="value">100.0</field>
+            <field name="sequence">10</field>
+        </record>
+        
+        <record id="line_demo_2_2" model="example.line">
+            <field name="example_id" ref="example_demo_2"/>
+            <field name="name">Line B</field>
+            <field name="value">75.0</field>
+            <field name="sequence">20</field>
+        </record>
+        
+    </data>
+</odoo> 

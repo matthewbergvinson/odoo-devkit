@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+        <!-- Example Model Views -->
+        <record id="example_model_tree_view" model="ir.ui.view">
+            <field name="name">example.model.tree</field>
+            <field name="model">example.model</field>
+            <field name="arch" type="xml">
+                <tree string="Examples" decoration-success="state=='done'" decoration-info="state=='confirmed'" decoration-muted="state=='cancelled'">
+                    <field name="name"/>
+                    <field name="description"/>
+                    <field name="value"/>
+                    <field name="total_value"/>
+                    <field name="state"/>
+                    <field name="partner_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="example_model_form_view" model="ir.ui.view">
+            <field name="name">example.model.form</field>
+            <field name="model">example.model</field>
+            <field name="arch" type="xml">
+                <form string="Example">
+                    <header>
+                        <button name="action_confirm" string="Confirm" type="object" class="oe_highlight" states="draft"/>
+                        <button name="action_done" string="Mark as Done" type="object" class="oe_highlight" states="confirmed"/>
+                        <button name="action_cancel" string="Cancel" type="object" states="draft,confirmed"/>
+                        <button name="action_reset_to_draft" string="Reset to Draft" type="object" states="cancelled"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,done"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="partner_id"/>
+                                <field name="value"/>
+                            </group>
+                            <group>
+                                <field name="active"/>
+                                <field name="total_value"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Description">
+                                <field name="description"/>
+                            </page>
+                            <page string="Tags">
+                                <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                            </page>
+                            <page string="Lines">
+                                <field name="line_ids">
+                                    <tree editable="bottom">
+                                        <field name="sequence" widget="handle"/>
+                                        <field name="name"/>
+                                        <field name="value"/>
+                                        <field name="notes"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="example_model_search_view" model="ir.ui.view">
+            <field name="name">example.model.search</field>
+            <field name="model">example.model</field>
+            <field name="arch" type="xml">
+                <search string="Examples">
+                    <field name="name"/>
+                    <field name="description"/>
+                    <field name="partner_id"/>
+                    <field name="tag_ids"/>
+                    <separator/>
+                    <filter name="active" string="Active" domain="[('active', '=', True)]"/>
+                    <filter name="inactive" string="Inactive" domain="[('active', '=', False)]"/>
+                    <separator/>
+                    <filter name="draft" string="Draft" domain="[('state', '=', 'draft')]"/>
+                    <filter name="confirmed" string="Confirmed" domain="[('state', '=', 'confirmed')]"/>
+                    <filter name="done" string="Done" domain="[('state', '=', 'done')]"/>
+                    <filter name="cancelled" string="Cancelled" domain="[('state', '=', 'cancelled')]"/>
+                    <separator/>
+                    <group expand="0" string="Group By">
+                        <filter name="group_by_state" string="State" domain="[]" context="{'group_by': 'state'}"/>
+                        <filter name="group_by_partner" string="Partner" domain="[]" context="{'group_by': 'partner_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- Example Tag Views -->
+        <record id="example_tag_tree_view" model="ir.ui.view">
+            <field name="name">example.tag.tree</field>
+            <field name="model">example.tag</field>
+            <field name="arch" type="xml">
+                <tree string="Tags">
+                    <field name="name"/>
+                    <field name="color" widget="color"/>
+                    <field name="active"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="example_tag_form_view" model="ir.ui.view">
+            <field name="name">example.tag.form</field>
+            <field name="model">example.tag</field>
+            <field name="arch" type="xml">
+                <form string="Tag">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="color" widget="color"/>
+                            <field name="active"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Actions -->
+        <record id="example_model_action" model="ir.actions.act_window">
+            <field name="name">Examples</field>
+            <field name="res_model">example.model</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create your first example record!
+                </p>
+                <p>
+                    Use this module to demonstrate the testing framework capabilities.
+                </p>
+            </field>
+        </record>
+
+        <record id="example_tag_action" model="ir.actions.act_window">
+            <field name="name">Tags</field>
+            <field name="res_model">example.tag</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{}</field>
+        </record>
+
+        <!-- Menu Items -->
+        <menuitem id="example_main_menu" name="Example Module" sequence="10"/>
+        
+        <menuitem id="example_model_menu" name="Examples" parent="example_main_menu" 
+                  action="example_model_action" sequence="10"/>
+        
+        <menuitem id="example_tag_menu" name="Tags" parent="example_main_menu" 
+                  action="example_tag_action" sequence="20"/>
+
+    </data>
+</odoo> 

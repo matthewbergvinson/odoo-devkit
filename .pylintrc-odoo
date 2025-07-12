@@ -1,0 +1,50 @@
+[MASTER]
+load-plugins = pylint_odoo
+ignore = __pycache__
+
+[MESSAGES CONTROL]
+# Disable some pylint checks that are too strict for Odoo development
+disable =
+    # Odoo-specific patterns that pylint doesn't understand
+    too-few-public-methods,
+    too-many-arguments,
+    too-many-instance-attributes,
+    too-many-locals,
+    too-many-branches,
+    too-many-statements,
+    # These are handled by pylint-odoo
+    missing-module-docstring,
+    missing-class-docstring,
+    missing-function-docstring,
+    # Common in Odoo
+    unused-argument,
+    broad-except,
+    # Sometimes necessary in Odoo
+    protected-access,
+    # Odoo uses single character variable names frequently
+    invalid-name
+
+[FORMAT]
+max-line-length = 88
+max-module-lines = 1500
+
+[DESIGN]
+max-args = 10
+max-locals = 20
+max-returns = 8
+max-branches = 15
+max-statements = 60
+
+[ODOO]
+# Enable all Odoo-specific checks
+odoo-checks-enabled = all
+
+# Odoo version (important for version-specific checks)
+odoo-version = 18.0
+
+# Enable checks for deprecated Odoo patterns
+deprecated-modules = openerp
+
+[REPORTS]
+output-format = colorized
+reports = yes

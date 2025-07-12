@@ -1,0 +1,71 @@
+# Odoo.sh ignore file - files/directories to ignore during deployment
+
+# Development files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Testing files
+tests/
+test_*
+*_test.py
+.pytest_cache/
+.coverage
+.tox/
+
+# Documentation
+docs/
+README.md
+*.md
+*.rst
+
+# Development tools
+.git/
+.gitignore
+.odoo_ignore
+requirements-dev.txt
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+ehthumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.backup
+*.old
+
+# Log files
+*.log
+*.log.*
+
+# Cache files
+__pycache__/
+*.py[cod]
+*$py.class
+.cache/
+
+# Local development
+local/
+dev/
+testing/
+.env
+.venv
+venv/
+env/
+
+# IDE specific
+.vscode/settings.json
+.idea/
+*.sublime-*
+
+# Build artifacts
+build/
+dist/
+*.egg-info/ 

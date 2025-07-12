@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>royal_textiles_sales API Documentation - Royal Textiles Odoo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #e83e8c;
+            border-bottom: 3px solid #e83e8c;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            color: #6f42c1;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            border-left: 4px solid #6f42c1;
+            padding-left: 15px;
+        }
+
+        h3 {
+            color: #495057;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        h4 {
+            color: #666;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        code {
+            background: #f8f9fa;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            color: #e83e8c;
+        }
+
+        pre {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        pre code {
+            background: none;
+            color: inherit;
+            padding: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            border: 1px solid #dee2e6;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #495057;
+        }
+
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .toc {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .toc ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .toc li {
+            margin: 5px 0;
+        }
+
+        .toc a {
+            color: #6f42c1;
+            text-decoration: none;
+        }
+
+        .toc a:hover {
+            text-decoration: underline;
+        }
+
+        blockquote {
+            border-left: 4px solid #6f42c1;
+            padding-left: 20px;
+            margin: 20px 0;
+            color: #666;
+            font-style: italic;
+        }
+
+        .header-info {
+            background: linear-gradient(135deg, #e83e8c 0%, #6f42c1 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .footer {
+            text-align: center;
+            color: #666;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #dee2e6;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            background: #6f42c1;
+            color: white;
+            border-radius: 12px;
+            font-size: 0.8em;
+            margin: 2px;
+        }
+
+        .api-method {
+            background: #28a745;
+        }
+
+        .http-route {
+            background: #17a2b8;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                padding: 20px;
+            }
+
+            table {
+                font-size: 0.9em;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</head>
+<body>
+    <div class="container">
+        <div class="header-info">
+            <h1>🏢 Royal Textiles Odoo Platform</h1>
+            <p>📚 royal_textiles_sales API Documentation</p>
+            <p>Generated: 2025-07-11 23:18:35</p>
+        </div>
+
+        <h1 id="royal_textiles_sales-api-documentation">royal_textiles_sales API Documentation</h1>
+<p><strong>Generated:</strong> 2025-07-11 23:18:35
+<strong>Version:</strong> 18.0.1.0.1
+<strong>Author:</strong> RTP Denver Development Team</p>
+<h2 id="overview">Overview</h2>
+<p>Custom sales order enhancements for Royal Textiles installation company</p>
+<h3 id="module-information">Module Information</h3>
+<ul>
+<li><strong>Name:</strong> royal_textiles_sales</li>
+<li><strong>Version:</strong> 18.0.1.0.1</li>
+<li><strong>Category:</strong> Sales</li>
+<li><strong>Depends:</strong> base, web, sale, project, calendar</li>
+<li><strong>License:</strong> LGPL-3</li>
+<li><strong>Website:</strong> https://github.com/matthewbergvinson/rtp-denver</li>
+</ul>
+<h3 id="statistics">Statistics</h3>
+<ul>
+<li><strong>Models:</strong> 0</li>
+<li><strong>Methods:</strong> 16</li>
+<li><strong>Controllers:</strong> 0</li>
+<li><strong>Views:</strong> 8</li>
+<li><strong>Tests:</strong> 0</li>
+</ul>
+<hr />
+<h2 id="methods-16">Methods (16)</h2>
+<p>The following methods are defined in the royal_textiles_sales module:</p>
+<h3 id="saleorder-methods">SaleOrder Methods</h3>
+<h4 id="_compute_estimated_hoursself"><code>_compute_estimated_hours(self)</code></h4>
+<p><strong>File:</strong> <code>/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/models/sale_order.py</code>
+<strong>Line:</strong> 69</p>
+<p><strong>Decorators:</strong> <ast.Call object at 0x102f6d950></p>
+<p><strong>Description:</strong>
+Compute estimated installation hours based on products ordered
+Business logic specific to blinds and shades installation</p>
+<h4 id="action_schedule_installationself"><code>action_schedule_installation(self)</code></h4>
+<p><strong>File:</strong> <code>/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/models/sale_order.py</code>
+<strong>Line:</strong> 105</p>
+<p><strong>Description:</strong>
+Schedule Installation Button Action</p>
+<p>Creates an installation record and opens a form to schedule the appointment.
+Only available for confirmed sales orders.</p>
+<h4 id="action_generate_work_orderself"><code>action_generate_work_order(self)</code></h4>
+<p><strong>File:</strong> <code>/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/models/sale_order.py</code>
+<strong>Line:</strong> 185</p>
+<p><strong>Description:</strong>
+Generate Work Order Button Action</p>
+<p>Creates a project with tasks for the installation work.
+Integrates with Odoo's project management module.</p>
+<h4 id="action_calculate_materialsself"><code>action_calculate_materials(self)</code></h4>
+<p><strong>File:</strong> <code>/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/models/sale_order.py</code>
+<strong>Line:</strong> 263</p>
+<p><strong>Description:</strong>
+Calculate Materials Button Action</p>
+<p>Analyzes the order lines and calculates additional materials needed
+for the installation (screws, brackets, etc.)</p>
+<hr />
+<h3 id="royalinstallation-methods">RoyalInstallation Methods</h3>
+<h4 id="_compute_durationself"><code>_compute_duration(self)</code></h4>
+<p><strong>File:</strong> <code>/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/models/installation.py</code>
+<strong>Line:</strong> 161</p>
+<p><strong>Decorators:</strong> <ast.Call object at 0x102f63cd0></p>
+<p><strong>Description:</strong>
+Compute actual duration of installation
+Same pattern as Hello World Todo computed fields</p>
+<h4 id="_compute_is_overdueself"><code>_compute_is_overdue(self)</code></h4>
+<p><strong>File:</strong> <code>/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/models/installation.py</code>
+<strong>Line:</strong> 174</p>
+<p><strong>Decorators:</strong> <ast.Call object at 0x102f6c150></p>
+<p><strong>Description:</strong>
+Compute if installation is overdue
+Same pattern as Hello World Todo overdue logic</p>
+<h4 id="_compute_efficiency_ratingself"><code>_compute_efficiency_rating(self)</code></h4>
+<p><strong>File:</strong> <code>/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/models/installation.py</code>
+<strong>Line:</strong> 188</p>
+<p><strong>Decorators:</strong> <ast.Call object at 0x102fadcd0></p>
+<p><strong>Description:</strong>
+Compute efficiency rating based on actual vs estimated time
+Same pattern as Hello World Todo computed fields</p>
+<h4 id="action_start_installationself"><code>action_start_installation(self)</code></h4>
+<p><strong>File:</strong> <code>/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/models/installation.py</code>
+<strong>Line:</strong> 213</p>
+<p><strong>Description:</strong>
+Start the installation process
+Same pattern as Hello World Todo action_start_task</p>
+<h4 id="action_complete_installationself"><code>action_complete_installation(self)</code></h4>
+<p><strong>File:</strong> <code>/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/models/installation.py</code>
+<strong>Line:</strong> 238</p>
+<p><strong>Description:</strong>
+Complete the installation
+Same pattern as Hello World Todo action_complete_task</p>
+<h4 id="action_cancel_installationself"><code>action_cancel_installation(self)</code></h4>
+<p><strong>File:</strong> <code>/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/models/installation.py</code>
+<strong>Line:</strong> 263</p>
+<p><strong>Description:</strong>
+Cancel the installation
+Same pattern as Hello World Todo action_cancel_task</p>
+<h4 id="action_reschedule_installationself"><code>action_reschedule_installation(self)</code></h4>
+<p><strong>File:</strong> <code>/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/models/installation.py</code>
+<strong>Line:</strong> 287</p>
+<p><strong>Description:</strong>
+Reschedule the installation
+Custom business action</p>
+<h4 id="_check_scheduled_dateself"><code>_check_scheduled_date(self)</code></h4>
+<p><strong>File:</strong> <code>/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/models/installation.py</code>
+<strong>Line:</strong> 310</p>
+<p><strong>Decorators:</strong> <ast.Call object at 0x102f98550></p>
+<p><strong>Description:</strong>
+Validate scheduled date is not in the past
+Same pattern as Hello World Todo validation</p>
+<h4 id="_check_date_sequenceself"><code>_check_date_sequence(self)</code></h4>
+<p><strong>File:</strong> <code>/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/models/installation.py</code>
+<strong>Line:</strong> 327</p>
+<p><strong>Decorators:</strong> <ast.Call object at 0x102fa31d0></p>
+<p><strong>Description:</strong>
+Validate date sequence is logical
+Same pattern as Hello World Todo validation</p>
+<h4 id="createself-vals"><code>create(self, vals)</code></h4>
+<p><strong>File:</strong> <code>/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/models/installation.py</code>
+<strong>Line:</strong> 340</p>
+<p><strong>Decorators:</strong> <ast.Attribute object at 0x102fa1190></p>
+<p><strong>Description:</strong>
+Override create method for custom logic
+Same pattern as Hello World Todo create override</p>
+<h4 id="writeself-vals"><code>write(self, vals)</code></h4>
+<p><strong>File:</strong> <code>/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/models/installation.py</code>
+<strong>Line:</strong> 353</p>
+<p><strong>Description:</strong>
+Override write method for status change logic
+Same pattern as Hello World Todo write override</p>
+<h4 id="name_getself"><code>name_get(self)</code></h4>
+<p><strong>File:</strong> <code>/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/models/installation.py</code>
+<strong>Line:</strong> 382</p>
+<p><strong>Description:</strong>
+Override name display for better UX
+Same pattern as Hello World Todo name_get</p>
+<hr />
+<h2 id="views-8">Views (8)</h2>
+<p>The following views are defined in the royal_textiles_sales module:</p>
+<h3 id="form-views-1">Form Views (1)</h3>
+<table>
+<thead>
+<tr>
+<th>View ID</th>
+<th>Model</th>
+<th>File</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>view_royal_installation_form</code></td>
+<td><code>ir.ui.view</code></td>
+<td><code>/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/views/installation_views.xml</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="tree-views-1">Tree Views (1)</h3>
+<table>
+<thead>
+<tr>
+<th>View ID</th>
+<th>Model</th>
+<th>File</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>view_royal_installation_tree</code></td>
+<td><code>ir.ui.view</code></td>
+<td><code>/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/views/installation_views.xml</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="search-views-1">Search Views (1)</h3>
+<table>
+<thead>
+<tr>
+<th>View ID</th>
+<th>Model</th>
+<th>File</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>view_royal_installation_search</code></td>
+<td><code>ir.ui.view</code></td>
+<td><code>/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/views/installation_views.xml</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="calendar-views-1">Calendar Views (1)</h3>
+<table>
+<thead>
+<tr>
+<th>View ID</th>
+<th>Model</th>
+<th>File</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>view_royal_installation_calendar</code></td>
+<td><code>ir.ui.view</code></td>
+<td><code>/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/views/installation_views.xml</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="kanban-views-1">Kanban Views (1)</h3>
+<table>
+<thead>
+<tr>
+<th>View ID</th>
+<th>Model</th>
+<th>File</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>view_royal_installation_kanban</code></td>
+<td><code>ir.ui.view</code></td>
+<td><code>/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/views/installation_views.xml</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="xpath-views-3">Xpath Views (3)</h3>
+<table>
+<thead>
+<tr>
+<th>View ID</th>
+<th>Model</th>
+<th>File</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>view_order_form_royal_textiles</code></td>
+<td><code>ir.ui.view</code></td>
+<td><code>/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/views/sale_order_views.xml</code></td>
+</tr>
+<tr>
+<td><code>view_order_tree_royal_textiles</code></td>
+<td><code>ir.ui.view</code></td>
+<td><code>/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/views/sale_order_views.xml</code></td>
+</tr>
+<tr>
+<td><code>view_sales_order_filter_royal_textiles</code></td>
+<td><code>ir.ui.view</code></td>
+<td><code>/Users/mbergvinson/cursor-projects/odoo/rtp-denver/custom_modules/royal_textiles_sales/views/sale_order_views.xml</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="file-structure">File Structure</h2>
+<h3 id="python-files-5">Python Files (5)</h3>
+<ul>
+<li><code>__init__.py</code></li>
+<li><code>__manifest__.py</code></li>
+<li><code>models/sale_order.py</code></li>
+<li><code>models/installation.py</code></li>
+<li><code>models/__init__.py</code></li>
+</ul>
+<h3 id="xml-files-4">XML Files (4)</h3>
+<ul>
+<li><code>data/installation_demo.xml</code></li>
+<li><code>views/installation_views.xml</code></li>
+<li><code>views/sale_order_views.xml</code></li>
+<li><code>views/installation_menu.xml</code></li>
+</ul>
+<h3 id="csv-files-1">CSV Files (1)</h3>
+<ul>
+<li><code>security/ir.model.access.csv</code></li>
+</ul>
+
+        <div class="footer">
+            <p><strong>Royal Textiles Odoo Platform Documentation</strong></p>
+            <p>Generated by Task 6.7 - Documentation Generation System</p>
+        </div>
+    </div>
+</body>
+</html>

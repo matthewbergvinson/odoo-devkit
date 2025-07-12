@@ -1,0 +1,167 @@
+# Pre-commit hooks for RTP Denver Odoo Development
+# Install with: pre-commit install
+# Run manually with: pre-commit run --all-files
+#
+# This configuration runs all our linting and validation tools automatically
+# before commits to catch errors before they reach odoo.sh deployment
+
+# Performance settings
+default_install_hook_types: [pre-commit, prepare-commit-msg]
+default_stages: [pre-commit, pre-push]
+
+repos:
+  # ============================================================================
+  # PHASE 1: File Format and Basic Checks (Fast)
+  # ============================================================================
+
+  # General file checks (runs first, very fast)
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: trailing-whitespace
+        exclude: '\.po$'  # Skip .po files which may have intentional trailing whitespace
+      - id: end-of-file-fixer
+        exclude: '\.po$'
+      - id: check-yaml
+        args: [--unsafe]  # Allow custom YAML tags
+      - id: check-xml
+      - id: check-merge-conflict
+      - id: check-added-large-files
+        args: [--maxkb=1000]
+      - id: check-case-conflict
+      - id: check-json
+      - id: check-toml
+      - id: mixed-line-ending
+        args: [--fix=lf]
+
+  # ============================================================================
+  # PHASE 2: Python Code Formatting (Automatic fixes)
+  # ============================================================================
+
+  # Python code formatting
+  - repo: https://github.com/psf/black
+    rev: 23.12.1
+    hooks:
+      - id: black
+        language_version: python3
+        args: [--line-length=120, --skip-string-normalization]
+        files: \.py$
+
+  # Python import sorting
+  - repo: https://github.com/pycqa/isort
+    rev: 5.13.2
+    hooks:
+      - id: isort
+        args: [--profile, black, --line-length, "120"]
+        files: \.py$
+
+  # ============================================================================
+  # PHASE 3: Python Code Quality (Linting and Style)
+  # ============================================================================
+
+  # Python linting with comprehensive plugins
+  - repo: https://github.com/pycqa/flake8
+    rev: 7.0.0
+    hooks:
+      - id: flake8
+        additional_dependencies:
+          - flake8-docstrings>=1.7
+          - flake8-builtins>=2.0
+          - flake8-comprehensions>=3.0
+          - flake8-import-order>=0.18
+          - flake8-bugbear>=23.0
+          - pep8-naming>=0.13
+        files: \.py$
+
+  # Type checking with mypy
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.8.0
+    hooks:
+      - id: mypy
+        args: [--ignore-missing-imports, --show-error-codes]
+        files: ^(custom_modules|scripts)/.*\.py$
+        exclude: (__manifest__|__init__)\.py$
+
+  # ============================================================================
+  # PHASE 4: Odoo-Specific Validation (Most Important)
+  # ============================================================================
+
+  # Odoo-specific linting (critical for deployment success)
+  - repo: local
+    hooks:
+      - id: pylint-odoo
+        name: pylint-odoo
+        entry: pylint
+        language: python
+        args: [--load-plugins=pylint_odoo, --rcfile=.pylintrc-odoo, --score=no]
+        files: ^custom_modules/.*\.py$
+        additional_dependencies: [pylint-odoo>=8.0]
+        exclude: (__manifest__|migrations)/.*\.py$
+
+  # Custom Odoo type checker (catches field type mismatches)
+  - repo: local
+    hooks:
+      - id: odoo-type-checker
+        name: odoo-type-checker
+        entry: python scripts/odoo-type-checker.py
+        language: python
+        files: ^custom_modules/.*\.py$
+        pass_filenames: false
+        verbose: true
+
+  # Comprehensive Odoo module validation
+  - repo: local
+    hooks:
+      - id: validate-odoo-module
+        name: validate-odoo-module
+        entry: python scripts/validate-module.py
+        language: python
+        files: ^custom_modules/
+        pass_filenames: false
+        verbose: true
+
+  # ============================================================================
+  # PHASE 5: File-Specific Formatting and Validation
+  # ============================================================================
+
+  # XML formatting for Odoo view files
+  - repo: local
+    hooks:
+      - id: xml-format-odoo
+        name: xml-format-odoo
+        entry: python scripts/format-xml.py
+        language: python
+        files: ^custom_modules/.*\.xml$
+        pass_filenames: true
+
+  # CSV validation for security files
+  - repo: local
+    hooks:
+      - id: validate-odoo-csv
+        name: validate-odoo-csv
+        entry: python -c "import csv, sys; [csv.reader(open(f)) for f in sys.argv[1:]]"
+        language: python
+        files: ^custom_modules/.*\.csv$
+        pass_filenames: true
+
+# ============================================================================
+# Configuration Notes:
+# ============================================================================
+#
+# Hook Execution Order:
+# 1. File format checks (fast, catch basic issues)
+# 2. Code formatting (Black, isort - auto-fix issues)
+# 3. Code quality (flake8, mypy - identify problems)
+# 4. Odoo validation (pylint-odoo, type-checker, module validator)
+# 5. File-specific validation (XML, CSV formatting)
+#
+# Performance Optimizations:
+# - Files are filtered by type to avoid unnecessary processing
+# - Fast checks run first to fail fast
+# - Verbose output only for critical Odoo checks
+# - Excludes generated files and migrations
+#
+# Error Prevention:
+# - This configuration would have caught the field type mismatch
+# - Validates all critical Odoo patterns before deployment
+# - Ensures consistent code style and structure

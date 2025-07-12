@@ -1,0 +1,138 @@
+{
+    // =====================================
+    // Essential VS Code Extensions for Royal Textiles Odoo Development
+    // =====================================
+
+    "recommendations": [
+        // =====================================
+        // Core Python Development
+        // =====================================
+        "ms-python.python",                                    // Python IntelliSense, linting, debugging
+        "ms-python.black-formatter",                           // Black code formatter
+        "ms-python.flake8",                                    // Flake8 linter
+        "ms-python.pylint",                                    // Pylint with Odoo support
+        "ms-python.mypy-type-checker",                         // MyPy type checking
+        "ms-python.autopep8",                                  // PEP8 auto-formatting
+        "donjayamanne.python-environment-manager",             // Python environment management
+        "njpwerner.autodocstring",                             // Auto-generate docstrings
+        "ms-python.python-docstring-generator",                // Python docstring generator
+        "visualstudioexptteam.vscodeintellicode",              // AI-assisted development
+
+        // =====================================
+        // Odoo-Specific Extensions
+        // =====================================
+        "odoo.odoo",                                           // Official Odoo Language Server (ESSENTIAL)
+        "trinhanhngoc.vscode-odoo",                            // Odoo IDE with framework integration
+        "jigar-patel.OdooSnippets",                            // Additional Odoo code snippets
+        "mstuttgart.odoo-scaffold",                            // Odoo module scaffolding
+        "jjviscarra.vscode-odoo-snippets",                     // Extended Odoo snippets
+
+        // =====================================
+        // XML and Template Development
+        // =====================================
+        "redhat.vscode-xml",                                   // XML language support with validation
+        "dotjoshjohnson.xml",                                  // XML tools and formatting
+        "formulahendry.auto-rename-tag",                       // Auto rename paired XML/HTML tags
+        "bradlc.vscode-tailwindcss",                           // Tailwind CSS support for styling
+
+        // =====================================
+        // JavaScript and Frontend
+        // =====================================
+        "ms-vscode.vscode-typescript-next",                    // TypeScript and JavaScript support
+        "esbenp.prettier-vscode",                              // Code formatter for JS/CSS/HTML
+        "ms-vscode.vscode-js-profile-flame",                   // JavaScript performance profiling
+        "ms-vscode.vscode-json",                               // JSON language support
+
+        // =====================================
+        // Data and Configuration Files
+        // =====================================
+        "redhat.vscode-yaml",                                  // YAML language support
+        "mechatroner.rainbow-csv",                             // CSV file viewer and editor
+        "janisdd.vscode-edit-csv",                             // Advanced CSV editing
+        "ms-toolsai.datawrangler",                             // Data manipulation and analysis
+
+        // =====================================
+        // Database and SQL
+        // =====================================
+        "ms-mssql.mssql",                                      // SQL Server support
+        "ckolkman.vscode-postgres",                            // PostgreSQL support
+        "mtxr.sqltools",                                       // SQL tools and database management
+        "mtxr.sqltools-driver-pg",                             // PostgreSQL driver for SQL tools
+
+        // =====================================
+        // Git and Version Control
+        // =====================================
+        "eamodio.gitlens",                                     // Enhanced Git capabilities
+        "mhutchie.git-graph",                                  // Git repository graph
+        "donjayamanne.githistory",                             // Git file history
+        "github.vscode-pull-request-github",                   // GitHub integration
+
+        // =====================================
+        // Development Tools
+        // =====================================
+        "ms-toolsai.jupyter",                                  // Jupyter notebook support
+        "ms-vscode.test-adapter-converter",                    // Test adapter for various frameworks
+        "hbenl.vscode-test-explorer",                          // Test explorer UI
+        "littlefoxteam.vscode-python-test-adapter",            // Python test adapter
+        "streetsidesoftware.code-spell-checker",               // Spell checker for code
+        "aaron-bond.better-comments",                          // Enhanced comment highlighting
+        "oderwat.indent-rainbow",                              // Indent visualization
+        "pkief.material-icon-theme",                           // Material Design icons
+        "zhuangtongfa.material-theme",                         // Material theme
+
+        // =====================================
+        // Productivity and UI Enhancement
+        // =====================================
+        "alefragnani.bookmarks",                               // Bookmarks for navigation
+        "christian-kohler.path-intellisense",                  // Path autocompletion
+        "formulahendry.code-runner",                           // Code execution in editor
+        "ms-vscode.live-server",                               // Live server for web development
+        "ritwickdey.liveserver",                               // Live Server alternative
+        "yzhang.markdown-all-in-one",                          // Markdown support
+        "davidanson.vscode-markdownlint",                      // Markdown linting
+
+        // =====================================
+        // AI and Code Assistance
+        // =====================================
+        "github.copilot",                                      // GitHub Copilot AI assistance
+        "github.copilot-chat",                                 // GitHub Copilot Chat
+
+        // =====================================
+        // Docker and Containers
+        // =====================================
+        "ms-vscode-remote.remote-containers",                  // Development in containers
+        "ms-azuretools.vscode-docker",                         // Docker support
+
+        // =====================================
+        // REST API and Web Development
+        // =====================================
+        "humao.rest-client",                                   // REST API testing
+        "ms-vscode.vscode-thunder-client",                     // API client for testing
+
+        // =====================================
+        // Performance and Monitoring
+        // =====================================
+        "ms-vscode.vscode-js-profile-flame",                   // Performance profiling
+        "waderyan.gitblame",                                   // Git blame annotations
+        "gruntfuggly.todo-tree",                               // TODO highlighting and management
+
+        // =====================================
+        // Security and Quality
+        // =====================================
+        "ms-python.bandit",                                    // Security linter for Python
+        "sonarsource.sonarlint-vscode",                        // Code quality and security
+        "42crunch.vscode-openapi"                              // OpenAPI/Swagger support
+    ],
+
+    // =====================================
+    // Extensions to Avoid
+    // =====================================
+    "unwantedRecommendations": [
+        "ms-python.python-legacy-intellisense",               // Replaced by Pylance
+        "ms-python.python-legacy-support",                    // Outdated Python support
+        "hookyqr.beautify",                                    // Replaced by Prettier
+        "formulahendry.auto-close-tag",                        // Built into VS Code now
+        "ms-vscode.vscode-typescript",                         // Replaced by newer TypeScript extension
+        "vscode-icons-team.vscode-icons"                       // We prefer Material Icon Theme
+    ]
+}

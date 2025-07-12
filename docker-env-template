@@ -1,0 +1,91 @@
+# RTP Denver - Docker Environment Configuration Template
+# Task 3.7: Create Docker alternative setup for environment consistency
+#
+# Copy this file to .env and customize for your environment
+# cp docker-env-template .env
+
+# =================================================================
+# Database Configuration
+# =================================================================
+POSTGRES_PASSWORD=odoo
+POSTGRES_PORT=5432
+DEFAULT_DB_NAME=
+
+# =================================================================
+# Odoo Configuration
+# =================================================================
+ADMIN_PASSWORD=admin123
+ENVIRONMENT=development
+ODOO_PORT=8069
+ODOO_LONGPOLLING_PORT=8072
+ODOO_TEST_PORT=8169
+
+# =================================================================
+# Development Tools
+# =================================================================
+# pgAdmin (Database Management)
+PGADMIN_EMAIL=admin@rtp-denver.local
+PGADMIN_PASSWORD=admin123
+PGADMIN_PORT=8080
+
+# Redis (Caching - optional)
+REDIS_PORT=6379
+
+# MailHog (Email Testing - development)
+MAILHOG_SMTP_PORT=1025
+MAILHOG_WEB_PORT=8025
+
+# =================================================================
+# Docker Compose Profiles
+# =================================================================
+# Uncomment to enable different service combinations:
+# COMPOSE_PROFILES=development     # Odoo + PostgreSQL + MailHog
+# COMPOSE_PROFILES=testing         # Include testing service
+# COMPOSE_PROFILES=pgadmin         # Include pgAdmin
+# COMPOSE_PROFILES=redis           # Include Redis
+# COMPOSE_PROFILES=full            # All services
+# COMPOSE_PROFILES=development,pgadmin  # Multiple profiles
+
+# =================================================================
+# Docker Configuration
+# =================================================================
+# Docker image tag (optional)
+DOCKER_IMAGE_TAG=latest
+
+# Docker build context (optional)
+DOCKER_BUILD_CONTEXT=.
+
+# Container resource limits (optional)
+ODOO_MEMORY_LIMIT=2g
+POSTGRES_MEMORY_LIMIT=1g
+
+# =================================================================
+# Development Settings
+# =================================================================
+# Mount additional directories (optional)
+# ADDITIONAL_MOUNTS=/path/to/custom:/opt/odoo/custom
+
+# Development user (optional - for file permissions)
+DOCKER_USER_ID=1001
+DOCKER_GROUP_ID=1001
+
+# =================================================================
+# CI/CD Settings (for automated testing)
+# =================================================================
+# CI_MODE=true                    # Disable interactive features
+# TEST_DATABASE=test_ci           # Default test database name
+# SKIP_INIT=false                 # Skip database initialization
+
+# =================================================================
+# Performance Tuning (advanced)
+# =================================================================
+# ODOO_WORKERS=0                  # Number of worker processes
+# POSTGRES_MAX_CONNECTIONS=100    # PostgreSQL connection limit
+# POSTGRES_SHARED_BUFFERS=256MB   # PostgreSQL memory settings
+
+# =================================================================
+# Security Settings (production)
+# =================================================================
+# SECURE_MODE=false               # Enable security hardening
+# SSL_CERT_PATH=/path/to/cert     # SSL certificate path
+# SSL_KEY_PATH=/path/to/key       # SSL private key path
