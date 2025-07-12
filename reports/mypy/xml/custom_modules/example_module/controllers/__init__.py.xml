@@ -1,0 +1,1 @@
+<?xml-stylesheet type="text/xsl" href="../../../../mypy-html.xslt"?><mypy-report-file name="custom_modules/example_module/controllers/__init__.py" module="custom_modules.example_module.controllers"><line any_info="No Anys on this line!" content="from . import example_controller" number="1" precision="precise"/></mypy-report-file>

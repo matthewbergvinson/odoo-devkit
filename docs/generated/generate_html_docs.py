@@ -1,8 +1,10 @@
+import json
 import os
 import sys
-import markdown
-import json
 from datetime import datetime
+
+import markdown
+
 
 def convert_markdown_to_html(markdown_file, html_file, title="Documentation"):
     """Convert Markdown file to HTML with styling."""
@@ -231,6 +233,7 @@ def convert_markdown_to_html(markdown_file, html_file, title="Documentation"):
         print(f"Error converting {markdown_file} to HTML: {e}")
         return False
 
+
 def main():
     if len(sys.argv) < 4:
         print("Usage: python generate_html_docs.py <markdown_file> <html_file> <title>")
@@ -242,6 +245,7 @@ def main():
 
     success = convert_markdown_to_html(markdown_file, html_file, title)
     sys.exit(0 if success else 1)
+
 
 if __name__ == '__main__':
     main()

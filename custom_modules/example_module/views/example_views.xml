@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        
-        <!-- Example Model Views -->
         <record id="example_model_tree_view" model="ir.ui.view">
             <field name="name">example.model.tree</field>
             <field name="model">example.model</field>
@@ -17,7 +15,6 @@
                 </tree>
             </field>
         </record>
-
         <record id="example_model_form_view" model="ir.ui.view">
             <field name="name">example.model.form</field>
             <field name="model">example.model</field>
@@ -64,7 +61,6 @@
                 </form>
             </field>
         </record>
-
         <record id="example_model_search_view" model="ir.ui.view">
             <field name="name">example.model.search</field>
             <field name="model">example.model</field>
@@ -90,8 +86,6 @@
                 </search>
             </field>
         </record>
-
-        <!-- Example Tag Views -->
         <record id="example_tag_tree_view" model="ir.ui.view">
             <field name="name">example.tag.tree</field>
             <field name="model">example.tag</field>
@@ -103,7 +97,6 @@
                 </tree>
             </field>
         </record>
-
         <record id="example_tag_form_view" model="ir.ui.view">
             <field name="name">example.tag.form</field>
             <field name="model">example.tag</field>
@@ -119,8 +112,6 @@
                 </form>
             </field>
         </record>
-
-        <!-- Actions -->
         <record id="example_model_action" model="ir.actions.act_window">
             <field name="name">Examples</field>
             <field name="res_model">example.model</field>
@@ -135,22 +126,14 @@
                 </p>
             </field>
         </record>
-
         <record id="example_tag_action" model="ir.actions.act_window">
             <field name="name">Tags</field>
             <field name="res_model">example.tag</field>
             <field name="view_mode">tree,form</field>
             <field name="context">{}</field>
         </record>
-
-        <!-- Menu Items -->
         <menuitem id="example_main_menu" name="Example Module" sequence="10"/>
-        
-        <menuitem id="example_model_menu" name="Examples" parent="example_main_menu" 
-                  action="example_model_action" sequence="10"/>
-        
-        <menuitem id="example_tag_menu" name="Tags" parent="example_main_menu" 
-                  action="example_tag_action" sequence="20"/>
-
+        <menuitem id="example_model_menu" name="Examples" parent="example_main_menu" action="example_model_action" sequence="10"/>
+        <menuitem id="example_tag_menu" name="Tags" parent="example_main_menu" action="example_tag_action" sequence="20"/>
     </data>
-</odoo> 
+</odoo>

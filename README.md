@@ -595,7 +595,7 @@ make benchmark
 
 ---
 
-**🎯 Ready to build amazing Odoo modules!** 
+**🎯 Ready to build amazing Odoo modules!**
 
 Start with `make help` to see all available commands, then dive into `custom_modules/` to begin development.
 

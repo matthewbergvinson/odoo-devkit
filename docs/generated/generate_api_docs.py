@@ -3,6 +3,7 @@ import os
 import sys
 from datetime import datetime
 
+
 def generate_model_docs(models, module_name):
     """Generate documentation for Odoo models."""
     if not models:
@@ -39,6 +40,7 @@ The following models are defined in the {module_name} module:
 
     return docs
 
+
 def generate_controller_docs(controllers, module_name):
     """Generate documentation for controllers."""
     if not controllers:
@@ -63,6 +65,7 @@ The following controllers are defined in the {module_name} module:
         docs += "---\n\n"
 
     return docs
+
 
 def generate_method_docs(methods, module_name):
     """Generate documentation for methods."""
@@ -110,6 +113,7 @@ The following methods are defined in the {module_name} module:
 
     return docs
 
+
 def generate_view_docs(views, module_name):
     """Generate documentation for views."""
     if not views:
@@ -141,6 +145,7 @@ The following views are defined in the {module_name} module:
         docs += "\n"
 
     return docs
+
 
 def generate_module_api_docs(analysis_file, output_file):
     """Generate complete API documentation for a module."""
@@ -216,6 +221,7 @@ def generate_module_api_docs(analysis_file, output_file):
 
     print(f"API documentation generated: {output_file}")
 
+
 def main():
     if len(sys.argv) < 3:
         print("Usage: python generate_api_docs.py <analysis_file> <output_file>")
@@ -225,6 +231,7 @@ def main():
     output_file = sys.argv[2]
 
     generate_module_api_docs(analysis_file, output_file)
+
 
 if __name__ == '__main__':
     main()

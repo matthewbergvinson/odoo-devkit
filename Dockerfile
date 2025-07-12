@@ -1,14 +1,13 @@
-# RTP Denver - Odoo 18.0 Docker Environment
-# Task 3.7: Create Docker alternative setup for environment consistency
-#
-# This Dockerfile creates an Odoo 18.0 environment that matches our local installation
-# and integrates seamlessly with our existing infrastructure from Tasks 3.1-3.6
+# Odoo Local Testing Framework - Odoo 18.0 Docker Environment
+# 
+# This Dockerfile creates an Odoo 18.0 environment for testing and validating custom modules
+# with comprehensive development and testing tools
 
 FROM python:3.11-slim-bullseye
 
 # Metadata
-LABEL maintainer="RTP Denver Development Team"
-LABEL description="Odoo 18.0 development environment with RTP Denver customizations"
+LABEL maintainer="Odoo Local Testing Framework"
+LABEL description="Odoo 18.0 development environment for module testing and validation"
 LABEL version="18.0.1.0.0"
 
 # Environment variables

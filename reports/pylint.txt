@@ -1,0 +1,178 @@
+************* Module .pylintrc-odoo
+.pylintrc-odoo:1:0: E0015: Unrecognized option found: odoo-checks-enabled, odoo-version (unrecognized-option)
+************* Module custom_modules.example_module.__manifest__
+custom_modules/example_module/__manifest__.py:16:4: C8101: One of the following authors must be present in manifest: 'Odoo Community Association (OCA)' (manifest-required-author)
+custom_modules/example_module/__manifest__.py:6:4: C8103: Deprecated key "description" in manifest file (manifest-deprecated-key)
+************* Module custom_modules.example_module.tests.test_example_model
+custom_modules/example_module/tests/test_example_model.py:19:0: C0301: Line too long (108/88) (line-too-long)
+custom_modules/example_module/tests/test_example_model.py:69:0: C0301: Line too long (91/88) (line-too-long)
+custom_modules/example_module/tests/test_example_model.py:71:0: C0301: Line too long (91/88) (line-too-long)
+custom_modules/example_module/tests/test_example_model.py:91:0: C0301: Line too long (101/88) (line-too-long)
+custom_modules/example_module/tests/test_example_model.py:93:0: C0301: Line too long (105/88) (line-too-long)
+custom_modules/example_module/tests/test_example_model.py:130:0: C0301: Line too long (115/88) (line-too-long)
+custom_modules/example_module/tests/test_example_model.py:132:0: C0301: Line too long (115/88) (line-too-long)
+custom_modules/example_module/tests/test_example_model.py:165:0: C0301: Line too long (89/88) (line-too-long)
+custom_modules/example_module/tests/test_example_model.py:1:0: E0401: Unable to import 'odoo.exceptions' (import-error)
+custom_modules/example_module/tests/test_example_model.py:2:0: E0401: Unable to import 'odoo.tests.common' (import-error)
+************* Module custom_modules.example_module.models.example_model
+custom_modules/example_module/models/example_model.py:12:0: C0301: Line too long (91/88) (line-too-long)
+custom_modules/example_module/models/example_model.py:14:0: C0301: Line too long (104/88) (line-too-long)
+custom_modules/example_module/models/example_model.py:16:0: C0301: Line too long (97/88) (line-too-long)
+custom_modules/example_module/models/example_model.py:18:0: C0301: Line too long (96/88) (line-too-long)
+custom_modules/example_module/models/example_model.py:21:0: C0301: Line too long (103/88) (line-too-long)
+custom_modules/example_module/models/example_model.py:26:0: C0301: Line too long (89/88) (line-too-long)
+custom_modules/example_module/models/example_model.py:28:0: C0301: Line too long (92/88) (line-too-long)
+custom_modules/example_module/models/example_model.py:30:0: C0301: Line too long (98/88) (line-too-long)
+custom_modules/example_module/models/example_model.py:33:0: C0301: Line too long (105/88) (line-too-long)
+custom_modules/example_module/models/example_model.py:81:0: C0301: Line too long (93/88) (line-too-long)
+custom_modules/example_module/models/example_model.py:91:0: C0301: Line too long (90/88) (line-too-long)
+custom_modules/example_module/models/example_model.py:94:0: C0301: Line too long (106/88) (line-too-long)
+custom_modules/example_module/models/example_model.py:1:0: E0401: Unable to import 'odoo' (import-error)
+custom_modules/example_module/models/example_model.py:2:0: E0401: Unable to import 'odoo.exceptions' (import-error)
+custom_modules/example_module/models/example_model.py:12:11: W8113: The attribute string is redundant. String parameter equal to name of variable (attribute-string-redundant)
+custom_modules/example_module/models/example_model.py:14:18: W8113: The attribute string is redundant. String parameter equal to name of variable (attribute-string-redundant)
+custom_modules/example_module/models/example_model.py:16:12: W8113: The attribute string is redundant. String parameter equal to name of variable (attribute-string-redundant)
+custom_modules/example_module/models/example_model.py:18:13: W8113: The attribute string is redundant. String parameter equal to name of variable (attribute-string-redundant)
+custom_modules/example_module/models/example_model.py:20:12: W8113: The attribute string is redundant. String parameter equal to name of variable (attribute-string-redundant)
+custom_modules/example_module/models/example_model.py:32:18: W8113: The attribute string is redundant. String parameter equal to name of variable (attribute-string-redundant)
+custom_modules/example_module/models/example_model.py:47:16: C8107: String parameter on "ValidationError" requires translation. Use self.env._('Value must be positive') (translation-required)
+custom_modules/example_module/models/example_model.py:77:11: W8113: The attribute string is redundant. String parameter equal to name of variable (attribute-string-redundant)
+custom_modules/example_module/models/example_model.py:79:12: W8113: The attribute string is redundant. String parameter equal to name of variable (attribute-string-redundant)
+custom_modules/example_module/models/example_model.py:81:13: W8113: The attribute string is redundant. String parameter equal to name of variable (attribute-string-redundant)
+custom_modules/example_module/models/example_model.py:91:15: W8113: The attribute string is redundant. String parameter equal to name of variable (attribute-string-redundant)
+custom_modules/example_module/models/example_model.py:97:11: W8113: The attribute string is redundant. String parameter equal to name of variable (attribute-string-redundant)
+custom_modules/example_module/models/example_model.py:99:12: W8113: The attribute string is redundant. String parameter equal to name of variable (attribute-string-redundant)
+custom_modules/example_module/models/example_model.py:101:12: W8113: The attribute string is redundant. String parameter equal to name of variable (attribute-string-redundant)
+************* Module custom_modules.example_module.controllers.example_controller
+custom_modules/example_module/controllers/example_controller.py:32:0: C0301: Line too long (92/88) (line-too-long)
+custom_modules/example_module/controllers/example_controller.py:81:0: C0301: Line too long (97/88) (line-too-long)
+custom_modules/example_module/controllers/example_controller.py:85:0: C0301: Line too long (99/88) (line-too-long)
+custom_modules/example_module/controllers/example_controller.py:104:0: C0301: Line too long (114/88) (line-too-long)
+custom_modules/example_module/controllers/example_controller.py:122:0: C0301: Line too long (100/88) (line-too-long)
+custom_modules/example_module/controllers/example_controller.py:127:0: C0301: Line too long (93/88) (line-too-long)
+custom_modules/example_module/controllers/example_controller.py:3:0: E0401: Unable to import 'odoo' (import-error)
+custom_modules/example_module/controllers/example_controller.py:4:0: E0401: Unable to import 'odoo.http' (import-error)
+custom_modules/example_module/controllers/example_controller.py:127:86: W0640: Cell variable state defined in loop (cell-var-from-loop)
+custom_modules/example_module/controllers/example_controller.py:1:0: W0611: Unused import json (unused-import)
+
+
+Report
+======
+198 statements analysed.
+
+Statistics by type
+------------------
+
++---------+-------+-----------+-----------+------------+---------+
+|type     |number |old number |difference |%documented |%badname |
++=========+=======+===========+===========+============+=========+
+|module   |9      |9          |=          |22.22       |0.00     |
++---------+-------+-----------+-----------+------------+---------+
+|class    |5      |5          |=          |100.00      |0.00     |
++---------+-------+-----------+-----------+------------+---------+
+|method   |22     |22         |=          |100.00      |4.55     |
++---------+-------+-----------+-----------+------------+---------+
+|function |0      |NC         |NC         |0           |0        |
++---------+-------+-----------+-----------+------------+---------+
+
+
+
+451 lines have been analyzed
+
+Raw metrics
+-----------
+
++----------+-------+------+---------+-----------+
+|type      |number |%     |previous |difference |
++==========+=======+======+=========+===========+
+|code      |242    |53.66 |242      |=          |
++----------+-------+------+---------+-----------+
+|docstring |87     |19.29 |87       |=          |
++----------+-------+------+---------+-----------+
+|comment   |24     |5.32  |24       |=          |
++----------+-------+------+---------+-----------+
+|empty     |98     |21.73 |98       |=          |
++----------+-------+------+---------+-----------+
+
+
+
+Duplication
+-----------
+
++-------------------------+------+---------+-----------+
+|                         |now   |previous |difference |
++=========================+======+=========+===========+
+|nb duplicated lines      |0     |0        |0          |
++-------------------------+------+---------+-----------+
+|percent duplicated lines |0.000 |0.000    |=          |
++-------------------------+------+---------+-----------+
+
+
+
+Messages by category
+--------------------
+
++-----------+-------+---------+-----------+
+|type       |number |previous |difference |
++===========+=======+=========+===========+
+|convention |29     |29       |29         |
++-----------+-------+---------+-----------+
+|refactor   |0      |0        |0          |
++-----------+-------+---------+-----------+
+|warning    |15     |15       |15         |
++-----------+-------+---------+-----------+
+|error      |6      |6        |6          |
++-----------+-------+---------+-----------+
+
+
+
+% errors / warnings by module
+-----------------------------
+
++-------------------------------------------------------------+------+--------+---------+-----------+
+|module                                                       |error |warning |refactor |convention |
++=============================================================+======+========+=========+===========+
+|custom_modules.example_module.models.example_model           |33.33 |86.67   |0.00     |44.83      |
++-------------------------------------------------------------+------+--------+---------+-----------+
+|custom_modules.example_module.controllers.example_controller |33.33 |13.33   |0.00     |20.69      |
++-------------------------------------------------------------+------+--------+---------+-----------+
+|custom_modules.example_module.tests.test_example_model       |33.33 |0.00    |0.00     |27.59      |
++-------------------------------------------------------------+------+--------+---------+-----------+
+|.pylintrc-odoo                                               |16.67 |0.00    |0.00     |0.00       |
++-------------------------------------------------------------+------+--------+---------+-----------+
+|custom_modules.example_module.__manifest__                   |0.00  |0.00    |0.00     |6.90       |
++-------------------------------------------------------------+------+--------+---------+-----------+
+
+
+
+Messages
+--------
+
++---------------------------+------------+
+|message id                 |occurrences |
++===========================+============+
+|line-too-long              |26          |
++---------------------------+------------+
+|attribute-string-redundant |13          |
++---------------------------+------------+
+|import-error               |6           |
++---------------------------+------------+
+|unused-import              |1           |
++---------------------------+------------+
+|unrecognized-option        |1           |
++---------------------------+------------+
+|translation-required       |1           |
++---------------------------+------------+
+|manifest-required-author   |1           |
++---------------------------+------------+
+|manifest-deprecated-key    |1           |
++---------------------------+------------+
+|cell-var-from-loop         |1           |
++---------------------------+------------+
+
+
+
+
+------------------------------------------------------------------
+Your code has been rated at 6.26/10 (previous run: 6.26/10, +0.00)
+

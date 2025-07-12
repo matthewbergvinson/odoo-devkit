@@ -202,4 +202,4 @@ docs/source/_build/
 # Virtual environments
 venv*/
 env*/
-ENV*/ 
+ENV*/

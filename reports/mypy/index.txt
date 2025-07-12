@@ -1,0 +1,29 @@
+Mypy Type Check Coverage Summary
+================================
+
+Script: index
+
++--------------------------------------------------------------+-------------------+----------+
+| Module                                                       | Imprecision       | Lines    |
++--------------------------------------------------------------+-------------------+----------+
+| custom_modules                                               |   0.00% imprecise |    1 LOC |
+| custom_modules.example_module                                |   0.00% imprecise |    1 LOC |
+| custom_modules.example_module.__manifest__                   |   0.00% imprecise |   30 LOC |
+| custom_modules.example_module.controllers                    |   0.00% imprecise |    1 LOC |
+| custom_modules.example_module.controllers.example_controller |  66.67% imprecise |  129 LOC |
+| custom_modules.example_module.models                         |   0.00% imprecise |    1 LOC |
+| custom_modules.example_module.models.example_model           |  36.63% imprecise |  101 LOC |
+| custom_modules.example_module.tests                          |   0.00% imprecise |    1 LOC |
+| custom_modules.example_module.tests.test_example_model       |  53.89% imprecise |  167 LOC |
+| scripts.debugpy-config                                       |  28.74% imprecise |   87 LOC |
+| scripts.format-xml                                           |  52.24% imprecise |   67 LOC |
+| scripts.odoo-type-checker                                    |  17.20% imprecise |  250 LOC |
+| scripts.test-coverage-setup                                  |  55.13% imprecise |  234 LOC |
+| scripts.validate-imports                                     |  14.29% imprecise |  483 LOC |
+| scripts.validate-manifest                                    |  24.65% imprecise |  714 LOC |
+| scripts.validate-module                                      |  15.81% imprecise | 1271 LOC |
+| scripts.validate-security                                    |  15.63% imprecise |  499 LOC |
+| scripts.validate-xml                                         |  13.15% imprecise |  517 LOC |
++--------------------------------------------------------------+-------------------+----------+
+| Total                                                        |  22.77% imprecise | 4554 LOC |
++--------------------------------------------------------------+-------------------+----------+

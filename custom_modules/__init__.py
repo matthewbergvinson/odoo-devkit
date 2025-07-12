@@ -1,1 +1,1 @@
-# Custom Odoo modules directory 
+# Custom Odoo modules directory

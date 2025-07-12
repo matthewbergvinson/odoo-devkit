@@ -1,0 +1,17 @@
+🔍 Starting Odoo XML Validation...
+📦 Validating XML files in all modules...
+
+======================================================================
+🔍 ODOO XML VALIDATION RESULTS
+======================================================================
+
+⚠️  WARNINGS (2):
+  ⚠️  views/example_views.xml: Model name 'ir.actions.act_window' doesn't follow naming convention
+  ⚠️  views/example_views.xml: Model name 'ir.actions.act_window' doesn't follow naming convention
+
+ℹ️  SUGGESTIONS (1):
+  ℹ️  views/example_views.xml: Unknown widget type: 'many2many_tags'
+
+======================================================================
+✅ No errors found (2 warnings)
+======================================================================

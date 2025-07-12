@@ -171,7 +171,7 @@ Apply these concepts to real modules:
    class Customer(models.Model):
        _name = 'rtp.customer'
        _description = 'RTP Customer'
-       
+
        name = fields.Char(required=True)
        email = fields.Char()
        phone = fields.Char()
@@ -241,11 +241,11 @@ class TestYourModel(TransactionCase):
     def setUp(self):
         super().setUp()
         self.Model = self.env['your.model']
-        
+
     def test_create_record(self):
         record = self.Model.create({'name': 'Test'})
         self.assertEqual(record.name, 'Test')
-        
+
     def test_business_logic(self):
         # Test your business methods
         pass
@@ -330,4 +330,4 @@ Fixes: #issue-number
 
 **Remember**: The goal is to build maintainable, scalable, and user-friendly business applications. Use your Hello World knowledge as a foundation, but always consider real-world requirements and best practices.
 
-For questions or support, contact: m@vigilanteconsulting.com 
+For questions or support, contact: m@vigilanteconsulting.com

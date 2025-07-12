@@ -1,8 +1,9 @@
+import ast
 import json
 import os
 import sys
-import ast
 from datetime import datetime
+
 
 class TestAnalyzer(ast.NodeVisitor):
     def __init__(self):
@@ -23,7 +24,7 @@ class TestAnalyzer(ast.NodeVisitor):
                 'docstring': ast.get_docstring(node),
                 'bases': bases,
                 'line_number': node.lineno,
-                'test_methods': []
+                'test_methods': [],
             }
             self.test_classes.append(test_class_info)
 
@@ -38,11 +39,12 @@ class TestAnalyzer(ast.NodeVisitor):
                 'file': self.current_file,
                 'docstring': ast.get_docstring(node),
                 'line_number': node.lineno,
-                'decorators': [dec.id if hasattr(dec, 'id') else str(dec) for dec in node.decorator_list]
+                'decorators': [dec.id if hasattr(dec, 'id') else str(dec) for dec in node.decorator_list],
             }
             self.test_methods.append(test_method_info)
 
         self.generic_visit(node)
+
 
 def analyze_test_file(file_path):
     """Analyze a test file for test classes and methods."""
@@ -55,13 +57,11 @@ def analyze_test_file(file_path):
         analyzer.current_file = file_path
         analyzer.visit(tree)
 
-        return {
-            'test_classes': analyzer.test_classes,
-            'test_methods': analyzer.test_methods
-        }
+        return {'test_classes': analyzer.test_classes, 'test_methods': analyzer.test_methods}
     except Exception as e:
         print(f"Error analyzing test file {file_path}: {e}")
         return {'test_classes': [], 'test_methods': []}
+
 
 def generate_test_methodology_docs():
     """Generate testing methodology documentation."""
@@ -278,6 +278,7 @@ pytest -vv -s tests/test_specific.py::TestClass::test_method
 
 """
 
+
 def generate_test_docs(tests_dir, output_file):
     """Generate comprehensive test documentation."""
 
@@ -355,6 +356,7 @@ def generate_test_docs(tests_dir, output_file):
 
     print(f"Test documentation generated: {output_file}")
 
+
 def main():
     if len(sys.argv) < 3:
         print("Usage: python generate_test_docs.py <tests_dir> <output_file>")
@@ -364,6 +366,7 @@ def main():
     output_file = sys.argv[2]
 
     generate_test_docs(tests_dir, output_file)
+
 
 if __name__ == '__main__':
     main()

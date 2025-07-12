@@ -1,0 +1,10 @@
+
+============================================================
+ODOO MODULE VALIDATION RESULTS
+============================================================
+
+❌ ERRORS (1):
+  ERROR: : Module directory not found: --output-format=text
+
+❌ Validation failed: 1 errors, 0 warnings
+============================================================

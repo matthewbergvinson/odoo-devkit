@@ -1,7 +1,8 @@
+import json
 import os
 import sys
-import json
 from datetime import datetime
+
 
 def generate_index_html(docs_dir, api_docs_dir, test_docs_dir):
     """Generate HTML index for all documentation."""
@@ -12,11 +13,7 @@ def generate_index_html(docs_dir, api_docs_dir, test_docs_dir):
         for file in os.listdir(api_docs_dir):
             if file.endswith('.md') or file.endswith('.html'):
                 module_name = file.replace('_api.md', '').replace('_api.html', '')
-                api_docs.append({
-                    'name': module_name,
-                    'file': file,
-                    'path': os.path.join('api', file)
-                })
+                api_docs.append({'name': module_name, 'file': file, 'path': os.path.join('api', file)})
 
     # Collect test documentation files
     test_docs = []
@@ -24,11 +21,7 @@ def generate_index_html(docs_dir, api_docs_dir, test_docs_dir):
         for file in os.listdir(test_docs_dir):
             if file.endswith('.md') or file.endswith('.html'):
                 doc_name = file.replace('.md', '').replace('.html', '')
-                test_docs.append({
-                    'name': doc_name,
-                    'file': file,
-                    'path': os.path.join('testing', file)
-                })
+                test_docs.append({'name': doc_name, 'file': file, 'path': os.path.join('testing', file)})
 
     # Generate HTML index
     html_content = f"""<!DOCTYPE html>
@@ -302,6 +295,7 @@ def generate_index_html(docs_dir, api_docs_dir, test_docs_dir):
 
     return html_content
 
+
 def main():
     if len(sys.argv) < 4:
         print("Usage: python generate_index.py <docs_dir> <api_docs_dir> <test_docs_dir>")
@@ -318,6 +312,7 @@ def main():
         f.write(html_content)
 
     print(f"Documentation index generated: {index_file}")
+
 
 if __name__ == '__main__':
     main()

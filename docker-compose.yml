@@ -1,0 +1,209 @@
+# Odoo Local Testing Framework - Docker Compose for Odoo 18.0 Development
+# 
+# This docker-compose.yml provides a complete Odoo development environment
+# for testing and validating custom modules
+
+version: '3.8'
+
+services:
+  # PostgreSQL Database Service
+  postgres:
+    image: postgres:14-alpine
+    container_name: odoo-testing-postgres
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: odoo
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-odoo}
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/pgdata
+      - ./docker/postgres/init:/docker-entrypoint-initdb.d
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U odoo -d postgres"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    networks:
+      - odoo-testing-network
+
+  # Odoo Development Service
+  odoo:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        ODOO_VERSION: 18.0
+    container_name: odoo-testing-odoo
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      # Database Configuration
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USER: odoo
+      DB_PASSWORD: ${POSTGRES_PASSWORD:-odoo}
+      DB_NAME: ${DEFAULT_DB_NAME:-}
+
+      # Odoo Configuration
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-admin123}
+      ENVIRONMENT: ${ENVIRONMENT:-development}
+
+      # Development Settings
+      ODOO_CONFIG: /etc/odoo/odoo.conf
+    volumes:
+      # Mount custom modules for development (read-write)
+      - ./custom_modules:/opt/odoo/custom_modules:rw
+
+      # Mount our scripts and tools (read-only)
+      - ./scripts:/opt/odoo/scripts:ro
+      - ./Makefile:/opt/odoo/Makefile:ro
+
+      # Mount documentation for reference (read-only)
+      - ./docs:/opt/odoo/docs:ro
+
+      # Persistent data volumes
+      - odoo_data:/var/lib/odoo
+      - odoo_logs:/var/log/odoo
+      - odoo_backups:/opt/odoo/backups
+
+      # Configuration directory (using container's own directory)
+      # - odoo_config:/etc/odoo:rw
+
+      # Development convenience mounts (optional)
+      - ./local-odoo/configs:/opt/odoo/local-configs:ro
+    ports:
+      - "${ODOO_PORT:-8069}:8069"
+      - "${ODOO_LONGPOLLING_PORT:-8072}:8072"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8069/web/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+    networks:
+      - odoo-testing-network
+
+  # Testing Service (isolated environment for testing)
+  odoo-testing:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: odoo-testing-odoo-testing
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USER: odoo
+      DB_PASSWORD: ${POSTGRES_PASSWORD:-odoo}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-admin123}
+      ENVIRONMENT: testing
+    volumes:
+      - ./custom_modules:/opt/odoo/custom_modules:ro
+      - ./scripts:/opt/odoo/scripts:ro
+      - odoo_test_data:/var/lib/odoo
+      - odoo_test_logs:/var/log/odoo
+    ports:
+      - "${ODOO_TEST_PORT:-8169}:8069"
+    profiles:
+      - testing
+    networks:
+      - odoo-testing-network
+
+  # pgAdmin for Database Management (optional)
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: odoo-testing-pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL:-admin@odoo-testing.local}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD:-admin123}
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+      - ./docker/pgadmin/servers.json:/pgadmin4/servers.json:ro
+    ports:
+      - "${PGADMIN_PORT:-8080}:80"
+    profiles:
+      - pgadmin
+      - full
+    networks:
+      - odoo-testing-network
+
+  # Redis for session storage and caching (optional)
+  redis:
+    image: redis:7-alpine
+    container_name: odoo-testing-redis
+    volumes:
+      - redis_data:/data
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    restart: unless-stopped
+    profiles:
+      - redis
+      - full
+    networks:
+      - odoo-testing-network
+
+  # Mailhog for email testing (development)
+  mailhog:
+    image: mailhog/mailhog:latest
+    container_name: odoo-testing-mailhog
+    ports:
+      - "${MAILHOG_SMTP_PORT:-1025}:1025"
+      - "${MAILHOG_WEB_PORT:-8025}:8025"
+    profiles:
+      - mail
+      - development
+      - full
+    networks:
+      - odoo-testing-network
+
+# Named volumes for persistent data
+volumes:
+  postgres_data:
+    driver: local
+    name: odoo-testing-postgres-data
+
+  odoo_data:
+    driver: local
+    name: odoo-testing-odoo-data
+
+  odoo_logs:
+    driver: local
+    name: odoo-testing-odoo-logs
+
+  odoo_backups:
+    driver: local
+    name: odoo-testing-odoo-backups
+
+  odoo_config:
+    driver: local
+    name: odoo-testing-odoo-config
+
+  odoo_test_data:
+    driver: local
+    name: odoo-testing-odoo-test-data
+
+  odoo_test_logs:
+    driver: local
+    name: odoo-testing-odoo-test-logs
+
+  pgadmin_data:
+    driver: local
+    name: odoo-testing-pgladmin-data
+
+  redis_data:
+    driver: local
+    name: odoo-testing-redis-data
+
+# Custom network for service communication
+networks:
+  odoo-testing-network:
+    driver: bridge
+    name: odoo-testing-network
