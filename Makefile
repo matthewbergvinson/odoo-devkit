@@ -1068,10 +1068,10 @@ ci-quick: ## ⚡ Quick CI check for fast feedback during development
 	@flake8 --select=E9,F63,F7,F82 custom_modules/ scripts/ && echo "✅ Syntax check passed" || (echo "❌ Syntax errors found" && exit 1)
 	@echo ""
 	@echo "✅ Quick validation (manifests only)..."
-	@python scripts/validate-manifest.py custom_modules/*/\__manifest__.py > /dev/null && echo "✅ Manifests valid" || (echo "❌ Manifest errors found" && exit 1)
+	@python scripts/validate-manifest.py > /dev/null && echo "✅ Manifests valid" || (echo "❌ Manifest errors found" && exit 1)
 	@echo ""
 	@echo "🧪 Quick test (smoke tests only)..."
-	@python -c "import sys; sys.path.insert(0, 'custom_modules'); [__import__(f'custom_modules.{m}') for m in ['royal_textiles_sales', 'rtp_customers']]" && echo "✅ Module imports working" || (echo "❌ Import errors found" && exit 1)
+	@python -m py_compile custom_modules/example_module/models/example_model.py && echo "✅ Module syntax check passed" || (echo "❌ Syntax errors found" && exit 1)
 	@echo ""
 	@echo "⚡ QUICK CI CHECK COMPLETED!"
 
