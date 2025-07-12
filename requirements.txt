@@ -48,4 +48,7 @@ pandas>=1.5.0             # Data analysis (for reports)
 cryptography>=37.0.0      # Cryptographic functions
 
 # Note: Odoo itself and its dependencies are provided by the odoo.sh platform
-# These are additional development tools and libraries for custom module development debugpy>=1.6.0  # Remote debugging support
+# These are additional development tools and libraries for custom module development
+
+# Remote debugging support
+debugpy>=1.6.0
