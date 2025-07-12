@@ -1,56 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    
-    <!-- Installation Form View -->
     <record id="view_royal_installation_form" model="ir.ui.view">
         <field name="name">royal.installation.form</field>
         <field name="model">royal.installation</field>
         <field name="arch" type="xml">
             <form string="Installation">
                 <header>
-                    <!-- Status workflow buttons -->
-                    <button name="action_start_installation" 
-                            type="object" 
-                            string="Start Installation" 
-                            class="btn-primary"
-                            invisible="status != 'scheduled'"/>
-                    
-                    <button name="action_complete_installation" 
-                            type="object" 
-                            string="Complete Installation" 
-                            class="btn-success"
-                            invisible="status != 'in_progress'"/>
-                    
-                    <button name="action_cancel_installation" 
-                            type="object" 
-                            string="Cancel Installation" 
-                            class="btn-danger"
-                            invisible="status in ['completed', 'cancelled']"/>
-                    
-                    <button name="action_reschedule_installation" 
-                            type="object" 
-                            string="Reschedule" 
-                            class="btn-warning"
-                            invisible="status not in ['scheduled', 'in_progress']"/>
-                    
-                    <!-- Status field -->
+                    <button name="action_start_installation" type="object" string="Start Installation" class="btn-primary" invisible="status != 'scheduled'"/>
+                    <button name="action_complete_installation" type="object" string="Complete Installation" class="btn-success" invisible="status != 'in_progress'"/>
+                    <button name="action_cancel_installation" type="object" string="Cancel Installation" class="btn-danger" invisible="status in ['completed', 'cancelled']"/>
+                    <button name="action_reschedule_installation" type="object" string="Reschedule" class="btn-warning" invisible="status not in ['scheduled', 'in_progress']"/>
                     <field name="status" widget="statusbar" statusbar_visible="draft,scheduled,in_progress,completed"/>
                 </header>
-                
                 <sheet>
                     <div class="oe_title">
                         <h1>
                             <field name="name" placeholder="Installation Name"/>
                         </h1>
                     </div>
-                    
                     <group>
                         <group name="basic_info" string="Basic Information">
                             <field name="customer_id" options="{'no_create': True}"/>
                             <field name="sale_order_id" options="{'no_create': True}"/>
                             <field name="installer_id" options="{'no_create': True}"/>
                         </group>
-                        
                         <group name="scheduling" string="Scheduling">
                             <field name="scheduled_date"/>
                             <field name="estimated_hours"/>
@@ -58,38 +31,30 @@
                             <field name="estimated_weight"/>
                         </group>
                     </group>
-                    
                     <group>
-                        <group name="actual_times" string="Actual Times" 
-                               invisible="status in ['draft', 'scheduled']">
+                        <group name="actual_times" string="Actual Times" invisible="status in ['draft', 'scheduled']">
                             <field name="actual_start_date" readonly="1"/>
                             <field name="completion_date" readonly="1"/>
                             <field name="actual_hours" readonly="1"/>
                             <field name="duration_actual" readonly="1"/>
                             <field name="efficiency_rating" readonly="1"/>
                         </group>
-                        
                         <group name="address_info" string="Location">
                             <field name="installation_address" widget="text"/>
                         </group>
                     </group>
-                    
                     <notebook>
                         <page string="Materials" name="materials">
                             <field name="materials_notes" widget="text" placeholder="Materials list will be populated when calculated from sales order..."/>
                         </page>
-                        
                         <page string="Instructions" name="instructions">
                             <field name="special_instructions" widget="text" placeholder="Special instructions for installation team..."/>
                         </page>
-                        
                         <page string="Notes" name="notes">
                             <field name="description" widget="text" placeholder="Additional notes and comments..."/>
                         </page>
                     </notebook>
                 </sheet>
-                
-                <!-- Chatter -->
                 <div class="oe_chatter">
                     <field name="message_follower_ids" widget="mail_followers"/>
                     <field name="activity_ids" widget="mail_activity"/>
@@ -98,29 +63,17 @@
             </form>
         </field>
     </record>
-    
-    <!-- Installation List View -->
     <record id="view_royal_installation_tree" model="ir.ui.view">
         <field name="name">royal.installation.tree</field>
         <field name="model">royal.installation</field>
         <field name="arch" type="xml">
-            <list string="Installations" 
-                  decoration-success="status == 'completed'"
-                  decoration-info="status == 'scheduled'"
-                  decoration-warning="status == 'in_progress'"
-                  decoration-danger="is_overdue == True"
-                  decoration-muted="status == 'cancelled'">
-                
+            <list string="Installations" decoration-success="status == 'completed'" decoration-info="status == 'scheduled'" decoration-warning="status == 'in_progress'" decoration-danger="is_overdue == True" decoration-muted="status == 'cancelled'">
                 <field name="name"/>
                 <field name="customer_id"/>
                 <field name="sale_order_id"/>
                 <field name="scheduled_date"/>
                 <field name="installer_id"/>
-                <field name="status" widget="badge" 
-                       decoration-success="status == 'completed'"
-                       decoration-info="status == 'scheduled'"
-                       decoration-warning="status == 'in_progress'"
-                       decoration-muted="status == 'cancelled'"/>
+                <field name="status" widget="badge" decoration-success="status == 'completed'" decoration-info="status == 'scheduled'" decoration-warning="status == 'in_progress'" decoration-muted="status == 'cancelled'"/>
                 <field name="estimated_hours"/>
                 <field name="actual_hours" optional="hide"/>
                 <field name="efficiency_rating" optional="hide"/>
@@ -128,8 +81,6 @@
             </list>
         </field>
     </record>
-    
-    <!-- Installation Search View -->
     <record id="view_royal_installation_search" model="ir.ui.view">
         <field name="name">royal.installation.search</field>
         <field name="model">royal.installation</field>
@@ -140,36 +91,14 @@
                 <field name="sale_order_id"/>
                 <field name="installer_id"/>
                 <field name="scheduled_date"/>
-                
-                <!-- Quick filters -->
-                <filter name="my_installations" 
-                        string="My Installations" 
-                        domain="[('installer_id', '=', uid)]"/>
-                <filter name="scheduled_today" 
-                        string="Scheduled Today" 
-                        domain="[('scheduled_date', '=', time.strftime('%Y-%m-%d'))]"/>
-                <filter name="scheduled_this_week" 
-                        string="This Week" 
-                        domain="[]" 
-                        context="{'search_default_filter_date': 1}"/>
-                <filter name="overdue" 
-                        string="Overdue" 
-                        domain="[('is_overdue', '=', True)]"/>
-                
+                <filter name="my_installations" string="My Installations" domain="[('installer_id', '=', uid)]"/>
+                <filter name="scheduled_today" string="Scheduled Today" domain="[('scheduled_date', '=', time.strftime('%Y-%m-%d'))]"/>
+                <filter name="scheduled_this_week" string="This Week" domain="[]" context="{'search_default_filter_date': 1}"/>
+                <filter name="overdue" string="Overdue" domain="[('is_overdue', '=', True)]"/>
                 <separator/>
-                
-                <!-- Status filters -->
-                <filter name="status_scheduled" 
-                        string="Scheduled" 
-                        domain="[('status', '=', 'scheduled')]"/>
-                <filter name="status_in_progress" 
-                        string="In Progress" 
-                        domain="[('status', '=', 'in_progress')]"/>
-                <filter name="status_completed" 
-                        string="Completed" 
-                        domain="[('status', '=', 'completed')]"/>
-                
-                <!-- Group by options -->
+                <filter name="status_scheduled" string="Scheduled" domain="[('status', '=', 'scheduled')]"/>
+                <filter name="status_in_progress" string="In Progress" domain="[('status', '=', 'in_progress')]"/>
+                <filter name="status_completed" string="Completed" domain="[('status', '=', 'completed')]"/>
                 <group expand="0" string="Group By">
                     <filter name="group_status" string="Status" context="{'group_by': 'status'}"/>
                     <filter name="group_installer" string="Installer" context="{'group_by': 'installer_id'}"/>
@@ -179,17 +108,11 @@
             </search>
         </field>
     </record>
-    
-    <!-- Installation Calendar View -->
     <record id="view_royal_installation_calendar" model="ir.ui.view">
         <field name="name">royal.installation.calendar</field>
         <field name="model">royal.installation</field>
         <field name="arch" type="xml">
-            <calendar string="Installation Calendar" 
-                      date_start="scheduled_date"
-                      date_stop="scheduled_date" 
-                      color="installer_id"
-                      event_open_popup="true">
+            <calendar string="Installation Calendar" date_start="scheduled_date" date_stop="scheduled_date" color="installer_id" event_open_popup="true">
                 <field name="name"/>
                 <field name="customer_id"/>
                 <field name="installer_id"/>
@@ -198,8 +121,6 @@
             </calendar>
         </field>
     </record>
-    
-    <!-- Installation Kanban View -->
     <record id="view_royal_installation_kanban" model="ir.ui.view">
         <field name="name">royal.installation.kanban</field>
         <field name="model">royal.installation</field>
@@ -212,7 +133,6 @@
                 <field name="status"/>
                 <field name="estimated_hours"/>
                 <field name="is_overdue"/>
-                
                 <templates>
                     <t t-name="kanban-box">
                         <div class="oe_kanban_card oe_kanban_global_click">
@@ -246,19 +166,20 @@
                                             <field name="scheduled_date" widget="date"/>
                                             <br/>
                                             <span t-if="record.estimated_hours.raw_value">
-                                                <i class="fa fa-clock-o"/> <field name="estimated_hours"/> hours
+                                                <i class="fa fa-clock-o"/>
+                                                <field name="estimated_hours"/>
+                                                 hours
                                             </span>
                                         </div>
                                         <div class="oe_kanban_bottom_right">
-                                            <img t-att-src="kanban_image('res.users', 'image_128', record.installer_id.raw_value)" 
-                                                 t-att-title="record.installer_id.value" 
-                                                 class="oe_kanban_avatar"/>
+                                            <img t-att-src="kanban_image('res.users', 'image_128', record.installer_id.raw_value)" t-att-title="record.installer_id.value" class="oe_kanban_avatar"/>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div t-if="record.is_overdue.raw_value" class="o_kanban_record_bottom alert alert-danger" style="margin-bottom: 0;">
-                                <i class="fa fa-exclamation-triangle"/> Overdue
+                                <i class="fa fa-exclamation-triangle"/>
+                                 Overdue
                             </div>
                         </div>
                     </t>
@@ -266,5 +187,4 @@
             </kanban>
         </field>
     </record>
-
-</odoo> 
+</odoo>

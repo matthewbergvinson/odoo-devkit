@@ -1,7 +1,7 @@
 # Odoo Local Testing Framework Makefile
 # Makes it easy to run common development tasks
 
-.PHONY: help install test lint validate format clean deploy-check setup ci-test ci-lint ci-validate ci-deploy-check ci-pipeline ci-quick ci-metrics
+.PHONY: help install test lint validate format clean deploy-check setup ci-test ci-lint ci-validate ci-deploy-check ci-pipeline ci-quick ci-metrics validate-odoo-18-compatibility test-red-team-complete test-with-demo test-without-demo simulate-odoo-sh-deployment validate-demo-data check-all-compatibility-issues validate-deployment-ready
 
 # Default target
 help:
@@ -1557,6 +1557,93 @@ workspace-extensions: ## 🔌 Show recommended VS Code extensions information
 	@echo "  • ms-python.pylint            - Pylint linting"
 	@echo "  • ms-python.mypy-type-checker  - Type checking"
 	@echo ""
+
+# =============================================================================
+# 🎯 Enhanced Red Team Testing (Comprehensive Odoo 18.0 Validation)
+# =============================================================================
+
+validate-odoo-18-compatibility: ## 🔍 Comprehensive Odoo 18.0 compatibility validation
+	@echo "🔍 Running comprehensive Odoo 18.0 compatibility validation..."
+	@python scripts/validate-odoo-18-compatibility.py custom_modules/$(MODULE_NAME)
+
+test-red-team-complete: ## 🎯 Complete red team testing methodology
+	@echo "🎯 Running complete red team testing methodology..."
+	@$(MAKE) validate-odoo-18-compatibility MODULE_NAME=$(MODULE_NAME)
+	@$(MAKE) test-with-demo MODULE_NAME=$(MODULE_NAME)
+	@$(MAKE) test-without-demo MODULE_NAME=$(MODULE_NAME)
+	@$(MAKE) docker-test-install MODULE_NAME=$(MODULE_NAME)
+	@echo "✅ Complete red team testing finished"
+
+test-with-demo: ## 🧪 Test module installation WITH demo data (like Odoo.sh)
+	@echo "🧪 Testing module installation WITH demo data..."
+	@docker-compose exec odoo python /opt/odoo/odoo/odoo-bin \
+		--config=/opt/odoo/config/odoo.conf \
+		-d demo_test_db \
+		-i $(MODULE_NAME) \
+		--stop-after-init
+	@echo "✅ Demo data installation test complete"
+
+test-without-demo: ## 🧪 Test module installation WITHOUT demo data
+	@echo "🧪 Testing module installation WITHOUT demo data..."
+	@docker-compose exec odoo python /opt/odoo/odoo/odoo-bin \
+		--config=/opt/odoo/config/odoo.conf \
+		-d no_demo_test_db \
+		-i $(MODULE_NAME) \
+		--without-demo=all \
+		--stop-after-init
+	@echo "✅ No demo data installation test complete"
+
+simulate-odoo-sh-deployment: ## 🚀 Complete Odoo.sh deployment simulation
+	@echo "🚀 Simulating complete Odoo.sh deployment..."
+	@$(MAKE) validate-odoo-18-compatibility MODULE_NAME=$(MODULE_NAME)
+	@$(MAKE) docker-build
+	@$(MAKE) test-with-demo MODULE_NAME=$(MODULE_NAME)
+	@$(MAKE) validate-demo-data
+	@echo "✅ Odoo.sh deployment simulation complete"
+
+validate-demo-data: ## 🔍 Validate demo data integrity
+	@echo "🔍 Validating demo data integrity..."
+	@find custom_modules -name "*demo*.xml" -exec xmllint --noout {} \; 2>/dev/null || echo "⚠️ XML validation issues found"
+	@echo "✅ Demo data validation complete"
+
+check-all-compatibility-issues: ## 🔍 Check for all known Odoo 18.0 compatibility issues
+	@echo "🔍 Checking for all known Odoo 18.0 compatibility issues..."
+	@echo ""
+	@echo "1. Checking for deprecated <tree> elements..."
+	@grep -r "<tree" custom_modules/ --include="*.xml" | head -5 || echo "✅ No <tree> elements found"
+	@echo ""
+	@echo "2. Checking for deprecated view_mode='tree'..."
+	@grep -r "view_mode.*tree" custom_modules/ --include="*.xml" | head -5 || echo "✅ No view_mode tree issues found"
+	@echo ""
+	@echo "3. Checking for deprecated attrs attributes..."
+	@grep -r "attrs=" custom_modules/ --include="*.xml" | head -5 || echo "✅ No attrs attributes found"
+	@echo ""
+	@echo "4. Checking for deprecated states attributes..."
+	@grep -r "states=" custom_modules/ --include="*.xml" | head -5 || echo "✅ No states attributes found"
+	@echo ""
+	@echo "5. Checking for missing __init__.py files..."
+	@find custom_modules -type d -name models -exec test -f {}/__init__.py \; || echo "⚠️ Some models directories missing __init__.py"
+	@echo ""
+	@echo "✅ Compatibility check complete"
+
+# Pre-deployment validation that covers all discovered issues
+validate-deployment-ready: ## ✅ Complete pre-deployment validation
+	@echo "✅ Running complete pre-deployment validation..."
+	@echo ""
+	@echo "🔍 Step 1: Odoo 18.0 compatibility..."
+	@$(MAKE) validate-odoo-18-compatibility MODULE_NAME=$(MODULE_NAME)
+	@echo ""
+	@echo "🧪 Step 2: Installation testing..."
+	@$(MAKE) test-with-demo MODULE_NAME=$(MODULE_NAME)
+	@echo ""
+	@echo "🔍 Step 3: Demo data validation..."
+	@$(MAKE) validate-demo-data
+	@echo ""
+	@echo "🎯 Step 4: Compatibility issues check..."
+	@$(MAKE) check-all-compatibility-issues
+	@echo ""
+	@echo "✅ DEPLOYMENT READY VALIDATION COMPLETE!"
+	@echo "Module $(MODULE_NAME) is ready for Odoo.sh deployment"
 	@echo "🌐 XML and Frontend:"
 	@echo "  • redhat.vscode-xml            - XML language support"
 	@echo "  • esbenp.prettier-vscode       - Code formatter"

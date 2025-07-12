@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    
-    <!-- Installation Actions -->
     <record id="action_royal_installation" model="ir.actions.act_window">
         <field name="name">Installations</field>
         <field name="res_model">royal.installation</field>
@@ -17,15 +15,13 @@
             </p>
         </field>
     </record>
-    
     <record id="action_royal_installation_today" model="ir.actions.act_window">
         <field name="name">Today's Installations</field>
         <field name="res_model">royal.installation</field>
         <field name="view_mode">tree,form,calendar,kanban</field>
         <field name="context">{'search_default_scheduled_today': 1}</field>
-        <field name="domain">[('scheduled_date', '>=', context_today), ('scheduled_date', '&lt;', context_today + timedelta(days=1))]</field>
+        <field name="domain">[('scheduled_date', '&gt;=', context_today), ('scheduled_date', '&lt;', context_today + timedelta(days=1))]</field>
     </record>
-    
     <record id="action_royal_installation_my" model="ir.actions.act_window">
         <field name="name">My Installations</field>
         <field name="res_model">royal.installation</field>
@@ -33,8 +29,6 @@
         <field name="context">{'search_default_my_installations': 1}</field>
         <field name="domain">[('installer_id', '=', uid)]</field>
     </record>
-    
-    <!-- Sales Order Actions with Installation Filter -->
     <record id="action_sale_order_installation_pending" model="ir.actions.act_window">
         <field name="name">Orders Needing Installation</field>
         <field name="res_model">sale.order</field>
@@ -42,47 +36,11 @@
         <field name="context">{'search_default_installation_not_scheduled': 1}</field>
         <field name="domain">[('state', 'in', ['sale', 'done']), ('installation_status', '=', 'not_scheduled')]</field>
     </record>
-    
-    <!-- Main Menu -->
-    <menuitem id="menu_royal_textiles_main" 
-              name="Royal Textiles" 
-              sequence="100"
-              web_icon="royal_textiles_sales,static/description/icon.png"/>
-    
-    <!-- Installation Management Menu -->
-    <menuitem id="menu_royal_textiles_installations" 
-              name="Installations" 
-              parent="menu_royal_textiles_main" 
-              sequence="10"/>
-    
-    <menuitem id="menu_royal_installation_all" 
-              name="All Installations" 
-              parent="menu_royal_textiles_installations" 
-              action="action_royal_installation" 
-              sequence="10"/>
-    
-    <menuitem id="menu_royal_installation_today" 
-              name="Today's Installations" 
-              parent="menu_royal_textiles_installations" 
-              action="action_royal_installation_today" 
-              sequence="20"/>
-    
-    <menuitem id="menu_royal_installation_my" 
-              name="My Installations" 
-              parent="menu_royal_textiles_installations" 
-              action="action_royal_installation_my" 
-              sequence="30"/>
-    
-    <!-- Sales Integration Menu -->
-    <menuitem id="menu_royal_textiles_sales" 
-              name="Sales Integration" 
-              parent="menu_royal_textiles_main" 
-              sequence="20"/>
-    
-    <menuitem id="menu_royal_sales_pending_installation" 
-              name="Orders Needing Installation" 
-              parent="menu_royal_textiles_sales" 
-              action="action_sale_order_installation_pending" 
-              sequence="10"/>
-
-</odoo> 
+    <menuitem id="menu_royal_textiles_main" name="Royal Textiles" sequence="100" web_icon="royal_textiles_sales,static/description/icon.png"/>
+    <menuitem id="menu_royal_textiles_installations" name="Installations" parent="menu_royal_textiles_main" sequence="10"/>
+    <menuitem id="menu_royal_installation_all" name="All Installations" parent="menu_royal_textiles_installations" action="action_royal_installation" sequence="10"/>
+    <menuitem id="menu_royal_installation_today" name="Today's Installations" parent="menu_royal_textiles_installations" action="action_royal_installation_today" sequence="20"/>
+    <menuitem id="menu_royal_installation_my" name="My Installations" parent="menu_royal_textiles_installations" action="action_royal_installation_my" sequence="30"/>
+    <menuitem id="menu_royal_textiles_sales" name="Sales Integration" parent="menu_royal_textiles_main" sequence="20"/>
+    <menuitem id="menu_royal_sales_pending_installation" name="Orders Needing Installation" parent="menu_royal_textiles_sales" action="action_sale_order_installation_pending" sequence="10"/>
+</odoo>

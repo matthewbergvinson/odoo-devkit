@@ -356,10 +356,12 @@ ADDITIONAL ITEMS TO BRING:
             """
 
             # Update installation notes with materials calculation and mark as calculated
-            order.write({
-                "installation_notes": materials_summary,
-                "materials_calculated": True,
-            })
+            order.write(
+                {
+                    "installation_notes": materials_summary,
+                    "materials_calculated": True,
+                }
+            )
 
             # Update installation record if it exists
             if order.installation_id:
