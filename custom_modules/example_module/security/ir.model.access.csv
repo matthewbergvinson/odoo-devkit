@@ -1,1 +1,4 @@
- 
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_example_model_user,example.model.user,model_example_model,base.group_user,1,1,1,1
+access_example_tag_user,example.tag.user,model_example_tag,base.group_user,1,1,1,1
+access_example_line_user,example.line.user,model_example_line,base.group_user,1,1,1,1
