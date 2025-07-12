@@ -43,6 +43,7 @@ class Odoo18CompatibilityValidator:
         self._check_field_dependencies()
         self._check_manifest_compatibility()
         self._check_business_logic_constraints()
+        self._check_field_mapping_issues()
 
         return {'errors': self.errors, 'warnings': self.warnings}
 
@@ -233,6 +234,29 @@ class Odoo18CompatibilityValidator:
                         
                 except Exception as e:
                     self.warnings.append(f"Could not parse demo data for constraints {xml_file}: {e}")
+
+    def _check_field_mapping_issues(self):
+        """Check for potential field mapping issues between models"""
+        models_dir = self.module_path / "models"
+        if models_dir.exists():
+            for py_file in models_dir.glob("*.py"):
+                try:
+                    content = py_file.read_text()
+                    
+                    # Check for .create() calls with hardcoded field names
+                    if ".create(" in content and '"' in content:
+                        # Look for potential field mapping issues
+                        lines = content.split('\n')
+                        for i, line in enumerate(lines, 1):
+                            if '.create(' in line or '"installation_notes"' in line:
+                                if '"installation_notes"' in line and 'royal.installation' in content:
+                                    rel_path = py_file.relative_to(self.module_path)
+                                    self.warnings.append(
+                                        f"Potential field mapping issue: 'installation_notes' may not exist on target model in {rel_path}:{i}"
+                                    )
+                                        
+                except Exception as e:
+                    self.warnings.append(f"Could not parse model file for field mapping {py_file}: {e}")
 
     def _is_inherited_model(self, model_name: str) -> bool:
         """Check if model is inherited rather than defined"""
