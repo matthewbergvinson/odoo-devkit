@@ -42,6 +42,7 @@ class Odoo18CompatibilityValidator:
         self._check_calendar_attributes()
         self._check_field_dependencies()
         self._check_manifest_compatibility()
+        self._check_business_logic_constraints()
 
         return {'errors': self.errors, 'warnings': self.warnings}
 
@@ -199,6 +200,39 @@ class Odoo18CompatibilityValidator:
                         self.warnings.append("Manifest version should be 18.0.x.x.x for Odoo 18.0")
             except Exception as e:
                 self.warnings.append(f"Could not read manifest: {e}")
+
+    def _check_business_logic_constraints(self):
+        """Check for potential business logic constraint violations in demo data"""
+        data_dir = self.module_path / "data"
+        if data_dir.exists():
+            for xml_file in data_dir.glob("*demo*.xml"):
+                try:
+                    content = xml_file.read_text()
+                    
+                    # Check for potential date constraint issues
+                    if "scheduled_date" in content and "datetime.now() -" in content:
+                        rel_path = xml_file.relative_to(self.module_path)
+                        self.warnings.append(
+                            f"Demo data uses past dates for scheduled_date in {rel_path} - may violate business constraints"
+                        )
+                    
+                    # Check for status and date combinations that might conflict
+                    if "status" in content and "scheduled" in content:
+                        if "datetime.now() -" in content:
+                            rel_path = xml_file.relative_to(self.module_path)
+                            self.warnings.append(
+                                f"Demo data has 'scheduled' status with past dates in {rel_path} - check business logic constraints"
+                            )
+                    
+                    # Check for in_progress status with past dates
+                    if 'status">in_progress' in content and "datetime.now() -" in content:
+                        rel_path = xml_file.relative_to(self.module_path)
+                        self.warnings.append(
+                            f"Demo data has 'in_progress' status with past dates in {rel_path} - may violate date constraints"
+                        )
+                        
+                except Exception as e:
+                    self.warnings.append(f"Could not parse demo data for constraints {xml_file}: {e}")
 
     def _is_inherited_model(self, model_name: str) -> bool:
         """Check if model is inherited rather than defined"""
