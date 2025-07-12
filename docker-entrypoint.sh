@@ -1,10 +1,9 @@
 #!/bin/bash
 
-# RTP Denver - Docker Entrypoint for Odoo 18.0
-# Task 3.7: Create Docker alternative setup for environment consistency
+# Odoo Local Testing Framework - Docker Entrypoint for Odoo 18.0
 #
 # This script provides a flexible entrypoint for the Odoo Docker container
-# that integrates with our existing infrastructure from Tasks 3.1-3.6
+# that integrates with comprehensive testing and development infrastructure
 
 set -euo pipefail
 
@@ -20,7 +19,7 @@ NC='\033[0m'
 ODOO_HOME="/opt/odoo"
 ODOO_PATH="/opt/odoo/odoo"
 CUSTOM_MODULES_PATH="/opt/odoo/custom_modules"
-CONFIG_PATH="/etc/odoo"
+CONFIG_PATH="/opt/odoo/config"
 LOGS_PATH="/var/log/odoo"
 DATA_PATH="/var/lib/odoo"
 
@@ -32,7 +31,7 @@ DB_PASSWORD="${DB_PASSWORD:-}"
 DB_NAME="${DB_NAME:-}"
 
 # Odoo configuration
-ODOO_CONFIG="${ODOO_CONFIG:-/etc/odoo/odoo.conf}"
+ODOO_CONFIG="${ODOO_CONFIG:-/opt/odoo/config/odoo.conf}"
 ADMIN_PASSWORD="${ADMIN_PASSWORD:-admin123}"
 
 # Logging functions
@@ -126,7 +125,7 @@ generate_odoo_config() {
     cat > "$config_file" << EOF
 [options]
 # =================================================================
-# RTP Denver - Odoo Docker Configuration
+# Odoo Local Testing Framework - Docker Configuration
 # =================================================================
 # Generated on: $(date)
 # Environment: $environment
@@ -294,8 +293,8 @@ run_script() {
 
 # Show help
 show_help() {
-    echo "RTP Denver - Odoo Docker Container"
-    echo "================================="
+    echo "Odoo Local Testing Framework - Docker Container"
+    echo "==============================================="
     echo ""
     echo "Usage: docker run [OPTIONS] rtp-denver-odoo [COMMAND] [ARGS...]"
     echo ""
@@ -336,6 +335,7 @@ show_help() {
 main() {
     # Ensure directories exist with proper permissions
     mkdir -p "$LOGS_PATH" "$DATA_PATH" "$CONFIG_PATH"
+    chmod 755 "$LOGS_PATH" "$DATA_PATH" "$CONFIG_PATH"
 
     # Wait for PostgreSQL if we're going to use it
     if [[ "${1:-odoo}" != "shell" && "${1:-odoo}" != "help" ]]; then

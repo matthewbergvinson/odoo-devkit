@@ -1,9 +1,7 @@
 # Odoo Local Testing Framework - Docker Compose for Odoo 18.0 Development
-# 
+#
 # This docker-compose.yml provides a complete Odoo development environment
 # for testing and validating custom modules
-
-version: '3.8'
 
 services:
   # PostgreSQL Database Service

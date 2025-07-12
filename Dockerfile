@@ -1,5 +1,5 @@
 # Odoo Local Testing Framework - Odoo 18.0 Docker Environment
-# 
+#
 # This Dockerfile creates an Odoo 18.0 environment for testing and validating custom modules
 # with comprehensive development and testing tools
 
