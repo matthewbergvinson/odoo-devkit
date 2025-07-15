@@ -1,12 +1,12 @@
-# Odoo Local Testing Framework Makefile
+# Odoo DevKit Makefile
 # Makes it easy to run common development tasks
 
 .PHONY: help install test lint validate format clean deploy-check setup ci-test ci-lint ci-validate ci-deploy-check ci-pipeline ci-quick ci-metrics validate-odoo-18-compatibility test-red-team-complete test-with-demo test-without-demo simulate-odoo-sh-deployment validate-demo-data check-all-compatibility-issues validate-deployment-ready
 
 # Default target
 help:
-	@echo "Odoo Local Testing Framework Commands"
-	@echo "===================================="
+	@echo "Odoo DevKit Commands"
+	@echo "==================="
 	@echo ""
 	@echo "Setup Commands:"
 	@echo "  make setup           Install development dependencies and hooks"

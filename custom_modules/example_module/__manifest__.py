@@ -2,7 +2,7 @@
     'name': 'Example Module',
     'version': '18.0.1.0.0',
     'category': 'Productivity',
-    'summary': 'Example module for demonstrating the Odoo local testing framework',
+    'summary': 'Example module for demonstrating the Odoo DevKit framework',
     'description': '''
         This is an example module that demonstrates:
         - Proper module structure
@@ -14,7 +14,7 @@
         - Documentation generation
     ''',
     'author': 'Your Name',
-    'website': 'https://github.com/matthewbergvinson/odoo-local-testing',
+    'website': 'https://github.com/matthewbergvinson/odoo-devkit',
     'depends': ['base', 'web'],
     'data': [
         'security/ir.model.access.csv',
