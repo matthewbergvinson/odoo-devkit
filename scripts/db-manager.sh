@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# RTP Denver - Advanced Database Manager for Odoo Development
+# Advanced Database Manager for Odoo Development
 # Task 3.3: Create database management scripts (create, drop, reset test databases)
 #
 # This script provides comprehensive database management for Odoo 18.0 development
@@ -53,7 +53,7 @@ DEFAULT_DATABASES=("odoo_dev" "odoo_test" "odoo_staging")
 
 # Show help message
 show_help() {
-    echo "RTP Denver - Advanced Database Manager for Odoo Development"
+    echo "Advanced Database Manager for Odoo Development"
     echo "=========================================================="
     echo ""
     echo "Task 3.3: Comprehensive database management for Odoo 18.0"

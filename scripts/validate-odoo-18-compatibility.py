@@ -249,7 +249,7 @@ class Odoo18CompatibilityValidator:
                         lines = content.split('\n')
                         for i, line in enumerate(lines, 1):
                             if '.create(' in line or '"installation_notes"' in line:
-                                if '"installation_notes"' in line and 'royal.installation' in content:
+                                if '"installation_notes"' in line:
                                     rel_path = py_file.relative_to(self.module_path)
                                     self.warnings.append(
                                         f"Potential field mapping issue: 'installation_notes' may not exist on target model in {rel_path}:{i}"

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# RTP Denver - Odoo Configuration Manager for Development Environment
+# Odoo Configuration Manager for Development Environment
 # Task 3.4: Configure Odoo config file for development environment
 #
 # This script creates comprehensive Odoo configuration files for different environments
@@ -38,7 +38,7 @@ NC='\033[0m'
 
 # Show help message
 show_help() {
-    echo "RTP Denver - Odoo Configuration Manager"
+    echo "Odoo Configuration Manager"
     echo "======================================"
     echo ""
     echo "Comprehensive Odoo configuration for development environments"
