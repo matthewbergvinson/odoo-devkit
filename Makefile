@@ -3353,7 +3353,7 @@ pipeline: ci-pipeline ## 🤖 Alias for ci-pipeline
 # Based on real-world experience - catches Odoo 18 compatibility issues
 
 .PHONY: validate-odoo18-fields validate-tracking-parameters validate-view-types
-.PHONY: validate-field-attributes fix-odoo18-compatibility
+.PHONY: validate-field-attributes fix-odoo18-compatibility validate-odoo-sh-config generate-odoo-conf
 
 validate-odoo18-fields: ## 🔍 Validate Odoo 18 field parameter compatibility
 	@echo "🔍 Validating Odoo 18 field parameter compatibility..."
@@ -3434,6 +3434,36 @@ fix-odoo18-compatibility: ## 🔧 Automatically fix common Odoo 18 compatibility
 	@echo "✅ Automatic fixes applied!"
 	@echo "📋 Backup files created with .bak extension"
 	@echo "💡 Review changes and test before committing"
+
+validate-odoo-sh-config: ## 🔍 Validate Odoo.sh deployment configuration
+	@echo "🔍 Checking Odoo.sh configuration..."
+	@if [ -d "custom_modules" ] && [ ! -f "odoo.conf" ]; then \
+		echo "❌ ERROR: custom_modules/ directory found but no odoo.conf file"; \
+		echo "   Odoo.sh won't be able to find your modules!"; \
+		echo "   Run: make generate-odoo-conf"; \
+		exit 1; \
+	elif [ -f "odoo.conf" ]; then \
+		if grep -q "addons_path.*custom_modules" odoo.conf; then \
+			echo "✅ odoo.conf properly configured for custom_modules/"; \
+		else \
+			echo "⚠️  WARNING: odoo.conf exists but doesn't include custom_modules in addons_path"; \
+		fi; \
+	else \
+		echo "✅ No custom_modules directory - standard deployment"; \
+	fi
+
+generate-odoo-conf: ## 🛠️ Generate odoo.conf for Odoo.sh deployment with custom modules
+	@echo "🛠️ Generating odoo.conf for Odoo.sh deployment..."
+	@if [ -d "custom_modules" ]; then \
+		echo "[options]" > odoo.conf; \
+		echo "addons_path = custom_modules" >> odoo.conf; \
+		echo "data_dir = filestore" >> odoo.conf; \
+		echo "admin_passwd = \$$pbkdf2-sha512\$$600000\$$tQfx/386v520PDfHOCck5A\$$kH0ORzcqVJngDIaP6L/mo3AL8r9MfcAUH4OBt3PjggMqfHJN1eXe99ZKY/PMGkHsP29i6WOjR7YygEgJxeE9vQ" >> odoo.conf; \
+		echo "✅ odoo.conf generated successfully"; \
+		echo "📝 Don't forget to commit this file: git add odoo.conf && git commit -m 'Add odoo.conf for Odoo.sh deployment'"; \
+	else \
+		echo "ℹ️  No custom_modules directory found - odoo.conf not needed"; \
+	fi
 
 # =============================================================================
 # ENHANCED MODULE TESTING (Based on Real-World Experience)
@@ -3538,6 +3568,7 @@ endif
 	@$(MAKE) test-module-complete MODULE=$(MODULE)
 	@$(MAKE) validate-odoo18-fields
 	@$(MAKE) validate-demo-data-constraints
+	@$(MAKE) validate-odoo-sh-config
 	@echo ""
 	@echo "🎉 Production module testing completed!"
 
@@ -3570,6 +3601,8 @@ production-help: ## 📖 Production deployment specific help and commands
 	@echo "🔍 Validation:"
 	@echo "  make validate-odoo18-fields                        - Odoo 18 compatibility"
 	@echo "  make validate-demo-data-constraints                - Business logic validation"
+	@echo "  make validate-odoo-sh-config                       - Odoo.sh deployment config"
+	@echo "  make generate-odoo-conf                            - Generate odoo.conf for Odoo.sh"
 	@echo ""
 	@echo "🔧 Fixes:"
 	@echo "  make fix-odoo18-compatibility                      - Auto-fix common issues"
