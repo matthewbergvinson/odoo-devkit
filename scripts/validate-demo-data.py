@@ -299,12 +299,90 @@ class DemoDataValidator:
         """Validate business logic constraints"""
         print("⚖️  Validating business logic constraints...")
         
-        # This would require parsing the actual constraint logic
-        # For now, we'll just report fields that have constraints
+        # Report fields that have constraints
         if self.constrains_fields:
             print(f"   ⚠️  Found {len(self.constrains_fields)} fields with constraints:")
             for field, models in self.constrains_fields.items():
                 print(f"      - {field} (in {', '.join(models)})")
+        
+        # Validate common constraint patterns in demo data
+        constraint_violations = 0
+        
+        # Check for completion dates in the past (common constraint)
+        demo_files = list(self.demo_path.glob("*.xml"))
+        for demo_file in demo_files:
+            try:
+                tree = ET.parse(demo_file)
+                root = tree.getroot()
+                
+                for record in root.findall(".//record"):
+                    record_id = record.get("id", "unknown")
+                    model_name = record.get("model", "unknown")
+                    
+                    # Check completion date constraints
+                    completion_date_field = record.find(".//field[@name='expected_completion_date']")
+                    if completion_date_field is not None and completion_date_field.text:
+                        try:
+                            completion_date = datetime.strptime(completion_date_field.text, "%Y-%m-%d")
+                            today = datetime.now()
+                            
+                            if completion_date.date() < today.date():
+                                constraint_violations += 1
+                                self.errors.append(
+                                    f"Constraint violation in {demo_file}:{record_id} - "
+                                    f"expected_completion_date '{completion_date_field.text}' is in the past. "
+                                    f"This will trigger: 'Expected completion date cannot be in the past'"
+                                )
+                        except ValueError:
+                            # Date format error already caught by date validation
+                            pass
+                    
+                    # Check for date sequence constraints (sent < due dates)
+                    sent_date_field = record.find(".//field[@name='rt_submittal_sent_date']")
+                    due_date_field = record.find(".//field[@name='rt_submittal_due_date']")
+                    
+                    if (sent_date_field is not None and sent_date_field.text and 
+                        due_date_field is not None and due_date_field.text):
+                        try:
+                            sent_date = datetime.strptime(sent_date_field.text, "%Y-%m-%d")
+                            due_date = datetime.strptime(due_date_field.text, "%Y-%m-%d")
+                            
+                            if due_date <= sent_date:
+                                constraint_violations += 1
+                                self.errors.append(
+                                    f"Constraint violation in {demo_file}:{record_id} - "
+                                    f"rt_submittal_due_date '{due_date_field.text}' must be after "
+                                    f"rt_submittal_sent_date '{sent_date_field.text}'"
+                                )
+                        except ValueError:
+                            # Date format error already caught by date validation
+                            pass
+                    
+                    # Check for zero change amounts (common constraint)
+                    change_amount_field = record.find(".//field[@name='change_amount']")
+                    if (change_amount_field is not None and change_amount_field.text and 
+                        model_name == "rt.change.order"):
+                        try:
+                            amount = float(change_amount_field.text)
+                            if amount == 0.0:
+                                constraint_violations += 1
+                                self.errors.append(
+                                    f"Constraint violation in {demo_file}:{record_id} - "
+                                    f"change_amount cannot be zero for change orders"
+                                )
+                        except ValueError:
+                            pass
+                            
+            except ET.ParseError:
+                # XML parsing error already caught by file validation
+                pass
+            except Exception as e:
+                self.warnings.append(f"Error checking constraints in {demo_file}: {e}")
+        
+        if constraint_violations > 0:
+            print(f"   ❌ Found {constraint_violations} constraint violations")
+        else:
+            print(f"   ✅ No constraint violations detected")
                 
         return True
     
