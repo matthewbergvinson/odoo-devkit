@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- 
+        Demo Data Template for Odoo 18
+        
+        This template follows best practices learned from Royal Textiles Construction Management module:
+        
+        1. Use fixed dates instead of eval expressions
+        2. Validate selection field values against model definitions
+        3. Ensure proper field relationship types
+        4. Consider business logic constraints
+        5. Use realistic, future-dated values
+        
+        Key Patterns:
+        - Selection fields: Use string values, not record references
+        - Date fields: Use YYYY-MM-DD or YYYY-MM-DD HH:MM:SS format
+        - Many2one fields: Reference correct target model
+        - Constraint fields: Ensure values comply with @api.constrains
+        -->
+        
+        <!-- Example Company/Partner Records -->
+        <record id="demo_company_alpha" model="res.partner">
+            <field name="name">Alpha Construction Inc.</field>
+            <field name="is_company">1</field>
+            <field name="customer_rank">1</field>
+            <field name="supplier_rank">0</field>
+            <field name="street">123 Business Avenue</field>
+            <field name="city">Denver</field>
+            <field name="state_id" ref="base.state_us_6"/>
+            <field name="zip">80202</field>
+            <field name="country_id" ref="base.us"/>
+            <field name="phone">+1 (555) 123-4567</field>
+            <field name="email">contact@alphaconstruction.com</field>
+            <field name="website">https://alphaconstruction.com</field>
+        </record>
+        
+        <record id="demo_company_beta" model="res.partner">
+            <field name="name">Beta Development LLC</field>
+            <field name="is_company">1</field>
+            <field name="customer_rank">1</field>
+            <field name="supplier_rank">0</field>
+            <field name="street">456 Innovation Drive</field>
+            <field name="city">Boulder</field>
+            <field name="state_id" ref="base.state_us_6"/>
+            <field name="zip">80301</field>
+            <field name="country_id" ref="base.us"/>
+            <field name="phone">+1 (555) 987-6543</field>
+            <field name="email">info@betadevelopment.com</field>
+            <field name="website">https://betadevelopment.com</field>
+        </record>
+        
+        <!-- Example User Records -->
+        <record id="demo_user_project_manager" model="res.users">
+            <field name="name">Sarah Johnson</field>
+            <field name="login">sarah.johnson@example.com</field>
+            <field name="email">sarah.johnson@example.com</field>
+            <field name="groups_id" eval="[(4, ref('project.group_project_manager'))]"/>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+        
+        <record id="demo_user_team_lead" model="res.users">
+            <field name="name">Mike Rodriguez</field>
+            <field name="login">mike.rodriguez@example.com</field>
+            <field name="email">mike.rodriguez@example.com</field>
+            <field name="groups_id" eval="[(4, ref('project.group_project_user'))]"/>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+        
+        <!-- Example Project Records -->
+        <record id="demo_project_alpha_office" model="project.project">
+            <field name="name">Alpha Office Complex - Phase 1</field>
+            <field name="partner_id" ref="demo_company_alpha"/>
+            <field name="user_id" ref="demo_user_project_manager"/>
+            <!-- 
+            IMPORTANT: Validate selection values against model definition
+            Example: If model defines rt_stage as:
+            fields.Selection([
+                ("planning", "Planning"),
+                ("execution", "Execution"),
+                ("closing", "Closing")
+            ])
+            Then use: planning, execution, or closing
+            -->
+            <!-- <field name="rt_stage">planning</field> -->
+            <!-- <field name="rt_project_type">commercial</field> -->
+            <field name="date_start">2025-08-01</field>
+            <field name="date">2025-12-31</field>
+            <field name="description">
+                <![CDATA[
+                <p>Office complex construction project including:</p>
+                <ul>
+                    <li>50,000 sq ft office space</li>
+                    <li>Parking garage for 200 vehicles</li>
+                    <li>Landscaping and exterior work</li>
+                </ul>
+                ]]>
+            </field>
+        </record>
+        
+        <record id="demo_project_beta_residential" model="project.project">
+            <field name="name">Beta Residential Development</field>
+            <field name="partner_id" ref="demo_company_beta"/>
+            <field name="user_id" ref="demo_user_project_manager"/>
+            <field name="date_start">2025-09-01</field>
+            <field name="date">2026-06-30</field>
+            <field name="description">
+                <![CDATA[
+                <p>Residential development project featuring:</p>
+                <ul>
+                    <li>24 single-family homes</li>
+                    <li>Community amenities</li>
+                    <li>Sustainable energy features</li>
+                </ul>
+                ]]>
+            </field>
+        </record>
+        
+        <!-- Example Task Records -->
+        <record id="demo_task_alpha_planning" model="project.task">
+            <field name="name">Site Survey and Planning</field>
+            <field name="project_id" ref="demo_project_alpha_office"/>
+            <field name="user_ids" eval="[(4, ref('demo_user_team_lead'))]"/>
+            <field name="date_deadline">2025-08-15</field>
+            <field name="planned_hours">40.0</field>
+            <field name="description">
+                Complete comprehensive site survey and develop detailed construction plans.
+            </field>
+        </record>
+        
+        <record id="demo_task_alpha_permits" model="project.task">
+            <field name="name">Obtain Building Permits</field>
+            <field name="project_id" ref="demo_project_alpha_office"/>
+            <field name="user_ids" eval="[(4, ref('demo_user_project_manager'))]"/>
+            <field name="date_deadline">2025-08-30</field>
+            <field name="planned_hours">20.0</field>
+            <field name="description">
+                Submit permit applications and coordinate with city planning department.
+            </field>
+        </record>
+        
+        <!-- Example Custom Model Records -->
+        <!-- 
+        Template for custom models - replace with your actual model
+        
+        <record id="demo_custom_record_1" model="your.custom.model">
+            <field name="name">Demo Custom Record 1</field>
+            <field name="project_id" ref="demo_project_alpha_office"/>
+            
+            <!-- Date fields: Use fixed dates, not eval expressions -->
+            <field name="start_date">2025-08-01</field>
+            <field name="end_date">2025-08-31</field>
+            <field name="created_date">2025-07-16 10:00:00</field>
+            
+            <!-- Selection fields: Use string values from model definition -->
+            <field name="status">draft</field>
+            <field name="priority">normal</field>
+            <field name="category">type_a</field>
+            
+            <!-- Many2one fields: Reference correct target model -->
+            <field name="responsible_user_id" ref="demo_user_team_lead"/>
+            <field name="customer_id" ref="demo_company_alpha"/>
+            
+            <!-- Boolean fields -->
+            <field name="is_active">1</field>
+            <field name="is_urgent">0</field>
+            
+            <!-- Numeric fields -->
+            <field name="amount">1500.00</field>
+            <field name="quantity">10</field>
+            <field name="percentage">75.0</field>
+            
+            <!-- Text fields -->
+            <field name="description">Demo description for custom record.</field>
+            <field name="notes">Additional notes and comments.</field>
+        </record>
+        -->
+        
+        <!-- Example with Business Logic Constraints -->
+        <!-- 
+        When creating records with @api.constrains, ensure values comply:
+        
+        Example constraint: completion_date cannot be in the past
+        <record id="demo_constrained_record" model="your.model">
+            <field name="name">Demo Constrained Record</field>
+            <field name="completion_date">2025-12-31</field>  <!-- Future date -->
+            <field name="start_date">2025-08-01</field>
+            <field name="end_date">2025-12-31</field>        <!-- end_date > start_date -->
+        </record>
+        
+        Example constraint: unique combination of fields
+        <record id="demo_unique_record" model="your.model">
+            <field name="project_id" ref="demo_project_alpha_office"/>
+            <field name="date">2025-08-01</field>
+            <field name="type">daily</field>
+            <!-- Ensure this combination is unique across all records -->
+        </record>
+        -->
+        
+        <!-- Example Activity/Mail Records -->
+        <record id="demo_activity_alpha" model="mail.activity">
+            <field name="res_model">project.project</field>
+            <field name="res_id" ref="demo_project_alpha_office"/>
+            <field name="activity_type_id" ref="mail.mail_activity_data_todo"/>
+            <field name="summary">Review Project Timeline</field>
+            <field name="date_deadline">2025-08-10</field>
+            <field name="user_id" ref="demo_user_project_manager"/>
+            <field name="note">Please review the updated project timeline and confirm resource allocation.</field>
+        </record>
+        
+        <!-- Example Sequence/Numbering Records -->
+        <record id="demo_sequence_custom" model="ir.sequence">
+            <field name="name">Demo Custom Sequence</field>
+            <field name="code">demo.custom.sequence</field>
+            <field name="prefix">DEMO-</field>
+            <field name="suffix">-%(year)s</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+            <field name="padding">4</field>
+        </record>
+        
+        <!-- Example Attachment Records -->
+        <record id="demo_attachment_spec" model="ir.attachment">
+            <field name="name">Project Specifications.pdf</field>
+            <field name="res_model">project.project</field>
+            <field name="res_id" ref="demo_project_alpha_office"/>
+            <field name="type">binary</field>
+            <field name="mimetype">application/pdf</field>
+            <field name="description">Detailed project specifications document</field>
+            <!-- For demo data, you might want to include actual file data -->
+        </record>
+        
+        <!-- Example Configuration Records -->
+        <record id="demo_config_setting" model="ir.config_parameter">
+            <field name="key">demo.module.setting</field>
+            <field name="value">enabled</field>
+        </record>
+        
+        <!--
+        VALIDATION CHECKLIST:
+        
+        Before using this template:
+        □ Replace placeholder model names with your actual models
+        □ Validate all selection field values against model definitions
+        □ Ensure all date fields use fixed dates (YYYY-MM-DD format)
+        □ Check Many2one field references point to correct models
+        □ Review @api.constrains decorators for business logic compliance
+        □ Test with scripts/validate-demo-data.py
+        □ Verify module installation with demo data enabled
+        
+        Common Mistakes to Avoid:
+        □ Using eval expressions instead of fixed dates
+        □ Selection fields with record references instead of string values
+        □ Many2one fields referencing wrong model types
+        □ Dates in the past that violate business logic constraints
+        □ Missing required fields or invalid field combinations
+        -->
+        
+    </data>
+</odoo>
