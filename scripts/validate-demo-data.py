@@ -7,6 +7,7 @@ common issues like field type mismatches, invalid selection values, and
 constraint violations.
 
 Based on lessons learned from Royal Textiles Construction Management module.
+Fixed to properly handle model-specific field validation.
 """
 
 import argparse
@@ -29,11 +30,11 @@ class DemoDataValidator:
         self.errors = []
         self.warnings = []
         
-        # Field type mappings
-        self.selection_fields = {}
-        self.date_fields = set()
-        self.many2one_fields = {}
-        self.constrains_fields = {}
+        # Model-specific field mappings
+        self.model_fields = {}  # model_name -> {field_name -> field_info}
+        self.date_fields = set()  # Global date fields
+        self.many2one_fields = {}  # Global many2one fields
+        self.constrains_fields = {}  # Global constraint fields
         
     def validate(self) -> bool:
         """Run full validation suite"""
@@ -72,7 +73,13 @@ class DemoDataValidator:
         for model_file in model_files:
             self._parse_model_file(model_file)
             
-        print(f"   ✅ Found {len(self.selection_fields)} selection fields")
+        total_selection_fields = sum(
+            sum(1 for f in fields.values() if f.get('type') == 'selection')
+            for fields in self.model_fields.values()
+        )
+        
+        print(f"   ✅ Parsed {len(self.model_fields)} models")
+        print(f"   ✅ Found {total_selection_fields} selection fields")
         print(f"   ✅ Found {len(self.date_fields)} date fields")
         print(f"   ✅ Found {len(self.many2one_fields)} many2one fields")
         print(f"   ✅ Found {len(self.constrains_fields)} constraint fields")
@@ -83,6 +90,22 @@ class DemoDataValidator:
         """Parse a single model file for field definitions"""
         try:
             content = model_file.read_text()
+            
+            # Find model class definitions and their _name attributes
+            model_pattern = r'class\s+(\w+)\s*\(.*?\):\s*.*?_name\s*=\s*["\']([^"\']*)["\']'
+            model_matches = list(re.finditer(model_pattern, content, re.DOTALL))
+            
+            # If no explicit model found, create a default one
+            if not model_matches:
+                model_name = f"unknown.{model_file.stem}"
+                self.model_fields[model_name] = {}
+                current_models = [model_name]
+            else:
+                current_models = []
+                for model_match in model_matches:
+                    model_name = model_match.group(2)
+                    self.model_fields[model_name] = {}
+                    current_models.append(model_name)
             
             # Find selection fields
             selection_pattern = r'(\w+)\s*=\s*fields\.Selection\(\s*\[(.*?)\]'
@@ -95,8 +118,13 @@ class DemoDataValidator:
                 option_pattern = r'\(\s*["\']([^"\']+)["\']'
                 for option_match in re.finditer(option_pattern, options_str):
                     options.append(option_match.group(1))
-                    
-                self.selection_fields[field_name] = options
+                
+                # Store in all current models
+                for model_name in current_models:
+                    self.model_fields[model_name][field_name] = {
+                        'type': 'selection',
+                        'options': options
+                    }
             
             # Find date fields
             date_pattern = r'(\w+)\s*=\s*fields\.(Date|Datetime)\('
@@ -158,6 +186,7 @@ class DemoDataValidator:
     def _validate_record(self, record: ET.Element, demo_file: Path):
         """Validate a single record element"""
         record_id = record.get("id", "unknown")
+        model_name = record.get("model", "unknown")
         
         for field in record.findall("field"):
             field_name = field.get("name")
@@ -167,10 +196,10 @@ class DemoDataValidator:
             if not field_name:
                 continue
                 
-            # Validate selection fields
-            if field_name in self.selection_fields:
+            # Validate selection fields with model-specific context
+            if self._is_selection_field(model_name, field_name):
                 self._validate_selection_field(
-                    field_name, field_value, record_id, demo_file
+                    field_name, field_value, record_id, demo_file, model_name
                 )
                 
             # Validate date fields
@@ -186,22 +215,46 @@ class DemoDataValidator:
                     f"- consider using fixed values for stability"
                 )
     
+    def _is_selection_field(self, model_name: str, field_name: str) -> bool:
+        """Check if a field is a selection field for the given model"""
+        if model_name in self.model_fields:
+            field_info = self.model_fields[model_name].get(field_name)
+            if field_info and field_info.get('type') == 'selection':
+                return True
+        return False
+    
+    def _get_selection_options(self, model_name: str, field_name: str) -> List[str]:
+        """Get selection options for a specific model and field"""
+        if model_name in self.model_fields:
+            field_info = self.model_fields[model_name].get(field_name)
+            if field_info and field_info.get('type') == 'selection':
+                return field_info['options']
+        return []
+    
     def _validate_selection_field(self, field_name: str, field_value: str, 
-                                 record_id: str, demo_file: Path):
+                                 record_id: str, demo_file: Path, model_name: str):
         """Validate selection field values"""
-        valid_options = self.selection_fields[field_name]
+        valid_options = self._get_selection_options(model_name, field_name)
         
+        if not valid_options:
+            # No validation possible if we can't find the field definition
+            self.warnings.append(
+                f"No selection options found for {model_name}.{field_name} "
+                f"in {demo_file}:{record_id} - skipping validation"
+            )
+            return
+            
         # Check if field_value is a reference (starts with ref=)
         if field_value and not field_value.startswith("ref="):
             if field_value not in valid_options:
                 self.errors.append(
                     f"Invalid selection value in {demo_file}:{record_id}.{field_name}: "
-                    f"'{field_value}' not in {valid_options}"
+                    f"'{field_value}' not in {valid_options} (model: {model_name})"
                 )
         elif field_value.startswith("ref="):
             self.errors.append(
                 f"Selection field using record reference in {demo_file}:{record_id}.{field_name}: "
-                f"'{field_value}' - should use selection value from {valid_options}"
+                f"'{field_value}' - should use selection value from {valid_options} (model: {model_name})"
             )
     
     def _validate_date_field(self, field_name: str, field_value: str, 
@@ -276,10 +329,29 @@ class DemoDataValidator:
             print("✅ No warnings!")
             
         print(f"\n📈 SUMMARY:")
-        print(f"   • Selection fields: {len(self.selection_fields)}")
+        print(f"   • Models parsed: {len(self.model_fields)}")
+        
+        total_selection_fields = sum(
+            sum(1 for f in fields.values() if f.get('type') == 'selection')
+            for fields in self.model_fields.values()
+        )
+        print(f"   • Selection fields: {total_selection_fields}")
         print(f"   • Date fields: {len(self.date_fields)}")
         print(f"   • Many2one fields: {len(self.many2one_fields)}")
         print(f"   • Constraint fields: {len(self.constrains_fields)}")
+        
+        # Show model-specific field breakdown
+        if self.model_fields:
+            print(f"\n🏗️  MODEL BREAKDOWN:")
+            for model_name, fields in self.model_fields.items():
+                selection_count = sum(1 for f in fields.values() if f.get('type') == 'selection')
+                if selection_count > 0:
+                    print(f"   • {model_name}: {selection_count} selection fields")
+                    # Show field names and options for debugging
+                    for field_name, field_info in fields.items():
+                        if field_info.get('type') == 'selection':
+                            options = field_info.get('options', [])
+                            print(f"     - {field_name}: {options[:3]}{'...' if len(options) > 3 else ''}")
         
         # Validation checklist
         print(f"\n📋 VALIDATION CHECKLIST:")
@@ -302,6 +374,11 @@ def main():
         "--strict",
         action="store_true",
         help="Treat warnings as errors"
+    )
+    parser.add_argument(
+        "--verbose",
+        action="store_true",
+        help="Show detailed model field information"
     )
     
     args = parser.parse_args()

@@ -1,5 +1,5 @@
-# Odoo Local Testing Framework
-*Complete local development, testing, and deployment pipeline for Odoo modules*
+# Odoo DevKit - Complete Development & Testing Framework
+*Professional-grade Odoo development environment with systematic validation and deployment pipeline*
 
 ## 🚀 Quick Start (< 5 minutes)
 
@@ -12,8 +12,8 @@
 ### Instant Setup
 ```bash
 # 1. Clone and enter directory
-git clone https://github.com/matthewbergvinson/odoo-local-testing.git
-cd odoo-local-testing
+git clone https://github.com/matthewbergvinson/odoo-devkit.git
+cd odoo-devkit
 
 # 2. Set up development environment
 chmod +x scripts/setup-dev-environment.sh
@@ -58,7 +58,7 @@ This is a **production-ready Odoo development environment** with comprehensive t
 ## 🏗️ Architecture & Directory Structure
 
 ```
-odoo-local-testing/
+odoo-devkit/
 ├── 📁 custom_modules/           # Your Odoo modules go here
 │   └── example_module/          # Example module showing best practices
 ├── 📁 tests/                   # Comprehensive test suite
@@ -67,7 +67,14 @@ odoo-local-testing/
 │   ├── functional/             # Functional tests
 │   └── performance/            # Performance tests
 ├── 📁 scripts/                 # Development and deployment scripts
+│   ├── validate-demo-data.py   # Demo data validation script
+│   ├── setup-dev-environment.sh # Environment setup
+│   └── run-pre-push-checks.sh  # Pre-push validation
 ├── 📁 docs/                    # Documentation and guides
+│   ├── ODOO_18_LESSONS_LEARNED.md  # Key lessons from Royal Textiles project
+│   └── ROYAL_TEXTILES_DEMO_DATA_ANALYSIS.md  # Demo data analysis
+├── 📁 templates/               # Best practices templates
+│   └── demo_data_template.xml  # Demo data template with validation checklist
 ├── 📁 docker/                  # Docker configurations
 ├── 📁 reports/                 # Test and validation reports
 ├── 🗂️ .vscode/                 # VS Code/Cursor configurations
@@ -112,8 +119,15 @@ make security-scan      # Security vulnerability scan
 make dependency-check   # Check for outdated dependencies
 ```
 
-### All Available Make Targets (45+)
+### Validation & Quality Assurance
 ```bash
+# Demo data validation (NEW)
+python scripts/validate-demo-data.py path/to/your/module
+
+# Pre-push validation pipeline
+./scripts/run-pre-push-checks.sh
+
+# All available make targets (45+)
 make help               # Show all available commands
 ```
 
@@ -275,6 +289,9 @@ python scripts/validate-module.py custom_modules/my_module
 
 # Validate manifest files
 python scripts/validate-manifest.py custom_modules/my_module/__manifest__.py
+
+# Validate demo data against models (NEW)
+python scripts/validate-demo-data.py custom_modules/my_module
 
 # Format XML files
 python scripts/format-xml.py custom_modules/my_module/views/
@@ -560,6 +577,8 @@ git push origin v1.0.0
 - **Odoo Documentation**: https://www.odoo.com/documentation/
 - **Python Testing**: https://docs.pytest.org/
 - **Docker**: https://docs.docker.com/
+- **Demo Data Best Practices**: `docs/ODOO_18_LESSONS_LEARNED.md`
+- **Validation Examples**: `docs/ROYAL_TEXTILES_DEMO_DATA_ANALYSIS.md`
 
 ### Example Module
 Check out the `custom_modules/example_module/` for a complete example showing:
