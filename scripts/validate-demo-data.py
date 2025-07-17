@@ -32,6 +32,7 @@ class DemoDataValidator:
         
         # Model-specific field mappings
         self.model_fields = {}  # model_name -> {field_name -> field_info}
+        self.all_model_fields = {}  # model_name -> set of all field names
         self.date_fields = set()  # Global date fields
         self.many2one_fields = {}  # Global many2one fields
         self.constrains_fields = {}  # Global constraint fields
@@ -107,7 +108,19 @@ class DemoDataValidator:
                     self.model_fields[model_name] = {}
                     current_models.append(model_name)
             
-            # Find selection fields
+            # Find ALL field definitions (not just selection fields)
+            all_field_pattern = r'(\w+)\s*=\s*fields\.(\w+)\('
+            for match in re.finditer(all_field_pattern, content):
+                field_name = match.group(1)
+                field_type = match.group(2)
+                
+                # Store in all current models
+                for model_name in current_models:
+                    if model_name not in self.all_model_fields:
+                        self.all_model_fields[model_name] = set()
+                    self.all_model_fields[model_name].add(field_name)
+            
+            # Find selection fields (for detailed validation)
             selection_pattern = r'(\w+)\s*=\s*fields\.Selection\(\s*\[(.*?)\]'
             for match in re.finditer(selection_pattern, content, re.DOTALL):
                 field_name = match.group(1)
@@ -195,6 +208,14 @@ class DemoDataValidator:
             # Skip if field not found in our definitions
             if not field_name:
                 continue
+            
+            # CRITICAL: Validate field existence in model
+            if not self._field_exists_in_model(model_name, field_name):
+                self.errors.append(
+                    f"Invalid field '{field_name}' on model '{model_name}' "
+                    f"in {demo_file}:{record_id} - Field does not exist in model definition"
+                )
+                continue
                 
             # Validate selection fields with model-specific context
             if self._is_selection_field(model_name, field_name):
@@ -222,6 +243,27 @@ class DemoDataValidator:
             if field_info and field_info.get('type') == 'selection':
                 return True
         return False
+    
+    def _field_exists_in_model(self, model_name: str, field_name: str) -> bool:
+        """Check if a field exists in the given model"""
+        # Check if we have field information for this model
+        if model_name in self.all_model_fields:
+            return field_name in self.all_model_fields[model_name]
+        
+        # For models we don't recognize, be permissive but warn
+        if model_name.startswith('unknown.'):
+            self.warnings.append(f"Unknown model '{model_name}' - cannot validate field existence")
+            return True
+        
+        # For standard Odoo models, assume they exist (we don't parse core models)
+        standard_models = ['res.partner', 'res.users', 'project.project', 'project.task', 
+                          'mail.activity', 'ir.sequence', 'ir.attachment', 'ir.config_parameter']
+        if model_name in standard_models:
+            return True
+            
+        # If we don't know the model, warn and be permissive
+        self.warnings.append(f"Model '{model_name}' not found in module - cannot validate field existence")
+        return True
     
     def _get_selection_options(self, model_name: str, field_name: str) -> List[str]:
         """Get selection options for a specific model and field"""
